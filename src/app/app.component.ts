@@ -42,8 +42,8 @@ export class AppComponent {
     }
 
     ngOnInit() {
-
-        this
+        if (!this.items){
+            this
             .dataService
             .getData('menu')
             .subscribe((res) => {
@@ -51,7 +51,6 @@ export class AppComponent {
                 this.items = JSON.parse(res);
                 this.successMessage('Data Service', 'Got Dynamic Menu Items');
             });
-
-        //this.items = this.dataService.getData('menu');
+        }
     }
 }

@@ -16,6 +16,7 @@ import {TerminalModule} from 'primeng/primeng';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { DataService } from './data.service';
+import { DynamicUiPipe } from './dynamic-ui.pipe';
 
 const appRoutes: Routes = [
   {
@@ -31,7 +32,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent, AboutComponent
+    AppComponent, AboutComponent, DynamicUiPipe
   ],
   imports: [
     RouterModule.forRoot(appRoutes,
