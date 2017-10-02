@@ -10,7 +10,7 @@ export class DataService {
 
   constructor(private http: Http) { }
 
-  getData(dataFile: string): any {
+  getData(dataFile: string): Observable<any> {
      
     let response = this.http
       .get('./assets/data/' + dataFile + '.json')

@@ -11,6 +11,7 @@ import {OrderListModule} from 'primeng/primeng';
 import { Observable } from 'rxjs/Rx';
 import {ChartModule, DataTableModule, MessagesModule, GrowlModule, DialogModule, ToolbarModule} from 'primeng/primeng';
 import {InputTextModule, AccordionModule, SharedModule, ButtonModule, FileUploadModule} from 'primeng/primeng';
+import {MessageService} from 'primeng/components/common/messageservice';
 import {TerminalModule} from 'primeng/primeng';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
@@ -44,7 +45,7 @@ const appRoutes: Routes = [
     HttpModule
   ],
 
-  providers: [DataService],
+  providers: [DataService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
