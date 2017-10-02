@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {TieredMenuModule,MenuItem} from 'primeng/primeng';
+import {TieredMenuModule, MenuItem} from 'primeng/primeng';
 import { AppComponent } from './app.component';
 
 import {OrderListModule} from 'primeng/primeng';
@@ -41,7 +41,7 @@ const appRoutes: Routes = [
     BrowserModule, BrowserAnimationsModule, ToolbarModule, HttpClientModule,
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule,
-    TieredMenuModule, 
+    TieredMenuModule,
     FormsModule, InputTextModule,
     HttpModule
   ],
