@@ -24,6 +24,16 @@ export class AppComponent {
     }
 
     ngOnInit() {
-        this.items = this.dataService.getData('menu');
+        
+            this.dataService.getData('menu').subscribe(
+                (res) => {
+                    console.log(JSON.parse(res));
+
+                    this.items = JSON.parse(res);
+                    
+                }
+            );
+        
+        //this.items = this.dataService.getData('menu');
     }
 }

@@ -14,6 +14,7 @@ import {InputTextModule, AccordionModule, SharedModule, ButtonModule, FileUpload
 import {TerminalModule} from 'primeng/primeng';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
+import { DataService } from './data.service';
 
 const appRoutes: Routes = [
   {
@@ -43,7 +44,7 @@ const appRoutes: Routes = [
     HttpModule
   ],
 
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
