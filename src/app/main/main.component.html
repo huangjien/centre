@@ -1,17 +1,34 @@
-<div class="ui-g">
-  <div class="ui-g-4" [hidden]="!treeViewVisible" >
-    <app-tree></app-tree>
-  </div>
-  <div class="ui-g-4">
-    <div class="ui-g-12" [hidden]="!searchViewVisible" >
-      <app-search></app-search>
-    </div>
-    <div class="ui-g-12">Main</div>
-    <div class="ui-g-12" [hidden]="!terminalViewVisible">
-      <app-terminal></app-terminal>
-    </div>
-  </div>
-  <div class="ui-g-4" [hidden]="!debugViewVisible">
-    <app-debug></app-debug>
-  </div>
-</div>
+<split direction="horizontal" [gutterSize]="10">
+  <split-area [size]="35">
+    <split direction="vertical" [gutterSize]="5">
+      <split-area [visible]="treeViewVisible" [order]="1">
+
+        <app-tree></app-tree>
+
+      </split-area>
+      <split-area [visible]="debugViewVisible" [order]="2">
+
+        <app-debug></app-debug>
+
+      </split-area>
+    </split>
+  </split-area>
+  <split-area [size]="65">
+    <split direction="vertical" [gutterSize]="5">
+      <split-area [visible]="searchViewVisible" [size]="25" [order]="1">
+
+        <app-search></app-search>
+
+      </split-area>
+      <split-area [size]="50" [order]="2">
+        <div>Main</div>
+      </split-area>
+      <split-area [visible]="terminalViewVisible" [size]="25" [order]="3">
+
+        <app-terminal></app-terminal>
+
+      </split-area>
+
+    </split>
+  </split-area>
+</split>

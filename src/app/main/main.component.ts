@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Globals } from '../globals';
 import {PanelModule} from 'primeng/primeng';
+import { AngularSplitModule } from 'angular-split';
 
 @Component({
   selector: 'app-main',
@@ -9,10 +10,10 @@ import {PanelModule} from 'primeng/primeng';
 })
 export class MainComponent implements OnInit {
 
-  treeViewVisible = false; // this.globals.treeViewVisible;
-  searchViewVisible = false;
+  treeViewVisible = true; // this.globals.treeViewVisible;
+  searchViewVisible = true;
   terminalViewVisible = false;
-  debugViewVisible = false;
+  debugViewVisible = true;
 
   constructor(private globals: Globals) {
     this.globals.treeViewVisibilityChange.subscribe(value => this.treeViewVisible = value);
