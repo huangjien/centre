@@ -23,6 +23,7 @@ export class DataService {
     if (res.status < 200 || res.status >= 300) {
       throw new Error('Bad response sttus:' + res.status);
     }
+
     // console.log(res._body);
     return (JSON.parse(res._body));
   }

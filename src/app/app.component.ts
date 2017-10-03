@@ -29,4 +29,36 @@ export class AppComponent implements OnInit {
             this.globals.successMessage('Data Service', 'Got Menu Data');
         });
     }
+
+    onClicked($event) {
+        const clickedItem = event.srcElement.innerHTML;
+        if (!clickedItem) {
+            return;
+        }
+        switch (clickedItem) {
+            case 'Explore': {
+                this.globals.toggleTreeViewVisibility();
+                break;
+            }
+            case 'Terminal': {
+                this.globals.toggleTerminalViewVisibility();
+                break;
+            }
+            case 'Search': {
+                this.globals.toggleSearchViewVisibility();
+                break;
+            }
+            case 'Debug': {
+                this.globals.toggleDebugViewVisibility();
+                break;
+            }
+
+            default: {
+                console.log(clickedItem + ' is not been handled.');
+                this.globals.warnMessage('May Be An Error', clickedItem + ' is not been handled.');
+                break;
+            }
+        }
+
+    }
 }

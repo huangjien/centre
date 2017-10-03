@@ -2,8 +2,9 @@
   <div class="ui-toolbar-group-left">
     <label class="logo">A Test </label>
     <i class="fa fa-bars"></i>
-    <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
-    <button #btn type="button" pButton icon="fa fa-list" label="Menu" (click)="menu.toggle($event)"></button>
+    <p-tieredMenu #menu [model]="items" (click)="onClicked(event)" [popup]="true"></p-tieredMenu>
+    <button #btn type="button" pButton icon="fa fa-list" label="Menu" 
+      (click)="menu.toggle($event)"></button>
   </div>
 
   <div class="ui-toolbar-group-right">
@@ -15,4 +16,5 @@
   </div>
 </p-toolbar>
 <p-growl [value]="msgs" life="3000"></p-growl>
+
 <router-outlet></router-outlet>

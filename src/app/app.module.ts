@@ -18,12 +18,17 @@ import { AboutComponent } from './about/about.component';
 import { DataService } from './data.service';
 import { DynamicUiPipe } from './dynamic-ui.pipe';
 import { Globals } from './globals';
+import { MainComponent } from './main/main.component';
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: 'about',
+    redirectTo: 'main',
     pathMatch: 'full'
+  },
+  {
+    path: 'main',
+    component: MainComponent
   },
   {
     path: 'about',
@@ -33,7 +38,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent, AboutComponent, DynamicUiPipe
+    AppComponent, AboutComponent, DynamicUiPipe, MainComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes
