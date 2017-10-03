@@ -1,34 +1,34 @@
 [
     {
-        "label": "File",
+        "label": "Tests",
         "icon": "fa-file-o",
         "items": [{
                 "label": "New",
                 "icon": "fa-plus",
                 "items": [
                     {"label": "Project"},
-                    {"label": "Other"}
+                    {"label": "Folder"},
+                    {"label": "Suite"},
+                    {"label": "Case"},
+                    {"label": "OUT"},
+                    {"label": "Action"},
+                    {"label": "Data"}
                 ]
             },
-            {"label": "Open", "routerLink":["/"]},
             {"separator":true},
-            {"label": "Quit"}
+            {"label": "Terminal", "icon": "fa-terminal"},
+            {"label": "Explore", "icon": "fa-tree"},
+            {"label": "Search", "icon": "fa-search"},          
+            {"label": "Debug", "icon": "fa-bug"}
         ]
     },
+    
     {
-        "label": "Edit",
-        "icon": "fa-edit",
-        "items": [
-            {"label": "Undo", "icon": "fa-mail-forward"},
-            {"label": "Redo", "icon": "fa-mail-reply"}
-        ]
-    },
-    {
-        "label": "Help",
-        "icon": "fa-question",
+        "label": "Environments",
+        "icon": "fa-server",
         "items": [
             {
-                "label": "Contents"
+                "label": "Runnings"
             },
             {
                 "label": "Search", 
@@ -49,15 +49,24 @@
         ]
     },
     {
-        "label": "Actions",
+        "label": "Results",
+        "icon": "fa-list-ul",
+        "items": [
+            {"label": "News", "icon": "fa-puzzle-piece"},
+            {"label": "Archived", "icon": "fa-archive"}
+        ]
+    },
+    {
+        "label": "Administration",
         "icon": "fa-gear",
         "items": [
             {
                 "label": "Edit",
-                "icon": "fa-refresh",
+                "icon": "fa-edit",
                 "items": [
-                    {"label": "Save", "icon": "fa-save"},
-                    {"label": "Update", "icon": "fa-save"}
+                    {"label": "Settings", "icon": "fa-cogs"},
+                    {"label": "Menu", "icon": "fa-list"},
+                    {"label": "Forms", "icon": "fa-list-alt"}
                 ]
             },
             {
@@ -71,6 +80,6 @@
     },
     {"separator":true},
     {
-        "label": "Quit", "icon": "fa-minus"
+        "label": "About", "icon": "fa-copyright", "routerLink":["/"]
     }
 ]

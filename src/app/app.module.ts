@@ -17,6 +17,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { DataService } from './data.service';
 import { DynamicUiPipe } from './dynamic-ui.pipe';
+import { Globals } from './globals';
 
 const appRoutes: Routes = [
   {
@@ -35,8 +36,8 @@ const appRoutes: Routes = [
     AppComponent, AboutComponent, DynamicUiPipe
   ],
   imports: [
-    RouterModule.forRoot(appRoutes,
-        {enableTracing: true} // <-- debugging purposes only
+    RouterModule.forRoot(appRoutes
+        // , {enableTracing: true} // <-- debugging purposes only
     ),
     BrowserModule, BrowserAnimationsModule, ToolbarModule, HttpClientModule,
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule,
@@ -46,7 +47,7 @@ const appRoutes: Routes = [
     HttpModule
   ],
 
-  providers: [DataService, MessageService],
+  providers: [DataService, MessageService, Globals],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
