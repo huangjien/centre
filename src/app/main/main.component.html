@@ -1,4 +1,4 @@
-<split direction="horizontal" [gutterSize]="10">
+<split [gutterSize]="10">
   <split-area [size]="35">
     <split direction="vertical" [gutterSize]="5">
       <split-area [visible]="treeViewVisible" [order]="1">
@@ -21,7 +21,10 @@
 
       </split-area>
       <split-area [size]="50" [order]="2">
-        <div>Main</div>
+        <p-panel header="Main">
+
+        </p-panel>
+
       </split-area>
       <split-area [visible]="terminalViewVisible" [size]="25" [order]="3">
 
