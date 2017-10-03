@@ -19,6 +19,11 @@ import { DataService } from './data.service';
 import { DynamicUiPipe } from './dynamic-ui.pipe';
 import { Globals } from './globals';
 import { MainComponent } from './main/main.component';
+import { DebugComponent } from './debug/debug.component';
+import { SearchComponent } from './search/search.component';
+import { TreeComponent } from './tree/tree.component';
+import { TerminalComponent } from './terminal/terminal.component';
+import {PanelModule} from 'primeng/primeng';
 
 const appRoutes: Routes = [
   {
@@ -38,7 +43,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent, AboutComponent, DynamicUiPipe, MainComponent
+    AppComponent, AboutComponent, DynamicUiPipe, MainComponent, DebugComponent, SearchComponent, TreeComponent, TerminalComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes
@@ -47,7 +52,7 @@ const appRoutes: Routes = [
     BrowserModule, BrowserAnimationsModule, ToolbarModule, HttpClientModule,
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule,
-    TieredMenuModule,
+    TieredMenuModule, PanelModule,
     FormsModule, InputTextModule,
     HttpModule
   ],

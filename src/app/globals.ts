@@ -17,6 +17,10 @@ export class Globals {
     debugViewVisible = false;
     debugVisibilityChange: Subject<boolean> = new Subject<boolean>();
 
+    // debug info
+    debugInfo = '';
+    debugInfoChange: Subject<string> = new Subject<string>();
+
     // user
     currentUser = '';
 
@@ -26,6 +30,7 @@ export class Globals {
     // messageService: MessageService;
     // dataService: DataService;
     constructor(private messageService: MessageService, private dataService: DataService) {
+        // subscribe view visibility changes
         this.treeViewVisibilityChange.subscribe((value) => {
             this.treeViewVisible = value;
         });
@@ -37,6 +42,11 @@ export class Globals {
         });
         this.debugVisibilityChange.subscribe((value) => {
             this.debugViewVisible = value;
+        });
+
+        // subscribe debug info changes
+        this.debugInfoChange.subscribe((value) => {
+            this.debugInfo = value;
         });
     }
 
@@ -56,6 +66,10 @@ export class Globals {
         this.searchViewVisibilityChange.next(!this.searchViewVisible);
     }
 
+    debug(info: string) {
+        this.debugInfoChange.next(info);
+    }
+
     successMessage(_summary: string, _message: string) {
         this.showMessage('success', _summary, _message);
     }
@@ -73,8 +87,7 @@ export class Globals {
     }
 
     showMessage(_serverity: string, _summary: string, _message: string) {
-        this
-            .messageService
+        this.messageService
             .add({ severity: _serverity, summary: _summary, detail: _message });
     }
 

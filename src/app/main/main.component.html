@@ -1,9 +1,17 @@
 <div class="ui-g">
-  <div class="ui-g-4" [hidden]="!treeViewVisible" >Tree</div>
-  <div class="ui-g-4">
-    <div class="ui-g-12" [hidden]="!searchViewVisible" >Search</div>
-    <div class="ui-g-12">Main</div>
-    <div class="ui-g-12" [hidden]="!terminalViewVisible">Terminal</div>
+  <div class="ui-g-4" [hidden]="!treeViewVisible" >
+    <app-tree></app-tree>
   </div>
-  <div class="ui-g-4" [hidden]="!debugViewVisible">Debug</div>
+  <div class="ui-g-4">
+    <div class="ui-g-12" [hidden]="!searchViewVisible" >
+      <app-search></app-search>
+    </div>
+    <div class="ui-g-12">Main</div>
+    <div class="ui-g-12" [hidden]="!terminalViewVisible">
+      <app-terminal></app-terminal>
+    </div>
+  </div>
+  <div class="ui-g-4" [hidden]="!debugViewVisible">
+    <app-debug></app-debug>
+  </div>
 </div>

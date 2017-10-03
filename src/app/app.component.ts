@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
             // console.log(res);
             this.items = res;
             this.globals.successMessage('Data Service', 'Got Menu Data');
+            this.globals.debug(res);
         });
     }
 
@@ -55,7 +56,7 @@ export class AppComponent implements OnInit {
 
             default: {
                 console.log(clickedItem + ' is not been handled.');
-                this.globals.warnMessage('May Be An Error', clickedItem + ' is not been handled.');
+                this.globals.warnMessage('May Be A BIG Mistake', clickedItem + ' is not been handled!');
                 break;
             }
         }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Globals } from '../globals';
+import {PanelModule} from 'primeng/primeng';
 
 @Component({
   selector: 'app-main',
