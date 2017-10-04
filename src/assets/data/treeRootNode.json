@@ -1,0 +1,11 @@
+[
+    {
+        "label": "Work Space",
+        "data": "Root of Tree",
+        "expandedIcon": "fa-folder-open",
+        "collapsedIcon": "fa-folder",
+        "draggable": false,
+        "droppable": true,
+        "leaf": false
+    }
+]
