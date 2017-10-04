@@ -31,8 +31,27 @@ export class AppComponent implements OnInit {
         });
     }
 
+    private getMenuText(src): string {
+        let ret = src.textContent;
+        if (src.tagName === 'SPAN') {
+            if (!src.textContent) {
+                ret = src.nextElementSibling.innerHTML;
+            }
+        }
+        return ret;
+    }
+
     onClicked($event) {
-        const clickedItem = event.srcElement.innerHTML;
+
+        const src = event.srcElement;
+        let clickedItem = src.innerHTML;
+        if (src.tagName === 'A') {
+            clickedItem = this.getMenuText(src.children[0]);
+        }
+        if (src.tagName === 'SPAN') {
+            clickedItem = this.getMenuText(src);
+        }
+        console.log(clickedItem);
         if (!clickedItem) {
             return;
         }

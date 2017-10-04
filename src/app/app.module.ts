@@ -24,7 +24,9 @@ import { SearchComponent } from './search/search.component';
 import { TreeComponent } from './tree/tree.component';
 import { TerminalComponent } from './terminal/terminal.component';
 import {PanelModule} from 'primeng/primeng';
+import {TreeModule} from 'primeng/primeng';
 import { AngularSplitModule } from 'angular-split';
+import {SelectButtonModule} from 'primeng/primeng';
 
 const appRoutes: Routes = [
   {
@@ -54,7 +56,7 @@ const appRoutes: Routes = [
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule,
     TieredMenuModule, PanelModule, AngularSplitModule,
-    FormsModule, InputTextModule,
+    FormsModule, InputTextModule, TreeModule, SelectButtonModule,
     HttpModule
   ],
 

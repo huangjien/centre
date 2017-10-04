@@ -1,4 +1,22 @@
 
-<p-panel header="Search">
+<p-panel>
+    <p-header>
+        <div class="ui-helper-clearfix">
+            <div class="ui-inputgroup">
+                    
+                    <input [(ngModel)]="search_string" type="text" pInputText placeholder="Search">
+                    <span class="ui-inputgroup-addon" (click)="search()"><i class="fa fa-search"></i></span>
+
+                    <span>&nbsp;</span>
+                    <p-selectButton [options]="types" 
+                    [(ngModel)]="selectedTypes" 
+                    multiple="multiple" [style]="{'float':'right'}">
+                    </p-selectButton>
+            </div>
+            
+            
+        </div>
+    </p-header>
+    {{results}}
   
 </p-panel>

@@ -22,6 +22,7 @@ export class MainComponent implements OnInit {
     this.globals.terminalVisibilityChange.subscribe(value => this.terminalViewVisible = value);
    }
 
+
   ngOnInit() {
 
   }
