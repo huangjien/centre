@@ -1,4 +1,20 @@
+<p-panel >
+        <p-header>
+                <div class="ui-helper-clearfix">
+                        <div class="ui-inputgroup">
 
-<p-panel header="Command Line Interface">
-        <p-terminal welcomeMessage="Welcome to A Test" prompt="$"></p-terminal>
+                                <input (keyup.enter)="onEnter()" [(ngModel)]="command" type="text" pInputText placeholder="help date getData ...">
+                                <span class="ui-inputgroup-addon" (click)="runCommand()"><i class="fa fa-terminal"></i></span>
+
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                <p-checkbox [(ngModel)]="readOnly" binary="true"></p-checkbox>
+                                <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Read Only&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                
+                        </div>
+
+
+                </div>
+        </p-header>
+        <textarea [readonly]="isReadOnly()" [rows]="10" [cols]="145" pInputTextarea autoResize="autoResize" [(ngModel)]="response"></textarea>
+
 </p-panel>

@@ -25,6 +25,9 @@ export class SearchComponent implements OnInit {
     this.types.push({ label: 'Result', value: 'result' });
   }
 
+  onEnter () {
+    this.search();
+  }
   search() {
     if (this.search_string) {
       this.globals.infoMessage('Searching...', this.search_string);

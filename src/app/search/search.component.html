@@ -4,7 +4,7 @@
         <div class="ui-helper-clearfix">
             <div class="ui-inputgroup">
                     
-                    <input [(ngModel)]="search_string" type="text" pInputText placeholder="Search">
+                    <input (keyup.enter)="onEnter()" [(ngModel)]="search_string" type="text" pInputText placeholder="Search">
                     <span class="ui-inputgroup-addon" (click)="search()"><i class="fa fa-search"></i></span>
 
                     <span>&nbsp;</span>

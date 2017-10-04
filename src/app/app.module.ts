@@ -29,6 +29,8 @@ import { AngularSplitModule } from 'angular-split';
 import {SelectButtonModule} from 'primeng/primeng';
 import {AdvGrowlModule, AdvGrowlService} from 'primeng-advanced-growl';
 import {TreeDragDropService} from 'primeng/primeng';
+import {CheckboxModule} from 'primeng/primeng';
+import {InputTextareaModule} from 'primeng/primeng';
 
 const appRoutes: Routes = [
   {
@@ -58,7 +60,7 @@ const appRoutes: Routes = [
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule,
     TieredMenuModule, PanelModule, AngularSplitModule, AdvGrowlModule,
-    FormsModule, InputTextModule, TreeModule, SelectButtonModule,
+    FormsModule, InputTextModule, TreeModule, SelectButtonModule, CheckboxModule,
     HttpModule
   ],
 

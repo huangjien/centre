@@ -22,8 +22,10 @@ export class AppComponent implements OnInit {
     items: MenuItem[];
     messages = [];
     // msgs: Message[] = [];
+    innerHeight: any;
     constructor(private growlService: AdvGrowlService, private globals: Globals) {
         this.globals.setGrowlService(this.growlService);
+        this.innerHeight = window.innerHeight;
     }
 
     ngOnInit(): void {
