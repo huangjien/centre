@@ -2,20 +2,21 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
+import { environment } from '../environments/environment';
 
 @Injectable()
 export class DataService {
 
   // data: any;
-
+  baseUrl = environment.apiUrl;
   constructor(private http: Http) {
   }
 
   getData(dataFile: string): Observable<any> {
-
+    console.log(this.baseUrl + dataFile + '.json');
     return this
       .http
-      .get('./assets/data/' + dataFile + '.json')
+      .get( this.baseUrl + dataFile + '.json')
       .map(this.extractData);
   }
 
