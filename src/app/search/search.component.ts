@@ -29,10 +29,10 @@ export class SearchComponent implements OnInit {
     if (this.search_string) {
       this.globals.infoMessage('Searching...', this.search_string);
       this.results = JSON.stringify(this.globals.debugInfo);
+      this.globals.clearMessage();
     } else {
       this.globals.warnMessage('Search', 'You click search button, but forget to input something to search...');
     }
-    
   }
 
   ngOnInit() {

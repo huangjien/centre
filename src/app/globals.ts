@@ -3,7 +3,8 @@ import { Observable, Subject } from 'rxjs/Rx';
 import { MenuItem } from 'primeng/primeng';
 import { DataService } from './data.service';
 import { Message } from 'primeng/components/common/api';
-import { MessageService } from 'primeng/components/common/messageservice';
+import {AdvGrowlService} from 'primeng-advanced-growl';
+// import { MessageService } from 'primeng/components/common/messageservice';
 @Injectable()
 export class Globals {
 
@@ -26,10 +27,13 @@ export class Globals {
 
     items: MenuItem[];
 
+    messages = [];
+    // messages
+    // msgs: Message[] = [];
+    // messageChange: Subject<Message[]> = new Subject<Message[]>();
+    advGrowlService: AdvGrowlService;
     // services
-    // messageService: MessageService;
-    // dataService: DataService;
-    constructor(private messageService: MessageService, private dataService: DataService) {
+    constructor( private dataService: DataService) {
         // subscribe view visibility changes
         this.treeViewVisibilityChange.subscribe((value) => {
             this.treeViewVisible = value;
@@ -48,6 +52,10 @@ export class Globals {
         this.debugInfoChange.subscribe((value) => {
             this.debugInfo = value;
         });
+
+        // this.messageChange.subscribe((value) => {
+        //     this.msgs = value;
+        // });
     }
 
     toggleTreeViewVisibility() {
@@ -71,28 +79,53 @@ export class Globals {
     }
 
     successMessage(_summary: string, _message: string) {
-        this.showMessage('success', _summary, _message);
+        this.advGrowlService.createSuccessMessage(_message, _summary);
+        // this.showMessage('success', _summary, _message);
     }
 
     infoMessage(_summary: string, _message: string) {
-        this.showMessage('info', _summary, _message);
+        this.advGrowlService.createInfoMessage(_message, _summary);
+        // this.showMessage('info', _summary, _message);
     }
 
     warnMessage(_summary: string, _message: string) {
-        this.showMessage('warn', _summary, _message);
+        this.advGrowlService.createWarningMessage(_message, _summary);
+        // this.showMessage('warn', _summary, _message);
     }
 
     errorMessage(_summary: string, _message: string) {
-        this.showMessage('error', _summary, _message);
+        this.advGrowlService.createErrorMessage(_message, _summary);
+        // this.showMessage('error', _summary, _message);
     }
 
-    showMessage(_serverity: string, _summary: string, _message: string) {
-        this.messageService
-            .add({ severity: _serverity, summary: _summary, detail: _message });
+    // showMessage(_serverity: string, _summary: string, _message: string) {
+    //     this.advGrowlService.
+    //     // this.msgs.push({ severity: _serverity, summary: _summary, detail: _message });
+
+    //     // this.messageChange.next(this.msgs);
+    //     // setTimeout(() => {
+    //     //     this.msgs = [];
+    //     // }, 3000);
+    // }
+
+    setGrowlService(growlService: AdvGrowlService) {
+        this.advGrowlService = growlService;
+    }
+
+    clearMessage() {
+        this.advGrowlService.clearMessages();
     }
 
     getMenuItems(): Observable<any> {
         return this.dataService.getData('menu');
+    }
+
+    getTreeRootNode(): Observable<any> {
+        return this.dataService.getData('treeRootNode');
+    }
+
+    getChildrenNodes(): Observable<any> {
+        return this.dataService.getData('childrenNodes');
     }
 
 }

@@ -8,7 +8,8 @@ import { AboutComponent } from './about/about.component';
 import { Router } from '@angular/router';
 import { DataService } from './data.service';
 import { Message } from 'primeng/components/common/api';
-import { MessageService } from 'primeng/components/common/messageservice';
+import {AdvGrowlService} from 'primeng-advanced-growl';
+// import { MessageService } from 'primeng/components/common/messageservice';
 import { Globals } from './globals';
 
 @Component({
@@ -19,8 +20,11 @@ import { Globals } from './globals';
 export class AppComponent implements OnInit {
 
     items: MenuItem[];
-
-    constructor(private globals: Globals) { }
+    messages = [];
+    // msgs: Message[] = [];
+    constructor(private growlService: AdvGrowlService, private globals: Globals) {
+        this.globals.setGrowlService(this.growlService);
+    }
 
     ngOnInit(): void {
         this.globals.getMenuItems().subscribe(res => {
@@ -29,6 +33,7 @@ export class AppComponent implements OnInit {
             this.globals.successMessage('Data Service', 'Got Menu Data');
             this.globals.debug(res);
         });
+
     }
 
     private getMenuText(src): string {
@@ -70,6 +75,10 @@ export class AppComponent implements OnInit {
             }
             case 'Debug': {
                 this.globals.toggleDebugViewVisibility();
+                break;
+            }
+            case 'About': {
+                // Do nothing, the route link will handle it
                 break;
             }
 

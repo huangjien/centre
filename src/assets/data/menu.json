@@ -80,6 +80,6 @@
     },
     {"separator":true},
     {
-        "label": "About", "icon": "fa-copyright", "routerLink":["/"]
+        "label": "About", "icon": "fa-copyright", "routerLink":["/about"]
     }
 ]

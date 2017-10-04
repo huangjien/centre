@@ -27,6 +27,8 @@ import {PanelModule} from 'primeng/primeng';
 import {TreeModule} from 'primeng/primeng';
 import { AngularSplitModule } from 'angular-split';
 import {SelectButtonModule} from 'primeng/primeng';
+import {AdvGrowlModule, AdvGrowlService} from 'primeng-advanced-growl';
+import {TreeDragDropService} from 'primeng/primeng';
 
 const appRoutes: Routes = [
   {
@@ -55,12 +57,12 @@ const appRoutes: Routes = [
     BrowserModule, BrowserAnimationsModule, ToolbarModule, HttpClientModule,
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule,
-    TieredMenuModule, PanelModule, AngularSplitModule,
+    TieredMenuModule, PanelModule, AngularSplitModule, AdvGrowlModule,
     FormsModule, InputTextModule, TreeModule, SelectButtonModule,
     HttpModule
   ],
 
-  providers: [DataService, MessageService, Globals],
+  providers: [DataService, MessageService, Globals, TreeDragDropService, AdvGrowlService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

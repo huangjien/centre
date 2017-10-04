@@ -15,6 +15,7 @@
     </a>
   </div>
 </p-toolbar>
-<p-growl [value]="msgs" life="3000"></p-growl>
-
+<!-- <p-growl life="3000"></p-growl> -->
+<!-- <p-growl [(value)]="msgs" life="3000"></p-growl> -->
+<adv-growl [life]="3000" [pauseOnlyHoveredMessage]="true" [freezeMessagesOnHover]="true" ></adv-growl>
 <router-outlet></router-outlet>
