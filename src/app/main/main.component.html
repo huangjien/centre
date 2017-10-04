@@ -1,4 +1,5 @@
-<split [gutterSize]="10"  >
+<div [style.height.px]="innerHeight">
+<split [gutterSize]="10" direction="horizontal"  >
   <split-area [size]="35" [visible]="treeViewVisible || debugViewVisible">
     <split direction="vertical" [gutterSize]="5">
       <split-area [visible]="treeViewVisible" [order]="1">
@@ -35,3 +36,4 @@
     </split>
   </split-area>
 </split>
+</div>

@@ -15,11 +15,13 @@ export class MainComponent implements OnInit {
   terminalViewVisible = false;
   debugViewVisible = true;
 
+  innerHeight: any;
   constructor(private globals: Globals) {
     this.globals.treeViewVisibilityChange.subscribe(value => this.treeViewVisible = value);
     this.globals.debugVisibilityChange.subscribe(value => this.debugViewVisible = value);
     this.globals.searchViewVisibilityChange.subscribe(value => this.searchViewVisible = value);
     this.globals.terminalVisibilityChange.subscribe(value => this.terminalViewVisible = value);
+    this.innerHeight = window.innerHeight;
    }
 
 
