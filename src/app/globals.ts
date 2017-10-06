@@ -125,6 +125,9 @@ export class Globals {
     }
 
     getChildrenNodes(ids: any[]): any[] {
+        if ( !Array.isArray(ids)) {
+            return [];
+        }
         const ret = [];
         for (const id_record of ids) {
             const id = id_record['_id'];

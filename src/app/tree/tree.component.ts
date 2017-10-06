@@ -40,7 +40,7 @@ export class TreeComponent implements OnInit {
 
   selectNode(event) {
     if (event.node) {
-      this.globals.infoMessage('Node', 'A Node is Selected: \n' + this.selectedNode.data);
+      // this.globals.infoMessage('Node', 'A Node is Selected: \n' + JSON.stringify(this.selectedNode.data));
       console.log(this.selectedNode);
       this.globals.debug(JSON.stringify(this.selectedNode.data));
     }
@@ -63,9 +63,30 @@ export class TreeComponent implements OnInit {
 
   getIcon(type: string): string {
     if (type === 'Project') {
+      return 'fa-file-powerpoint-o';
+    }
+    if (type === 'Folder') {
+      return 'fa-folder-o';
+    }
+    if (type === 'Suite') {
       return 'fa-suitcase';
     }
-    return 'fa-tasks';
+    if (type === 'Case') {
+      return 'fa-briefcase';
+    }
+    if (type === 'OUT') {
+      return 'fa-suitcase';
+    }
+    if (type === 'Action') {
+      return 'fa-flash';
+    }
+    if (type === 'Data') {
+      return 'fa-database';
+    }
+    if (type === 'Root') {
+      return 'fa-flag';
+    }
+    return 'fa-circle-o';
   }
 
   isLeaf(obj: any): boolean {

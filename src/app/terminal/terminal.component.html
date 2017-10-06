@@ -1,5 +1,5 @@
 <p-panel >
-        <p-header>
+        <p-header >
                 <div class="ui-helper-clearfix">
                         <div class="ui-inputgroup">
 
@@ -15,6 +15,8 @@
 
                 </div>
         </p-header>
-        <textarea [readonly]="isReadOnly()" [rows]="10" [cols]="145" pInputTextarea autoResize="autoResize" [(ngModel)]="response"></textarea>
+        <textarea 
+                [readonly]="isReadOnly()" class="allarea" [rows]="8"
+                pInputTextarea autoResize="true" [(ngModel)]="response"></textarea>
 
 </p-panel>

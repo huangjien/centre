@@ -1,8 +1,9 @@
-<p-panel header="Tree View">
+<!-- <p-panel header="Tree View" > -->
   <p-tree [value]="nodes" [loadingIcon]="fa-circle-o-notch" 
   (onNodeExpand)="loadNode($event)"
   (onNodeSelect)="selectNode($event)" selectionMode="single" [(selection)]="selectedNode"
-  draggableNodes="true" droppableNodes="true">
+  draggableNodes="true" droppableNodes="true" class="allarea"
+  >
 
   </p-tree>
-</p-panel>
+<!-- </p-panel> -->
