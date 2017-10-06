@@ -1,11 +1,8 @@
-[
-    {
-        "label": "Work Space",
-        "data": "Root of Tree",
-        "expandedIcon": "fa-folder-open",
-        "collapsedIcon": "fa-folder",
-        "draggable": false,
-        "droppable": true,
-        "leaf": false
-    }
-]
+{
+    "name": "Work Space",
+    "type": "Root",
+    "_id": "0010010000000",
+    "children": [
+        {"_id":"0010010000001"},{"_id":"0010010000002"}
+    ]
+}

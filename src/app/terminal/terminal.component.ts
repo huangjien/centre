@@ -54,13 +54,14 @@ export class TerminalComponent implements OnInit {
         });
     }
     if (this.command === 'getChildrenNodes') {
-      this
-        .globals
-        .getChildrenNodes()
-        .subscribe(res => {
-          // console.log(res);
-          this.response = JSON.stringify(res);
-        });
+      // TODO: need to be fixed
+      // this
+      //   .globals
+      //   .getChildrenNodes()
+      //   .subscribe(res => {
+      //     // console.log(res);
+      //     this.response = JSON.stringify(res);
+      //   });
     }
   }
 

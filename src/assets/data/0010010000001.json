@@ -1,0 +1,10 @@
+{
+    "name": "My 1st Project",
+    "type": "Project",
+    "_id": "0010010000001",
+    "children":[
+        {
+            "_id": "0010020000001"
+        }
+    ]
+}

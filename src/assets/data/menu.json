@@ -68,13 +68,6 @@
                     {"label": "Menu", "icon": "fa-list"},
                     {"label": "Forms", "icon": "fa-list-alt"}
                 ]
-            },
-            {
-                "label": "Other",
-                "icon": "fa-phone",
-                "items": [
-                    {"label": "Delete", "icon": "fa-minus"}
-                ]
             }
         ]
     },

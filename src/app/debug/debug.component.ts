@@ -12,7 +12,9 @@ export class DebugComponent implements OnInit {
   debugInfo = '';
 
   constructor(private globals: Globals ) {
-    this.globals.debugInfoChange.subscribe(value => this.debugInfo = value);
+    this.globals.debugInfoChange.subscribe(value => {
+      this.debugInfo = this.globals.anythingToJson(value);
+    });
    }
 
   ngOnInit() {

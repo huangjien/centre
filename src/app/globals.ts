@@ -3,7 +3,7 @@ import { Observable, Subject } from 'rxjs/Rx';
 import { MenuItem } from 'primeng/primeng';
 import { DataService } from './data.service';
 import { Message } from 'primeng/components/common/api';
-import {AdvGrowlService} from 'primeng-advanced-growl';
+import { AdvGrowlService } from 'primeng-advanced-growl';
 // import { MessageService } from 'primeng/components/common/messageservice';
 @Injectable()
 export class Globals {
@@ -33,7 +33,7 @@ export class Globals {
     // messageChange: Subject<Message[]> = new Subject<Message[]>();
     advGrowlService: AdvGrowlService;
     // services
-    constructor( private dataService: DataService) {
+    constructor(private dataService: DataService) {
         // subscribe view visibility changes
         this.treeViewVisibilityChange.subscribe((value) => {
             this.treeViewVisible = value;
@@ -124,8 +124,27 @@ export class Globals {
         return this.dataService.getData('treeRootNode');
     }
 
-    getChildrenNodes(): Observable<any> {
-        return this.dataService.getData('childrenNodes');
+    getChildrenNodes(ids: any[]): any[] {
+        const ret = [];
+        for (const id_record of ids) {
+            const id = id_record['_id'];
+            ret.push(this.dataService.getData(id));
+        }
+        return ret;
+    }
+
+    anythingToJson(obj: any) {
+        if (obj === null) {
+            return JSON.parse('{\'obj\':\'is null\'}');
+        }
+        if (obj === undefined) {
+            return JSON.parse('{\'obj\':\'is undefined\'}');
+        }
+        if (typeof obj === 'string') {
+            return obj;
+        }
+
+        return JSON.stringify(obj);
     }
 
 }
