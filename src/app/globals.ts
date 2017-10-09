@@ -124,16 +124,15 @@ export class Globals {
         return this.dataService.getData('treeRootNode');
     }
 
-    getChildrenNodes(ids: any[]): any[] {
-        if ( !Array.isArray(ids)) {
-            return [];
+    getChildrenNodes(id): Observable<any> {
+        if (!id) {
+            return null;
         }
-        const ret = [];
-        for (const id_record of ids) {
-            const id = id_record['_id'];
-            ret.push(this.dataService.getData(id));
-        }
-        return ret;
+
+
+        return this.dataService.getKids(id);
+
+
     }
 
     anythingToJson(obj: any) {

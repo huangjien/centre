@@ -1,0 +1,8 @@
+[
+    {
+        "name": "My 1st Folder",
+        "type": "Folder",
+        "_id": "0010020000001",
+        "parent_id": "0010010000001"
+    }
+]

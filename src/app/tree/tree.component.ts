@@ -18,7 +18,7 @@ export class TreeComponent implements OnInit {
   // debugFlag = false;
   ngOnInit() {
     this.globals.getTreeRootNode().subscribe(res => {
-      console.log(res);
+      // console.log(res);
       const nodes = [];
       nodes.push(this.createTreeNode(res));
       this.nodes = nodes;
@@ -29,19 +29,29 @@ export class TreeComponent implements OnInit {
   loadNode(event) {
     const nodes = [];
     if (event.node) {
-      for (const node of this.globals.getChildrenNodes(event.node.data.children)) {
-        node.subscribe(res => {
-          nodes.push(this.createTreeNode(res));
+      // console.log(event.node.data._id);
+      this.globals.getChildrenNodes(event.node.data._id).subscribe(res => {
+        console.log ('tree.loadNode');
+        // console.log(res);
+        // nodes = res;
+        for (const node of res) {
+          nodes.push(this.createTreeNode(node));
+        }
+        event.node.children = nodes;
+      },
+        error => {
+          console.log('handle error');
+
+          event.node.leaf = true;
+          console.log(event.node);
         });
-      }
-      event.node.children = nodes;
     }
   }
 
   selectNode(event) {
     if (event.node) {
       // this.globals.infoMessage('Node', 'A Node is Selected: \n' + JSON.stringify(this.selectedNode.data));
-      console.log(this.selectedNode);
+      // console.log(this.selectedNode);
       this.globals.debug(JSON.stringify(this.selectedNode.data));
     }
   }
@@ -54,7 +64,7 @@ export class TreeComponent implements OnInit {
       draggable: this.isDraggable(obj.type),
       droppable: this.isDroppable(obj.type),
       selectable: this.isSelectable(obj.type),
-      leaf: this.isLeaf(obj)
+      leaf: false
     };
 
     return treeNode;
