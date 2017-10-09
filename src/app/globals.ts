@@ -9,9 +9,9 @@ import { AdvGrowlService } from 'primeng-advanced-growl';
 export class Globals {
 
     // views' visiblilties
-    treeViewVisible = false;
+    treeViewVisible = true;
     treeViewVisibilityChange: Subject<boolean> = new Subject<boolean>();
-    searchViewVisible = false;
+    searchViewVisible = true;
     searchViewVisibilityChange: Subject<boolean> = new Subject<boolean>();
     terminalViewVisible = false;
     terminalVisibilityChange: Subject<boolean> = new Subject<boolean>();

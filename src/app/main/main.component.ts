@@ -10,10 +10,10 @@ import { AngularSplitModule } from 'angular-split';
 })
 export class MainComponent implements OnInit {
 
-  treeViewVisible = true; // this.globals.treeViewVisible;
-  searchViewVisible = true;
-  terminalViewVisible = true;
-  debugViewVisible = true;
+  treeViewVisible = this.globals.treeViewVisible;
+  searchViewVisible = this.globals.searchViewVisible;
+  terminalViewVisible = this.globals.terminalViewVisible;
+  debugViewVisible = this.globals.debugViewVisible;
 
   constructor(private globals: Globals) {
     this.globals.treeViewVisibilityChange.subscribe(value => this.treeViewVisible = value);
