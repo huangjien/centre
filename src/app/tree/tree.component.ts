@@ -31,7 +31,7 @@ export class TreeComponent implements OnInit {
     if (event.node) {
       // console.log(event.node.data._id);
       this.globals.getChildrenNodes(event.node.data._id).subscribe(res => {
-        console.log ('tree.loadNode');
+        // console.log ('tree.loadNode');
         // console.log(res);
         // nodes = res;
         for (const node of res) {
@@ -40,10 +40,9 @@ export class TreeComponent implements OnInit {
         event.node.children = nodes;
       },
         error => {
-          console.log('handle error');
-
+          // console.log('handle error');
           event.node.leaf = true;
-          console.log(event.node);
+          // console.log(event.node);
         });
     }
   }
@@ -52,6 +51,7 @@ export class TreeComponent implements OnInit {
     if (event.node) {
       // this.globals.infoMessage('Node', 'A Node is Selected: \n' + JSON.stringify(this.selectedNode.data));
       // console.log(this.selectedNode);
+      this.globals.setContent(this.selectedNode.data);
       this.globals.debug(JSON.stringify(this.selectedNode.data));
     }
   }

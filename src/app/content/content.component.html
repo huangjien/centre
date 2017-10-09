@@ -1,8 +1,24 @@
-<p-panel header="Main">
+<p-panel>
+
+  <p-header>
+    <div class="ui-helper-clearfix">
+      <div class="ui-inputgroup">
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <p-checkbox [(ngModel)]="readOnly" binary="true"></p-checkbox>
+          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Read Only&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <div style="float:right;">
+              <button pButton  type="button" label="Cancel" [disabled]="formValid()"></button>
+              <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+              <button pButton  type="submit" label="Submit" [disabled]="formValid()"></button>
+          </div>
+          
+      </div>
+    </div>
+  </p-header>
   
   <form [formGroup]="userform" *ngIf="hasContent" (ngSubmit)="onSubmit(userform.value)" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid"
     style="margin: 10px 0px">
 
-    <button pButton type="submit" label="Submit" [disabled]="formValid()">Submit</button>
+    
   </form>
 </p-panel>

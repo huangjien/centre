@@ -1,18 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {TieredMenuModule, MenuItem} from 'primeng/primeng';
+import { TieredMenuModule, MenuItem } from 'primeng/primeng';
 import { AppComponent } from './app.component';
-
-import {OrderListModule} from 'primeng/primeng';
+import { FormBuilder } from '@angular/forms';
+import { OrderListModule } from 'primeng/primeng';
 import { Observable } from 'rxjs/Rx';
-import {ChartModule, DataTableModule, MessagesModule, GrowlModule, DialogModule, ToolbarModule} from 'primeng/primeng';
-import {InputTextModule, AccordionModule, SharedModule, ButtonModule, FileUploadModule} from 'primeng/primeng';
-import {MessageService} from 'primeng/components/common/messageservice';
-import {TerminalModule} from 'primeng/primeng';
+import { ChartModule, DataTableModule, MessagesModule, GrowlModule, DialogModule, ToolbarModule } from 'primeng/primeng';
+import { InputTextModule, AccordionModule, SharedModule, ButtonModule, FileUploadModule } from 'primeng/primeng';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { TerminalModule } from 'primeng/primeng';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { DataService } from './data.service';
@@ -23,14 +23,15 @@ import { DebugComponent } from './debug/debug.component';
 import { SearchComponent } from './search/search.component';
 import { TreeComponent } from './tree/tree.component';
 import { TerminalComponent } from './terminal/terminal.component';
-import {PanelModule} from 'primeng/primeng';
-import {TreeModule} from 'primeng/primeng';
+import { PanelModule } from 'primeng/primeng';
+import { TreeModule } from 'primeng/primeng';
 import { AngularSplitModule } from 'angular-split';
-import {SelectButtonModule} from 'primeng/primeng';
-import {AdvGrowlModule, AdvGrowlService} from 'primeng-advanced-growl';
-import {TreeDragDropService} from 'primeng/primeng';
-import {CheckboxModule} from 'primeng/primeng';
-import {InputTextareaModule} from 'primeng/primeng';
+import { SelectButtonModule } from 'primeng/primeng';
+import { AdvGrowlModule, AdvGrowlService } from 'primeng-advanced-growl';
+import { TreeDragDropService } from 'primeng/primeng';
+import { CheckboxModule } from 'primeng/primeng';
+import { InputTextareaModule } from 'primeng/primeng';
+import { ContentComponent } from './content/content.component';
 
 const appRoutes: Routes = [
   {
@@ -50,13 +51,14 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent, AboutComponent, DynamicUiPipe, MainComponent, DebugComponent, SearchComponent, TreeComponent, TerminalComponent
+    AppComponent, AboutComponent, DynamicUiPipe, MainComponent, DebugComponent,
+    SearchComponent, TreeComponent, TerminalComponent, ContentComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes
-        // , {enableTracing: true} // <-- debugging purposes only
+      // , {enableTracing: true} // <-- debugging purposes only
     ),
-    BrowserModule, BrowserAnimationsModule, ToolbarModule, HttpClientModule,
+    BrowserModule, BrowserAnimationsModule, ToolbarModule, HttpClientModule, ReactiveFormsModule,
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule,
     TieredMenuModule, PanelModule, AngularSplitModule, AdvGrowlModule,
@@ -64,7 +66,7 @@ const appRoutes: Routes = [
     HttpModule
   ],
 
-  providers: [DataService, MessageService, Globals, TreeDragDropService, AdvGrowlService],
+  providers: [DataService, MessageService, Globals, TreeDragDropService, AdvGrowlService, FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

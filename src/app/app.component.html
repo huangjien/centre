@@ -3,7 +3,7 @@
     <div class=" ui-toolbar-group-left ">
       <label class="logo ">A Test </label>
       <i class="fa fa-bars "></i>
-      <p-tieredMenu #menu [model]="items " (click)="onClicked(event) " [popup]="true "></p-tieredMenu>
+      <p-tieredMenu #menu [model]="menuItems " (click)="onClicked(event) " [popup]="true "></p-tieredMenu>
       <button #btn type="button " pButton icon="fa fa-list " label="Menu " 
         (click)="menu.toggle($event) "></button>
     </div>

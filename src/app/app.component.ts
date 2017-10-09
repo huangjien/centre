@@ -8,7 +8,7 @@ import { AboutComponent } from './about/about.component';
 import { Router } from '@angular/router';
 import { DataService } from './data.service';
 import { Message } from 'primeng/components/common/api';
-import {AdvGrowlService} from 'primeng-advanced-growl';
+import { AdvGrowlService } from 'primeng-advanced-growl';
 // import { MessageService } from 'primeng/components/common/messageservice';
 import { Globals } from './globals';
 
@@ -19,7 +19,7 @@ import { Globals } from './globals';
 })
 export class AppComponent implements OnInit {
 
-    items: MenuItem[];
+    menuItems: MenuItem[];
     messages = [];
     // msgs: Message[] = [];
     innerHeight: any;
@@ -31,11 +31,14 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
         this.globals.getMenuItems().subscribe(res => {
             // console.log(res);
-            this.items = res;
-            this.globals.successMessage('Data Service', 'Got Menu Data');
-            this.globals.debug(res);
+            this.menuItems = res;
+            this.globals.successMessage('Data Service', 'Menu Data Loaded');
+            // this.globals.debug(res);
         });
-
+        this.globals.getForms().subscribe(res => {
+            this.globals.forms = res;
+            this.globals.successMessage('Data Service', 'Form Data Loaded');
+        });
     }
 
     private getMenuText(src): string {

@@ -15,7 +15,7 @@ export class Globals {
     searchViewVisibilityChange: Subject<boolean> = new Subject<boolean>();
     terminalViewVisible = false;
     terminalVisibilityChange: Subject<boolean> = new Subject<boolean>();
-    debugViewVisible = false;
+    debugViewVisible = true;
     debugVisibilityChange: Subject<boolean> = new Subject<boolean>();
 
     // debug info
@@ -25,7 +25,14 @@ export class Globals {
     // user
     currentUser = '';
 
-    items: MenuItem[];
+    // items: MenuItem[];
+
+    // content
+    content: any;
+    contentChange: Subject<any> = new Subject<any>();
+
+    // forms metadata store here
+    forms: any[];
 
     messages = [];
     // messages
@@ -53,9 +60,10 @@ export class Globals {
             this.debugInfo = value;
         });
 
-        // this.messageChange.subscribe((value) => {
-        //     this.msgs = value;
-        // });
+        this.contentChange.subscribe((value) => {
+            this.content = value;
+        });
+
     }
 
     toggleTreeViewVisibility() {
@@ -76,6 +84,10 @@ export class Globals {
 
     debug(info: string) {
         this.debugInfoChange.next(info);
+    }
+
+    setContent(content: any) {
+        this.contentChange.next(content);
     }
 
     successMessage(_summary: string, _message: string) {
@@ -120,6 +132,14 @@ export class Globals {
         return this.dataService.getData('menu');
     }
 
+    getForms(): Observable<any> {
+        return this.dataService.getData('forms');
+    }
+
+    getForm(name: string): any {
+        return this.forms[name];
+    }
+
     getTreeRootNode(): Observable<any> {
         return this.dataService.getData('treeRootNode');
     }
@@ -128,11 +148,7 @@ export class Globals {
         if (!id) {
             return null;
         }
-
-
         return this.dataService.getKids(id);
-
-
     }
 
     anythingToJson(obj: any) {
