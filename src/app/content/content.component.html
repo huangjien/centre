@@ -1,0 +1,8 @@
+<p-panel header="Main">
+  
+  <form [formGroup]="userform" *ngIf="hasContent" (ngSubmit)="onSubmit(userform.value)" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid"
+    style="margin: 10px 0px">
+
+    <button pButton type="submit" label="Submit" [disabled]="formValid()">Submit</button>
+  </form>
+</p-panel>
