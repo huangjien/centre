@@ -2,50 +2,50 @@
     {
         "name": "Project",
         "fields": [
-            {"name": "_id", "type": "text", "readOnly": true},
-            {"name": "name", "type": "text", "readOnly": false}
+            {"name": "description", "type": "text", "readOnly": false, "validators":[{"name":"required"}]},
+            {"name": "name", "type": "text", "readOnly": false, "validators":[{"name":"required"}, {"name":"min3"}]}
         ]
     },
     {
         "name": "Suite",
         "fields": [
-            {"name": "_id", "type": "text", "readOnly": true},
-            {"name": "name", "type": "text", "readOnly": false}
+            {"name": "description", "type": "text", "readOnly": false, "validators":[{"name":"required"}]},
+            {"name": "name", "type": "text", "readOnly": false, "validators":[{"name":"required"}, {"name":"min3"}]}
         ]
     },
     {
         "name": "Case",
         "fields": [
-            {"name": "_id", "type": "text", "readOnly": true},
-            {"name": "name", "type": "text", "readOnly": false}
+            {"name": "description", "type": "text", "readOnly": false, "validators":[{"name":"required"}]},
+            {"name": "name", "type": "text", "readOnly": false, "validators":[{"name":"required"}, {"name":"min3"}]}
         ]
     },
     {
         "name": "Folder",
         "fields": [
-            {"name": "_id", "type": "text", "readOnly": true},
-            {"name": "name", "type": "text", "readOnly": false}
+            {"name": "description", "type": "text", "readOnly": false, "validators":[{"name":"required"}]},
+            {"name": "name", "type": "text", "readOnly": false, "validators":[{"name":"required"}, {"name":"min3"}]}
         ]
     },
     {
         "name": "OUT",
         "fields": [
-            {"name": "_id", "type": "text", "readOnly": true},
-            {"name": "name", "type": "text", "readOnly": false}
+            {"name": "description", "type": "text", "readOnly": false, "validators":[{"name":"required"}]},
+            {"name": "name", "type": "text", "readOnly": false, "validators":[{"name":"required"}, {"name":"min3"}]}
         ]
     },
     {
         "name": "Action",
         "fields": [
-            {"name": "_id", "type": "text", "readOnly": true},
-            {"name": "name", "type": "text", "readOnly": false}
+            {"name": "description", "type": "text", "readOnly": false, "validators":[{"name":"required"}]},
+            {"name": "name", "type": "text", "readOnly": false, "validators":[{"name":"required"}, {"name":"min3"}]}
         ]
     },
     {
         "name": "Data",
         "fields": [
-            {"name": "_id", "type": "text", "readOnly": true},
-            {"name": "name", "type": "text", "readOnly": false}
+            {"name": "description", "type": "text", "readOnly": false, "validators":[{"name":"required"}]},
+            {"name": "name", "type": "text", "readOnly": false, "validators":[{"name":"required"}, {"name":"min3"}]}
         ]
     }
 ]

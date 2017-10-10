@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,7 +16,6 @@ import { TerminalModule } from 'primeng/primeng';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { DataService } from './data.service';
-import { DynamicUiPipe } from './dynamic-ui.pipe';
 import { Globals } from './globals';
 import { MainComponent } from './main/main.component';
 import { DebugComponent } from './debug/debug.component';
@@ -32,6 +31,8 @@ import { TreeDragDropService } from 'primeng/primeng';
 import { CheckboxModule } from 'primeng/primeng';
 import { InputTextareaModule } from 'primeng/primeng';
 import { ContentComponent } from './content/content.component';
+import { ValidatorsService } from './validators.service';
+import { FormPipe } from './form.pipe';
 
 const appRoutes: Routes = [
   {
@@ -51,8 +52,8 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent, AboutComponent, DynamicUiPipe, MainComponent, DebugComponent,
-    SearchComponent, TreeComponent, TerminalComponent, ContentComponent
+    AppComponent, AboutComponent, MainComponent, DebugComponent,
+    SearchComponent, TreeComponent, TerminalComponent, ContentComponent, FormPipe
   ],
   imports: [
     RouterModule.forRoot(appRoutes
@@ -66,7 +67,8 @@ const appRoutes: Routes = [
     HttpModule
   ],
 
-  providers: [DataService, MessageService, Globals, TreeDragDropService, AdvGrowlService, FormBuilder],
+  providers: [DataService, MessageService, Globals, TreeDragDropService,
+     AdvGrowlService, FormBuilder, ValidatorsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

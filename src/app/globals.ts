@@ -137,7 +137,7 @@ export class Globals {
     }
 
     getForm(name: string): any {
-        return this.forms[name];
+        return this.forms.find(item => item.name === name);
     }
 
     getTreeRootNode(): Observable<any> {
@@ -149,6 +149,14 @@ export class Globals {
             return null;
         }
         return this.dataService.getKids(id);
+    }
+
+    uuid(): string {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            // tslint:disable-next-line:no-bitwise
+            const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
     }
 
     anythingToJson(obj: any) {
