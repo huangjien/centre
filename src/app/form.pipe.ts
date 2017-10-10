@@ -1,54 +1,63 @@
-import { Pipe, PipeTransform } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
-import { Globals } from './globals';
+import {Pipe, PipeTransform} from '@angular/core';
+import {DomSanitizer} from '@angular/platform-browser';
+import {Globals} from './globals';
 
-@Pipe({
-  name: 'form'
-})
+@Pipe({name: 'form'})
 export class FormPipe implements PipeTransform {
 
-  constructor(private globals: Globals, private sanitizer: DomSanitizer) { }
-  transform(value: any, formData?: any): any {
+  constructor(private globals : Globals, private sanitizer : DomSanitizer) {}
+  transform(value : any, formData?: any) : any {
     // value is the form name
     let ret = '';
     let id = '';
-    const formStructure = this.globals.getForm(value);
+    const formStructure = this
+      .globals
+      .getForm(value);
     console.log(formStructure);
     if (formData === undefined || formData === null) {
-      id = this.globals.uuid();
+      id = this
+        .globals
+        .uuid();
     } else {
       id = formData['_id'];
     }
-    ret += '<input style="visibility:hidden;" type="text" pInputText id="_id" disabled="true" value="' + id + '"/>';
+    ret += '<input style="visibility:hidden;" type="text" id="_id" disabled="true" value="' + id + '"/>';
     for (const f of formStructure.fields) {
       ret += this.getOneField(f, formData);
     }
-    console.log(ret);
-    return this.sanitizer.bypassSecurityTrustHtml(ret);
+    console.log(this.sanitizer.bypassSecurityTrustHtml(ret));
+    return this
+      .sanitizer
+      .bypassSecurityTrustHtml(ret);
   }
 
-  private getOneField(field: any, formData?: any): string {
+  private getOneField(field : any, formData?: any) : string {
     const type = field['type'];
     const name = field['name'];
     const readOnly = field['readOnly'];
-    let ret = '<';
+    const validators = field['validators'];
+    let ret = '<span  class="ui-float-label"><';
     if (type === 'text') {
-      ret += 'input type="text" pInputText ';
-    }
-    if (readOnly === 'true') {
-      ret += ' [disabled]="true" ';
-    } else {
-      ret += ' [disabled]="readOnly" ';
+      ret += 'input type="text" pInputText class=" ui-state-default ui-widget ui-state-filled"' +
+          ' ';
     }
 
-    ret += ' name="' + name + '" ';
-    ret += '/>';
+    if (readOnly === true) {
+      ret += ' readonly ';
+    }
+
+    if (validators !== null && validators !== undefined) {
+      ret += ' ' + validators + ' ';
+    }
+
+    ret += ' name="' + name + '" id="' + name + '" ';
+    ret += ' /><label for="' + name + '">' + name + '</label></span><p></p>';
 
     return ret;
   }
 
-  private getFieldValue(name: string, formData?: any): string {
-    if (formData === undefined || formData === null) {
+  private getFieldValue(name : string, formData?: any) : string {
+    if(formData === undefined || formData === null) {
       return null;
     }
     return formData[name];

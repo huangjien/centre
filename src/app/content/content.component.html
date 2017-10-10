@@ -5,21 +5,22 @@
       <div class="ui-inputgroup">
           <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <p-checkbox [(ngModel)]="readOnly" binary="true"></p-checkbox>
-          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Read Only&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+          <span>&nbsp;&nbsp;&nbsp;Disabled&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
           
           
       </div>
+      
     </div>
   </p-header>
   
-  <form *ngIf="hasContent" (ngSubmit)="onSubmit(userform.value)" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid"
+  <form [formGroup]="userform" ngNativeValidate *ngIf="hasContent" (ngSubmit)="onSubmit()" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid"
     style="margin: 10px 0px">
-    <div id="form"[innerHTML]="content.type | form " ></div>
-    <div style="float:right;">
-        <button pButton  type="button" label="Cancel" [disabled]="formValid()"></button>
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <button pButton  type="submit" label="Submit" [disabled]="formValid()"></button>
-    </div>
+    <div  [innerHTML]="content.type | form " ></div>
     
+    <div class="ui-inputgroup" style="float:right;">
+      <button pButton  type="button" label="Cancel" [disabled]="formValid()"></button>
+      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <button pButton  type="submit" label="Submit" [disabled]="formValid()"></button>
+  </div>
   </form>
 </p-panel>
