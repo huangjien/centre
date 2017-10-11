@@ -3,49 +3,49 @@
         "name": "Project",
         "fields": [
             {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required min='3'"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
         ]
     },
     {
         "name": "Suite",
         "fields": [
             {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required min='3'"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
         ]
     },
     {
         "name": "Case",
         "fields": [
             {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required min='3'"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
         ]
     },
     {
         "name": "Folder",
         "fields": [
             {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required min='3'"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
         ]
     },
     {
         "name": "OUT",
         "fields": [
             {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required min='3'"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
         ]
     },
     {
         "name": "Action",
         "fields": [
             {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required min='3'"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
         ]
     },
     {
         "name": "Data",
         "fields": [
             {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required min='3'"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
         ]
     }
 ]

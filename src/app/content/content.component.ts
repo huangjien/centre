@@ -31,8 +31,25 @@ export class ContentComponent implements OnInit {
 
   onSubmit() {
     console.log(this.userform.value);
-    this.globals.successMessage('Form', this.userform.value);
+    this.globals.successMessage('Form', JSON.stringify(this.userform.value));
   }
+
+  buildForm() {
+    // create controls according content
+    // TODO data structure not right, think about it
+    const ret: Map<string, FormControl> = new Map<string, FormControl>();
+    for (const f of this.globals.getForm(this.content.type).fields) {
+      
+      const name = f.name;
+      ret.set('name', new FormControl(''));
+      
+    }
+    console.log(ret);
+    this.userform = this.fb.group(JSON.parse(ret));
+  }
+
+
+
   ngOnInit() {
     this.userform = this.fb.group({
     });
@@ -41,6 +58,7 @@ export class ContentComponent implements OnInit {
       console.log('we receive change notification');
       console.log(this.content);
       this.hasContent = true;
+      this.buildForm();
     });
   }
 

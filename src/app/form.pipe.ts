@@ -1,12 +1,12 @@
-import {Pipe, PipeTransform} from '@angular/core';
-import {DomSanitizer} from '@angular/platform-browser';
-import {Globals} from './globals';
+import { Pipe, PipeTransform } from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Globals } from './globals';
 
-@Pipe({name: 'form'})
+@Pipe({ name: 'form' })
 export class FormPipe implements PipeTransform {
 
-  constructor(private globals : Globals, private sanitizer : DomSanitizer) {}
-  transform(value : any, formData?: any) : any {
+  constructor(private globals: Globals, private sanitizer: DomSanitizer) { }
+  transform(value: any, formData?: any): any {
     // value is the form name
     let ret = '';
     let id = '';
@@ -31,19 +31,20 @@ export class FormPipe implements PipeTransform {
       .bypassSecurityTrustHtml(ret);
   }
 
-  private getOneField(field : any, formData?: any) : string {
+  private getOneField(field: any, formData?: any): string {
     const type = field['type'];
     const name = field['name'];
     const readOnly = field['readOnly'];
     const validators = field['validators'];
     let ret = '<span  class="ui-float-label"><';
     if (type === 'text') {
-      ret += 'input type="text" pInputText class=" ui-state-default ui-widget ui-state-filled"' +
-          ' ';
+      ret += 'input type="text" pInputText  ';
     }
 
     if (readOnly === true) {
       ret += ' readonly ';
+    } else {
+      ret += ' [disabled]="readOnly" ';
     }
 
     if (validators !== null && validators !== undefined) {
@@ -56,8 +57,8 @@ export class FormPipe implements PipeTransform {
     return ret;
   }
 
-  private getFieldValue(name : string, formData?: any) : string {
-    if(formData === undefined || formData === null) {
+  private getFieldValue(name: string, formData?: any): string {
+    if (formData === undefined || formData === null) {
       return null;
     }
     return formData[name];
