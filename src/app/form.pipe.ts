@@ -51,7 +51,7 @@ export class FormPipe implements PipeTransform {
       ret += ' ' + validators + ' ';
     }
 
-    ret += ' name="' + name + '" id="' + name + '" ';
+    ret += ' name="' + name + '" id="' + name + '" [formControlName]="'+name+'"';
     ret += ' /><label for="' + name + '">' + name + '</label></span><p></p>';
 
     return ret;

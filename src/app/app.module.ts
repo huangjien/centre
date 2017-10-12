@@ -1,5 +1,6 @@
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, JsonpModule } from '@angular/http';
@@ -60,7 +61,7 @@ const appRoutes: Routes = [
       // , {enableTracing: true} // <-- debugging purposes only
     ),
     BrowserModule, BrowserAnimationsModule, ToolbarModule, HttpClientModule, ReactiveFormsModule,
-    ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule,
+    ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule, CommonModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule,
     TieredMenuModule, PanelModule, AngularSplitModule, AdvGrowlModule,
     FormsModule, InputTextModule, TreeModule, SelectButtonModule, CheckboxModule,

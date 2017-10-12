@@ -45,6 +45,7 @@
         "name": "Data",
         "fields": [
             {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
+            {"name": "value", "type": "text", "readOnly": false, "validators":"required"},
             {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
         ]
     }

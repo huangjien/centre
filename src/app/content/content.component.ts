@@ -1,4 +1,5 @@
-import { Component, OnInit, Pipe } from '@angular/core';
+import { Component, OnInit, Pipe, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
 import { Globals } from '../globals';
 import { ValidatorsService } from '../validators.service';
@@ -12,53 +13,52 @@ import { FormPipe } from '../form.pipe';
 })
 export class ContentComponent implements OnInit {
 
-  userform: FormGroup;
+  form: FormGroup;
   hasContent = false;
   readOnly = true;
+  @Input() config: any[] = [];
   content = this.globals.content;
 
   constructor(private fb: FormBuilder, private globals: Globals, private validatorsService: ValidatorsService) { }
 
   formValid() {
-    if (!this.userform) {
-      return true;
+    if (!this.form) {
+      return false;
     }
     if (this.readOnly) {
-      return true;
+      return false;
     }
-    return !this.userform.valid;
+    
+    return !this.form.valid;
   }
 
   onSubmit() {
-    console.log(this.userform.value);
-    this.globals.successMessage('Form', JSON.stringify(this.userform.value));
+    console.log(this.form.value);
+    Object.keys(this.form.controls).forEach(key => console.log(this.form.get(key).value));
+    this.globals.successMessage('Form', JSON.stringify(this.form.value));
   }
 
   buildForm() {
     // create controls according content
-    // TODO data structure not right, think about it
-    const ret: Map<string, FormControl> = new Map<string, FormControl>();
-    for (const f of this.globals.getForm(this.content.type).fields) {
-      
-      const name = f.name;
-      ret.set('name', new FormControl(''));
-      
-    }
-    console.log(ret);
-    this.userform = this.fb.group(JSON.parse(ret));
+    const group = this.fb.group({});
+    this.config.forEach(control => {
+      group.addControl(control.name, this.fb.control(''));
+    });
+    return group;
   }
 
 
 
   ngOnInit() {
-    this.userform = this.fb.group({
+    this.form = this.fb.group({
     });
     this.globals.contentChange.subscribe(value => {
       this.content = value;
       console.log('we receive change notification');
       console.log(this.content);
+      this.config = this.globals.getForm(this.content.type).fields;
       this.hasContent = true;
-      this.buildForm();
+      this.form = this.buildForm();
     });
   }
 

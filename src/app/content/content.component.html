@@ -13,9 +13,12 @@
     </div>
   </p-header>
   
-  <form [formGroup]="userform" ngNativeValidate *ngIf="hasContent" (ngSubmit)="onSubmit()" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid"
+  <form [formGroup]="form" ngNativeValidate *ngIf="hasContent" (ngSubmit)="onSubmit()" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid"
     style="margin: 10px 0px">
-    <div  [innerHTML]="content.type | form " ></div>
+    <!-- <div  [innerHTML]="content.type | form " ></div> -->
+    <ng-container *ngFor=" let control of config">
+      <input pInputText type="text" id="control.name" [formControlName]="control.name" name="control.name" required />
+    </ng-container>
     
     <div class="ui-inputgroup" style="float:right;">
       <button pButton  type="button" label="Cancel" [disabled]="formValid()"></button>
