@@ -2,51 +2,55 @@
     {
         "name": "Project",
         "fields": [
-            {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"},
+            {"name": "description", "type": "editor", "readOnly": false, "validators":"required"}
         ]
     },
     {
         "name": "Suite",
         "fields": [
-            {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"},
+            {"name": "name", "type": "single", "readOnly": false, "validators":"", "options":[{"label":"Root","value":"Root"},{"label":"Sub","value":"Sub"}]},
+            {"name": "description", "type": "editor", "readOnly": false, "validators":"required"}
         ]
     },
     {
         "name": "Case",
         "fields": [
-            {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"},
+            {"name": "description", "type": "editor", "readOnly": false, "validators":"required"}
         ]
     },
     {
         "name": "Folder",
         "fields": [
-            {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"},
+            {"name": "description", "type": "editor", "readOnly": false, "validators":"required"}
+            
         ]
     },
     {
         "name": "OUT",
         "fields": [
-            {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"},
+            {"name": "description", "type": "editor", "readOnly": false, "validators":"required"}
         ]
     },
     {
         "name": "Action",
         "fields": [
-            {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"},
+            {"name": "description", "type": "editor", "readOnly": false, "validators":"required"}
         ]
     },
     {
         "name": "Data",
         "fields": [
-            {"name": "description", "type": "text", "readOnly": false, "validators":"required"},
+            
+            
+            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"},
             {"name": "value", "type": "text", "readOnly": false, "validators":"required"},
-            {"name": "name", "type": "text", "readOnly": false, "validators":"required minlength=3"}
+            {"name": "description", "type": "editor", "readOnly": false, "validators":"required"}
         ]
     }
 ]

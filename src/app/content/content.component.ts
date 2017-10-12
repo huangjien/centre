@@ -5,6 +5,7 @@ import { Globals } from '../globals';
 import { ValidatorsService } from '../validators.service';
 import { FormPipe } from '../form.pipe';
 
+import {EditorModule, SelectButtonModule} from 'primeng/primeng';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -28,7 +29,6 @@ export class ContentComponent implements OnInit {
     if (this.readOnly) {
       return false;
     }
-    
     return !this.form.valid;
   }
 
@@ -36,12 +36,20 @@ export class ContentComponent implements OnInit {
     console.log(this.form.value);
     Object.keys(this.form.controls).forEach(key => console.log(this.form.get(key).value));
     this.globals.successMessage('Form', JSON.stringify(this.form.value));
+    this.form.reset();
+    // this.clearForm();
+  }
+
+  clearForm() {
+    this.config = [];
+    this.form = this.fb.group({});
   }
 
   buildForm() {
     // create controls according content
     const group = this.fb.group({});
     this.config.forEach(control => {
+      console.log(control);
       group.addControl(control.name, this.fb.control(''));
     });
     return group;
@@ -50,12 +58,10 @@ export class ContentComponent implements OnInit {
 
 
   ngOnInit() {
-    this.form = this.fb.group({
-    });
     this.globals.contentChange.subscribe(value => {
       this.content = value;
-      console.log('we receive change notification');
-      console.log(this.content);
+      // console.log('we receive change notification');
+      // console.log(this.content);
       this.config = this.globals.getForm(this.content.type).fields;
       this.hasContent = true;
       this.form = this.buildForm();

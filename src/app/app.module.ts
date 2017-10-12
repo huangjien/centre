@@ -1,6 +1,8 @@
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import {EditorModule} from 'primeng/primeng';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, JsonpModule } from '@angular/http';
@@ -63,7 +65,7 @@ const appRoutes: Routes = [
     BrowserModule, BrowserAnimationsModule, ToolbarModule, HttpClientModule, ReactiveFormsModule,
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule, CommonModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule,
-    TieredMenuModule, PanelModule, AngularSplitModule, AdvGrowlModule,
+    TieredMenuModule, PanelModule, AngularSplitModule, AdvGrowlModule, EditorModule, SelectButtonModule,
     FormsModule, InputTextModule, TreeModule, SelectButtonModule, CheckboxModule,
     HttpModule
   ],

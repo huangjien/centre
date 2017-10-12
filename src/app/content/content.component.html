@@ -3,27 +3,72 @@
   <p-header>
     <div class="ui-helper-clearfix">
       <div class="ui-inputgroup">
-          <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <p-checkbox [(ngModel)]="readOnly" binary="true"></p-checkbox>
-          <span>&nbsp;&nbsp;&nbsp;Disabled&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          
-          
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+        <p-checkbox [(ngModel)]="readOnly" binary="true"></p-checkbox>
+        <span>&nbsp;&nbsp;&nbsp;Disabled&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+
+
       </div>
-      
+
     </div>
   </p-header>
-  
-  <form [formGroup]="form" ngNativeValidate *ngIf="hasContent" (ngSubmit)="onSubmit()" class="ui-grid ui-grid-responsive ui-grid-pad ui-fluid"
-    style="margin: 10px 0px">
-    <!-- <div  [innerHTML]="content.type | form " ></div> -->
+
+  <form [formGroup]="form" ngNativeValidate *ngIf="hasContent" (ngSubmit)="onSubmit()" style="margin: 10px 0px">
+
     <ng-container *ngFor=" let control of config">
-      <input pInputText type="text" id="control.name" [formControlName]="control.name" name="control.name" required />
+      <p></p>
+      <ng-container [ngSwitch]="control.type">
+        <!-- input text -->
+        <div *ngSwitchCase="'text'">
+          <span class="ui-float-label">
+            <input id="control.name" type="text" pInputText id="control.name" [formControlName]="control.name" name="control.name">
+            <label for="control.name">{{control.name}}</label>
+          </span>
+        </div>
+        <!-- end of input text -->
+        <!-- editor -->
+        <div *ngSwitchCase="'editor'">
+          <p-editor id="control.name" type="" id="control.name" [formControlName]="control.name" name="control.name"
+            [style]="{'height':'160px'}"></p-editor>
+        </div>
+        <!-- end of editor -->
+        <!-- multi selection -->
+        <div *ngSwitchCase="'multi'">
+
+          <p-selectButton [options]="control.options" multiple="multiple" id="control.name" [formControlName]="control.name"
+            name="control.name"></p-selectButton>
+
+        </div>
+        <!-- end of multi selection -->
+        <!-- single selection -->
+        <div *ngSwitchCase="'single'">
+
+          <p-selectButton [options]="control.options" id="control.name" [formControlName]="control.name"
+            name="control.name"></p-selectButton>
+
+        </div>
+        <!-- end of single selection -->
+        <!-- table format reference list -->
+        <div *ngSwitchCase="'references'">
+          <span class="ui-float-label">
+            {{control}}
+            <label for="control.name">{{control.name}}</label>
+          </span>
+        </div>
+        <!-- end of table format reference list -->
+
+        <div *ngSwitchDefault>
+          <label>un-recognized control type "{{control.type}}", name:"{{control.name}}"</label>
+        </div>
+      </ng-container>
+
     </ng-container>
-    
+
+    <p></p>
     <div class="ui-inputgroup" style="float:right;">
-      <button pButton  type="button" label="Cancel" [disabled]="formValid()"></button>
+      <button pButton type="button" label="Cancel" [disabled]="formValid()"></button>
       <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <button pButton  type="submit" label="Submit" [disabled]="formValid()"></button>
-  </div>
+      <button pButton type="submit" label="Submit" [disabled]="formValid()"></button>
+    </div>
   </form>
 </p-panel>
