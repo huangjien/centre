@@ -87,6 +87,7 @@ export class Globals {
     }
 
     setContent(content: any) {
+        // this.content = content;
         this.contentChange.next(content);
     }
 

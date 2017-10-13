@@ -1,6 +1,6 @@
 <p-panel>
 
-  <p-header>
+  <!-- <p-header>
     <div class="ui-helper-clearfix">
       <div class="ui-inputgroup">
         <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
@@ -11,40 +11,47 @@
       </div>
 
     </div>
-  </p-header>
+  </p-header> -->
 
   <form [formGroup]="form" ngNativeValidate *ngIf="hasContent" (ngSubmit)="onSubmit()" style="margin: 10px 0px">
 
     <ng-container *ngFor=" let control of config">
       <p></p>
       <ng-container [ngSwitch]="control.type">
+        <!-- id -->
+        <div *ngSwitchCase="'_id'">
+          <input style="display:none;" type="text" id="_id" disabled="true" />
+        </div>
+        <!-- end of id -->
         <!-- input text -->
         <div *ngSwitchCase="'text'">
           <span class="ui-float-label">
-            <input id="control.name" type="text" pInputText id="control.name" [formControlName]="control.name" name="control.name">
-            <label for="control.name">{{control.name}}</label>
+            <input id="{{control.name}}" type="text" pInputText formControlName="{{control.name}}">
+            <label for="{{control.name}}">{{control.name}}</label>
           </span>
         </div>
         <!-- end of input text -->
         <!-- editor -->
         <div *ngSwitchCase="'editor'">
-          <p-editor id="control.name" type="" id="control.name" [formControlName]="control.name" name="control.name"
-            [style]="{'height':'160px'}"></p-editor>
+          
+            <textarea placeholder="Description" [rows]="5" 
+            pInputTextarea id="{{control.name}}" formControlName="{{control.name}}"
+            style="min-width: 160px"></textarea>
+            
+          <!-- <p-editor id="{{control.name}}" formControlName="{{control.name}}" [style]="{'height':'160px'}"></p-editor> -->
         </div>
         <!-- end of editor -->
         <!-- multi selection -->
         <div *ngSwitchCase="'multi'">
 
-          <p-selectButton [options]="control.options" multiple="multiple" id="control.name" [formControlName]="control.name"
-            name="control.name"></p-selectButton>
+          <p-selectButton [options]="control.options" multiple="multiple" id="{{control.name}}" formControlName="{{control.name}}"></p-selectButton>
 
         </div>
         <!-- end of multi selection -->
         <!-- single selection -->
         <div *ngSwitchCase="'single'">
 
-          <p-selectButton [options]="control.options" id="control.name" [formControlName]="control.name"
-            name="control.name"></p-selectButton>
+          <p-selectButton [options]="control.options" id="{{control.name}}" formControlName="{{control.name}}"></p-selectButton>
 
         </div>
         <!-- end of single selection -->
@@ -52,7 +59,7 @@
         <div *ngSwitchCase="'references'">
           <span class="ui-float-label">
             {{control}}
-            <label for="control.name">{{control.name}}</label>
+            <label for="{{control.name}}">{{control.name}}</label>
           </span>
         </div>
         <!-- end of table format reference list -->
@@ -66,9 +73,9 @@
 
     <p></p>
     <div class="ui-inputgroup" style="float:right;">
-      <button pButton type="button" label="Cancel" [disabled]="formValid()"></button>
-      <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-      <button pButton type="submit" label="Submit" [disabled]="formValid()"></button>
+      <button pButton type="button" (click)="onCancel()" label="Cancel" icon="fa-close"></button>
+      <!-- <button pButton type="button" (click)="onSave()" label="Save" icon="fa-save" [disabled]="formValid()"></button>       -->
+      <button pButton type="submit" label="Save & Close" icon="fa-check" [disabled]="formValid()"></button>
     </div>
   </form>
 </p-panel>

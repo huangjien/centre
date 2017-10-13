@@ -1,11 +1,10 @@
 import { Component, OnInit, Pipe, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Validators, FormControl, FormGroup, FormBuilder } from '@angular/forms';
+import { Validators, FormControl, FormGroup, FormBuilder, ValidatorFn } from '@angular/forms';
 import { Globals } from '../globals';
-import { ValidatorsService } from '../validators.service';
 import { FormPipe } from '../form.pipe';
 
-import {EditorModule, SelectButtonModule} from 'primeng/primeng';
+import { EditorModule, SelectButtonModule } from 'primeng/primeng';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -15,56 +14,100 @@ import {EditorModule, SelectButtonModule} from 'primeng/primeng';
 export class ContentComponent implements OnInit {
 
   form: FormGroup;
+  // we will use this later
   hasContent = false;
-  readOnly = true;
+  readOnly = false;
   @Input() config: any[] = [];
   content = this.globals.content;
 
-  constructor(private fb: FormBuilder, private globals: Globals, private validatorsService: ValidatorsService) { }
+  constructor(private fb: FormBuilder, private globals: Globals) { }
 
   formValid() {
     if (!this.form) {
-      return false;
+      return true;
     }
     if (this.readOnly) {
-      return false;
+      return true;
     }
     return !this.form.valid;
   }
 
-  onSubmit() {
-    console.log(this.form.value);
-    Object.keys(this.form.controls).forEach(key => console.log(this.form.get(key).value));
-    this.globals.successMessage('Form', JSON.stringify(this.form.value));
+  onCancel() {
     this.form.reset();
-    // this.clearForm();
+    this.hasContent = false;
   }
 
-  clearForm() {
-    this.config = [];
-    this.form = this.fb.group({});
+  // re-draw form issue not solved !!!
+  onSave() {
+    // save data to somewhere
+    this.globals.successMessage('Form', JSON.stringify(this.form.value));
+    Object.keys(this.form.controls).forEach(key => {
+      console.log(this.form.get(key).value)
+      this.content[key] = this.form.get(key).value;
+    });
+    // this.form.reset();
+    this.globals.setContent(this.content);
+    console.log(this.content);
+    this.buildForm();
+  }
+
+  onSubmit() {
+    console.log(this.form.value);
+    
+    this.globals.successMessage('Form', JSON.stringify(this.form.value));
+    Object.keys(this.form.controls).forEach(key => {
+      console.log(this.form.get(key).value)
+      this.content[key] = this.form.get(key).value;
+    });
+    this.globals.setContent(this.content);
+    this.form.reset();
+    this.hasContent = false;
+    // this.buildForm();
   }
 
   buildForm() {
+    if(this.form){
+      this.form.reset();
+    }
+    this.config = this.globals.getForm(this.content.type).fields;
     // create controls according content
     const group = this.fb.group({});
     this.config.forEach(control => {
       console.log(control);
-      group.addControl(control.name, this.fb.control(''));
+      // build controls with data and validations
+      const value = this.content[control.name];
+      const validators = this.getValidators(control.validators);
+      group.addControl(control.name, this.fb.control(value, validators));
     });
-    return group;
+    this.form = group;
+    this.hasContent = true;
   }
 
+  getValidators(validators: any): ValidatorFn[]{
+    let ret = [];
+    validators.forEach(item=>{
+switch (item) {
+  case "required": {
+    ret.push(Validators.required)
+    break;
+  }
+  case "minlength=3": {
+    ret.push(Validators.minLength(3));
+    break;
+  }
 
+  default: {
+    console.warn('We encounter some unknown validator:' + item);
+  }
+}
+    });
+    return ret;
+  }
 
   ngOnInit() {
     this.globals.contentChange.subscribe(value => {
       this.content = value;
-      // console.log('we receive change notification');
-      // console.log(this.content);
-      this.config = this.globals.getForm(this.content.type).fields;
-      this.hasContent = true;
-      this.form = this.buildForm();
+      this.buildForm();
     });
   }
 

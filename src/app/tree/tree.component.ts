@@ -49,9 +49,13 @@ export class TreeComponent implements OnInit {
 
   selectNode(event) {
     if (event.node) {
-      // this.globals.infoMessage('Node', 'A Node is Selected: \n' + JSON.stringify(this.selectedNode.data));
-      // console.log(this.selectedNode);
       this.globals.setContent(this.selectedNode.data);
+      const current_id = this.selectedNode.data['_id'];
+      this.globals.contentChange.subscribe(res => {
+        if (current_id === res['_id']) {
+          event.node.label = res['name'];
+        }
+      });
       this.globals.debug(JSON.stringify(this.selectedNode.data));
     }
   }
