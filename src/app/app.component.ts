@@ -86,6 +86,10 @@ export class AppComponent implements OnInit {
                 // Do nothing, the route link will handle it
                 break;
             }
+            case 'Project': {
+                this.globals.getTreeRootNode();
+                break;
+            }
 
             default: {
                 console.log(clickedItem + ' is not been handled.');

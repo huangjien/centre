@@ -73,7 +73,6 @@ export class ContentComponent implements OnInit {
     // create controls according content
     const group = this.fb.group({});
     this.config.forEach(control => {
-      console.log(control);
       // build controls with data and validations
       const value = this.content[control.name];
       const validators = this.getValidators(control.validators);
