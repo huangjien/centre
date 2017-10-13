@@ -1,13 +1,11 @@
-import { Component, OnInit, Pipe, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Validators, FormControl, FormGroup, FormBuilder, ValidatorFn } from '@angular/forms';
-import { Globals } from '../globals';
-import { FormPipe } from '../form.pipe';
+import {Component, OnInit, Pipe, Input} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Validators, FormControl, FormGroup, FormBuilder, ValidatorFn} from '@angular/forms';
+import {Globals} from '../globals';
+import {EditorModule, SelectButtonModule} from 'primeng/primeng';
 
-import { EditorModule, SelectButtonModule } from 'primeng/primeng';
 @Component({
-  selector: 'app-content',
-  templateUrl: './content.component.html',
+  selector: 'app-content', templateUrl: './content.component.html',
   // pipes: [form],
   styleUrls: ['./content.component.css']
 })
@@ -17,10 +15,10 @@ export class ContentComponent implements OnInit {
   // we will use this later
   hasContent = false;
   readOnly = false;
-  @Input() config: any[] = [];
+  @Input()config: any[] = [];
   content = this.globals.content;
 
-  constructor(private fb: FormBuilder, private globals: Globals) { }
+  constructor(private fb: FormBuilder, private globals: Globals) {}
 
   formValid() {
     if (!this.form) {
@@ -33,81 +31,115 @@ export class ContentComponent implements OnInit {
   }
 
   onCancel() {
-    this.form.reset();
+    this
+      .form
+      .reset();
     this.hasContent = false;
   }
 
   // re-draw form issue not solved !!!
   onSave() {
     // save data to somewhere
-    this.globals.successMessage('Form', JSON.stringify(this.form.value));
-    Object.keys(this.form.controls).forEach(key => {
-      console.log(this.form.get(key).value)
-      this.content[key] = this.form.get(key).value;
-    });
+    this
+      .globals
+      .successMessage('Form', JSON.stringify(this.form.value));
+    Object
+      .keys(this.form.controls)
+      .forEach(key => {
+        // console.log(this.form.get(key).value);
+        this.content[key] = this
+          .form
+          .get(key)
+          .value;
+      });
     // this.form.reset();
-    this.globals.setContent(this.content);
-    console.log(this.content);
-    this.buildForm();
+    this
+      .globals
+      .setContent(this.content);
   }
 
   onSubmit() {
-    console.log(this.form.value);
-    
-    this.globals.successMessage('Form', JSON.stringify(this.form.value));
-    Object.keys(this.form.controls).forEach(key => {
-      console.log(this.form.get(key).value)
-      this.content[key] = this.form.get(key).value;
-    });
-    this.globals.setContent(this.content);
-    this.form.reset();
+    this
+      .globals
+      .successMessage('Form', JSON.stringify(this.form.value));
+    Object
+      .keys(this.form.controls)
+      .forEach(key => {
+        // console.log(this.form.get(key).value);
+        this.content[key] = this
+          .form
+          .get(key)
+          .value;
+      });
+    this
+      .globals
+      .setContent(this.content);
+    this
+      .form
+      .reset();
     this.hasContent = false;
     // this.buildForm();
   }
 
   buildForm() {
-    if(this.form){
-      this.form.reset();
+    if (this.form) {
+      this
+        .form
+        .reset();
     }
-    this.config = this.globals.getForm(this.content.type).fields;
+    this.config = this
+      .globals
+      .getForm(this.content.type)
+      .fields;
     // create controls according content
-    const group = this.fb.group({});
-    this.config.forEach(control => {
-      // build controls with data and validations
-      const value = this.content[control.name];
-      const validators = this.getValidators(control.validators);
-      group.addControl(control.name, this.fb.control(value, validators));
-    });
+    const group = this
+      .fb
+      .group({});
+    this
+      .config
+      .forEach(control => {
+        // build controls with data and validations
+        const value = this.content[control.name];
+        const validators = this.getValidators(control.validators);
+        group.addControl(control.name, this.fb.control(value, validators));
+      });
     this.form = group;
     this.hasContent = true;
   }
 
-  getValidators(validators: any): ValidatorFn[]{
-    let ret = [];
-    validators.forEach(item=>{
-switch (item) {
-  case "required": {
-    ret.push(Validators.required)
-    break;
-  }
-  case "minlength=3": {
-    ret.push(Validators.minLength(3));
-    break;
-  }
+  getValidators(validators: any): ValidatorFn[] {
+    const ret = [];
+    validators.forEach(item => {
+      switch (item) {
+        case 'required':
+          {
+            ret.push(Validators.required);
+            break;
+          }
+        case 'minlength=3':
+          {
+            ret.push(Validators.minLength(3));
+            break;
+          }
 
-  default: {
-    console.warn('We encounter some unknown validator:' + item);
-  }
-}
+        default:
+          {
+            console.warn('We encounter some unknown validator:' + item);
+          }
+      }
     });
     return ret;
   }
 
   ngOnInit() {
-    this.globals.contentChange.subscribe(value => {
-      this.content = value;
-      this.buildForm();
-    });
+    this
+      .globals
+      .contentChange
+      .subscribe(value => {
+        console.log(value);
+        this.content = value;
+        this.buildForm();
+      });
   }
 
 }

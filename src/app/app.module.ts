@@ -1,21 +1,16 @@
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import {EditorModule} from 'primeng/primeng';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TieredMenuModule, MenuItem } from 'primeng/primeng';
+import { TieredMenuModule, MenuItem, EditorModule } from 'primeng/primeng';
 import { AppComponent } from './app.component';
-import { FormBuilder } from '@angular/forms';
-import { OrderListModule } from 'primeng/primeng';
 import { Observable } from 'rxjs/Rx';
-import { ChartModule, DataTableModule, MessagesModule, GrowlModule, DialogModule, ToolbarModule } from 'primeng/primeng';
-import { InputTextModule, AccordionModule, SharedModule, ButtonModule, FileUploadModule } from 'primeng/primeng';
+import { ChartModule, DataTableModule, MessagesModule, GrowlModule, DialogModule, ToolbarModule, OrderListModule } from 'primeng/primeng';
+import { InputTextModule, AccordionModule, SharedModule, ButtonModule, FileUploadModule, TerminalModule } from 'primeng/primeng';
 import { MessageService } from 'primeng/components/common/messageservice';
-import { TerminalModule } from 'primeng/primeng';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutComponent } from './about/about.component';
 import { DataService } from './data.service';
@@ -25,17 +20,11 @@ import { DebugComponent } from './debug/debug.component';
 import { SearchComponent } from './search/search.component';
 import { TreeComponent } from './tree/tree.component';
 import { TerminalComponent } from './terminal/terminal.component';
-import { PanelModule } from 'primeng/primeng';
-import { TreeModule } from 'primeng/primeng';
+import { PanelModule, TreeModule, SelectButtonModule, TreeDragDropService, CheckboxModule, InputTextareaModule } from 'primeng/primeng';
 import { AngularSplitModule } from 'angular-split';
-import { SelectButtonModule } from 'primeng/primeng';
 import { AdvGrowlModule, AdvGrowlService } from 'primeng-advanced-growl';
-import { TreeDragDropService } from 'primeng/primeng';
-import { CheckboxModule } from 'primeng/primeng';
-import { InputTextareaModule } from 'primeng/primeng';
 import { ContentComponent } from './content/content.component';
-import { ValidatorsService } from './validators.service';
-import { FormPipe } from './form.pipe';
+
 
 const appRoutes: Routes = [
   {
@@ -56,7 +45,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent, AboutComponent, MainComponent, DebugComponent,
-    SearchComponent, TreeComponent, TerminalComponent, ContentComponent, FormPipe
+    SearchComponent, TreeComponent, TerminalComponent, ContentComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes
@@ -71,7 +60,7 @@ const appRoutes: Routes = [
   ],
 
   providers: [DataService, MessageService, Globals, TreeDragDropService,
-     AdvGrowlService, FormBuilder, ValidatorsService],
+     AdvGrowlService, FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

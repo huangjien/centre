@@ -20,10 +20,19 @@ export class TreeComponent implements OnInit {
     this.globals.getTreeRootNode().subscribe(res => {
       // console.log(res);
       const nodes = [];
+      this.globals.rootID = res['_id'];
       nodes.push(this.createTreeNode(res));
       this.nodes = nodes;
       this.globals.debug(res);
     });
+  }
+
+  dropOnNode(event) {
+    const source = event.dragNode;
+    const target = event.dropNode;
+    source.data['parent_id'] = target.data['_id'];
+
+    // TODO update backend
   }
 
   loadNode(event) {

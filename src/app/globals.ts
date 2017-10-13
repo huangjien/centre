@@ -25,7 +25,8 @@ export class Globals {
     // user
     currentUser = '';
 
-    // items: MenuItem[];
+    // rootID
+    rootID = '';
 
     // content
     content: any;

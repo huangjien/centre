@@ -36,7 +36,7 @@
           
             <textarea placeholder="Description" [rows]="5" 
             pInputTextarea id="{{control.name}}" formControlName="{{control.name}}"
-            style="min-width: 160px"></textarea>
+            style="min-width: 640px"></textarea>
             
           <!-- <p-editor id="{{control.name}}" formControlName="{{control.name}}" [style]="{'height':'160px'}"></p-editor> -->
         </div>
@@ -74,7 +74,7 @@
     <p></p>
     <div class="ui-inputgroup" style="float:right;">
       <button pButton type="button" (click)="onCancel()" label="Cancel" icon="fa-close"></button>
-      <!-- <button pButton type="button" (click)="onSave()" label="Save" icon="fa-save" [disabled]="formValid()"></button>       -->
+      <button pButton type="button" (click)="onSave()" label="Save" icon="fa-save" [disabled]="formValid()"></button>      
       <button pButton type="submit" label="Save & Close" icon="fa-check" [disabled]="formValid()"></button>
     </div>
   </form>
