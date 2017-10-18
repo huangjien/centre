@@ -87,38 +87,38 @@ export class AppComponent implements OnInit {
                 break;
             }
             case 'Project': {
-                this.globals.setContent(JSON.parse('{"name": "New Project","type": "Project","_id": "'
-                    + this.globals.uuid() + '","parent_id": "' + this.globals.rootID + '"}'));
+                this.globals.setContent(JSON.parse('{"name": "New Project","type": "Project","id": "'
+                    + this.globals.uuid() + '","parentid": "' + this.globals.rootID + '"}'));
                 break;
             }
             case 'Folder': {
-                this.globals.setContent(JSON.parse('{"name": "New Folder","type": "Folder","_id": "'
-                    + this.globals.uuid() + '","parent_id": "' + this.globals.rootID + '"}'));
+                this.globals.setContent(JSON.parse('{"name": "New Folder","type": "Folder","id": "'
+                    + this.globals.uuid() + '","parentid": "' + this.globals.rootID + '"}'));
                 break;
             }
             case 'Suite': {
-                this.globals.setContent(JSON.parse('{"name": "New Suite","type": "Suite","_id": "'
-                    + this.globals.uuid() + '","parent_id": "' + this.globals.rootID + '"}'));
+                this.globals.setContent(JSON.parse('{"name": "New Suite","type": "Suite","id": "'
+                    + this.globals.uuid() + '","parentid": "' + this.globals.rootID + '"}'));
                 break;
             }
             case 'Case': {
-                this.globals.setContent(JSON.parse('{"name": "New Case","type": "Case","_id": "'
-                    + this.globals.uuid() + '","parent_id": "' + this.globals.rootID + '"}'));
+                this.globals.setContent(JSON.parse('{"name": "New Case","type": "Case","id": "'
+                    + this.globals.uuid() + '","parentid": "' + this.globals.rootID + '"}'));
                 break;
             }
             case 'OUT': {
-                this.globals.setContent(JSON.parse('{"name": "New OUT","type": "OUT","_id": "'
-                    + this.globals.uuid() + '","parent_id": "' + this.globals.rootID + '"}'));
+                this.globals.setContent(JSON.parse('{"name": "New OUT","type": "OUT","id": "'
+                    + this.globals.uuid() + '","parentid": "' + this.globals.rootID + '"}'));
                 break;
             }
             case 'Action': {
-                this.globals.setContent(JSON.parse('{"name": "New Action","type": "Action","_id": "'
-                    + this.globals.uuid() + '","parent_id": "' + this.globals.rootID + '"}'));
+                this.globals.setContent(JSON.parse('{"name": "New Action","type": "Action","id": "'
+                    + this.globals.uuid() + '","parentid": "' + this.globals.rootID + '"}'));
                 break;
             }
             case 'Data': {
-                this.globals.setContent(JSON.parse('{"name": "New Data","type": "Data","_id": "'
-                    + this.globals.uuid() + '","parent_id": "' + this.globals.rootID + '"}'));
+                this.globals.setContent(JSON.parse('{"name": "New Data","type": "Data","id": "'
+                    + this.globals.uuid() + '","parentid": "' + this.globals.rootID + '"}'));
                 break;
             }
 

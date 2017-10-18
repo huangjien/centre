@@ -2,7 +2,7 @@
     {
         "name": "Project",
         "fields": [
-            {"name": "_id", "type": "_id", "readOnly": false, "validators":[]},
+            {"name": "id", "type": "id", "readOnly": false, "validators":[]},
             {"name": "name", "type": "text", "readOnly": false, "validators":["required", "minlength=3"]},
             {"name": "description", "type": "editor", "readOnly": false, "validators":["required"]}
         ]
@@ -10,7 +10,7 @@
     {
         "name": "Suite",
         "fields": [
-            {"name": "_id", "type": "_id", "readOnly": false, "validators":[]},
+            {"name": "id", "type": "id", "readOnly": false, "validators":[]},
             {"name": "name", "type": "text", "readOnly": false, "validators":["required", "minlength=3"]},
             {"name": "isRoot", "type": "single", "readOnly": false, "validators":[], "options":[{"label":"Root","value":"Root"},{"label":"Sub","value":"Sub"}]},
             {"name": "tags", "type": "multi", "readOnly": false, "validators":[], 
@@ -21,7 +21,7 @@
     {
         "name": "Case",
         "fields": [
-            {"name": "_id", "type": "_id", "readOnly": false, "validators":[]},
+            {"name": "id", "type": "id", "readOnly": false, "validators":[]},
             {"name": "name", "type": "text", "readOnly": false, "validators":["required", "minlength=3"]},
             {"name": "description", "type": "editor", "readOnly": false, "validators":["required"]}
         ]
@@ -29,7 +29,7 @@
     {
         "name": "Folder",
         "fields": [
-            {"name": "_id", "type": "_id", "readOnly": false, "validators":[]},
+            {"name": "id", "type": "id", "readOnly": false, "validators":[]},
             {"name": "name", "type": "text", "readOnly": false, "validators":["required", "minlength=3"]},
             {"name": "description", "type": "editor", "readOnly": false, "validators":["required"]}
         ]
@@ -44,7 +44,7 @@
     {
         "name": "Action",
         "fields": [
-            {"name": "_id", "type": "_id", "readOnly": false, "validators":[]},
+            {"name": "id", "type": "id", "readOnly": false, "validators":[]},
             {"name": "name", "type": "text", "readOnly": false, "validators":["required", "minlength=3"]},
             {"name": "description", "type": "editor", "readOnly": false, "validators":["required"]}
         ]
@@ -52,7 +52,7 @@
     {
         "name": "Data",
         "fields": [            
-            {"name": "_id", "type": "_id", "readOnly": false, "validators":[]},
+            {"name": "id", "type": "id", "readOnly": false, "validators":[]},
             {"name": "isOverride", "type": "single", "readOnly": false, "validators":[], "options":[{"label":"Override","value":"Override"},{"label":"Inherit","value":"Inherit"}]},
             {"name": "name", "type": "text", "readOnly": false, "validators":["required", "minlength=3"]},
             {"name": "value", "type": "text", "readOnly": false, "validators":["required"]},

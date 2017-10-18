@@ -20,7 +20,7 @@ export class TreeComponent implements OnInit {
     this.globals.getTreeRootNode().subscribe(res => {
       // console.log(res);
       const nodes = [];
-      this.globals.rootID = res['_id'];
+      this.globals.rootID = res['id'];
       nodes.push(this.createTreeNode(res));
       this.nodes = nodes;
       this.globals.debug(res);
@@ -30,7 +30,7 @@ export class TreeComponent implements OnInit {
   dropOnNode(event) {
     const source = event.dragNode;
     const target = event.dropNode;
-    source.data['parent_id'] = target.data['_id'];
+    source.data['parentid'] = target.data['id'];
 
     // TODO update backend
   }
@@ -38,8 +38,8 @@ export class TreeComponent implements OnInit {
   loadNode(event) {
     const nodes = [];
     if (event.node) {
-      // console.log(event.node.data._id);
-      this.globals.getChildrenNodes(event.node.data._id).subscribe(res => {
+      // console.log(event.node.data.id);
+      this.globals.getChildrenNodes(event.node.data.id).subscribe(res => {
         // console.log ('tree.loadNode');
         // console.log(res);
         // nodes = res;
@@ -59,9 +59,9 @@ export class TreeComponent implements OnInit {
   selectNode(event) {
     if (event.node) {
       this.globals.setContent(this.selectedNode.data);
-      const current_id = this.selectedNode.data['_id'];
+      const currentid = this.selectedNode.data['id'];
       this.globals.contentChange.subscribe(res => {
-        if (current_id === res['_id']) {
+        if (currentid === res['id']) {
           event.node.label = res['name'];
         }
       });
