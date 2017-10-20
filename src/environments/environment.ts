@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: './assets/data/'
+  apiUrl: 'http://localhost:8080/data/'
 };

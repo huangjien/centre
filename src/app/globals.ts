@@ -131,11 +131,11 @@ export class Globals {
     }
 
     getMenuItems(): Observable<any> {
-        return this.dataService.getData('menu');
+        return this.dataService.getData('Menu');
     }
 
     getForms(): Observable<any> {
-        return this.dataService.getData('forms');
+        return this.dataService.getData('Forms');
     }
 
     getForm(name: string): any {
@@ -143,7 +143,7 @@ export class Globals {
     }
 
     getTreeRootNode(): Observable<any> {
-        return this.dataService.getData('treeRootNode');
+        return this.dataService.getData('Root');
     }
 
     getChildrenNodes(id): Observable<any> {
