@@ -138,6 +138,10 @@ export class Globals {
         return this.dataService.getData('Forms');
     }
 
+    ping(): Observable<any> {
+        return this.dataService.ping();
+    }
+
     getForm(name: string): any {
         return this.forms.find(item => item.name === name);
     }

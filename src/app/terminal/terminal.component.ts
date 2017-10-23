@@ -33,9 +33,18 @@ export class TerminalComponent implements OnInit {
     if (this.command === 'help') {
       this.response = 'Welcome! \n \
       we accept below command:\n \
-      date help getMenuData getTreeRootNode getChildrenNodes';
+      date help ping MENU ROOT ID KIDS FIND';
     }
-    if (this.command === 'getMenuData') {
+    if (this.command === 'ping') {
+      this
+        .globals
+        .ping()
+        .subscribe(res => {
+          // console.log(res);
+          this.response = JSON.stringify(res);
+        });
+    }
+    if (this.command === 'MENU') {
       this
         .globals
         .getMenuItems()
@@ -44,7 +53,7 @@ export class TerminalComponent implements OnInit {
           this.response = JSON.stringify(res);
         });
     }
-    if (this.command === 'getTreeRootNode') {
+    if (this.command === 'ROOT') {
       this
         .globals
         .getTreeRootNode()
@@ -53,15 +62,20 @@ export class TerminalComponent implements OnInit {
           this.response = JSON.stringify(res);
         });
     }
-    if (this.command === 'getChildrenNodes') {
-      // TODO: need to be fixed
-      // this
-      //   .globals
-      //   .getChildrenNodes()
-      //   .subscribe(res => {
-      //     // console.log(res);
-      //     this.response = JSON.stringify(res);
-      //   });
+    if (this.command.startsWith('ID ')) {
+      const commandParameter = this.command.substr(2);
+      // TODO: to be implemented
+    }
+
+    if (this.command.startsWith('KIDS ')) {
+      const commandParameter = this.command.substr(4);
+      
+      // TODO: to be implemented
+    }
+
+    if (this.command.startsWith('FIND ')) {
+      const commandParameter = this.command.substr(4);
+      // TODO: to be implemented
     }
   }
 

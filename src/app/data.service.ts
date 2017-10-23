@@ -8,8 +8,15 @@ import { environment } from '../environments/environment';
 export class DataService {
 
   // data: any;
-  baseUrl = environment.apiUrl;
+  baseUrl = environment.apiUrl + 'data/';
   constructor(private http: Http) {
+  }
+
+  ping(): Observable<any> {
+    return this.http.get(environment.apiUrl + 'ping').map(this.extractData).catch((error: any) => {
+      // console.error(error.message ? error.message : error.toString());
+      return Observable.throw(error);
+    });
   }
 
   getData(dataFile: string): Observable<any> {
