@@ -31,8 +31,12 @@ export class TreeComponent implements OnInit {
     const source = event.dragNode;
     const target = event.dropNode;
     source.data['parentid'] = target.data['id'];
-
-    // TODO update backend
+    this.globals.debug(source.data);
+    // check the types, decide if we allow this drop:
+    // folder: allow data, OUT, action, suite, case
+    // suite: allow nothing
+    this.globals.save(JSON.stringify(source.data));
+    
   }
 
   loadNode(event) {
@@ -137,7 +141,7 @@ export class TreeComponent implements OnInit {
   }
 
   isDroppable(type: string): boolean {
-    if (type === 'OUT' || type === 'Action') {
+    if (type === 'OUT' || type === 'Action' || type === 'Suite' || type === 'Case' || type === 'Data') {
       return false;
     }
     return true;
