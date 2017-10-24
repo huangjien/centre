@@ -42,7 +42,7 @@ export class ContentComponent implements OnInit {
     // save data to somewhere
     this
       .globals
-      .successMessage('Form', JSON.stringify(this.form.value));
+      .successMessage('Form', JSON.stringify(this.form.value, null, 2));
     Object
       .keys(this.form.controls)
       .forEach(key => {
@@ -61,7 +61,7 @@ export class ContentComponent implements OnInit {
   onSubmit() {
     this
       .globals
-      .successMessage('Form', JSON.stringify(this.form.value));
+      .successMessage('Form', JSON.stringify(this.form.value, null, 2));
     Object
       .keys(this.form.controls)
       .forEach(key => {

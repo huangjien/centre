@@ -176,7 +176,7 @@ export class Globals {
             return obj;
         }
 
-        return JSON.stringify(obj);
+        return JSON.stringify(obj, null, 2);
     }
 
 }

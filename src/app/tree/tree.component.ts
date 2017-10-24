@@ -18,12 +18,12 @@ export class TreeComponent implements OnInit {
   // debugFlag = false;
   ngOnInit() {
     this.globals.getTreeRootNode().subscribe(res => {
-      // console.log(res);
+      console.log(res[0]);
       const nodes = [];
-      this.globals.rootID = res['id'];
-      nodes.push(this.createTreeNode(res));
+      this.globals.rootID = res[0]['id'];
+      nodes.push(this.createTreeNode(res[0]));
       this.nodes = nodes;
-      this.globals.debug(res);
+      this.globals.debug(res[0]);
     });
   }
 
@@ -40,8 +40,8 @@ export class TreeComponent implements OnInit {
     if (event.node) {
       // console.log(event.node.data.id);
       this.globals.getChildrenNodes(event.node.data.id).subscribe(res => {
-        // console.log ('tree.loadNode');
-        // console.log(res);
+        console.log ('tree.loadNode');
+        console.log(res);
         // nodes = res;
         for (const node of res) {
           nodes.push(this.createTreeNode(node));
@@ -51,7 +51,7 @@ export class TreeComponent implements OnInit {
         error => {
           // console.log('handle error');
           event.node.leaf = true;
-          // console.log(event.node);
+          console.log(event.node);
         });
     }
   }
@@ -65,7 +65,7 @@ export class TreeComponent implements OnInit {
           event.node.label = res['name'];
         }
       });
-      this.globals.debug(JSON.stringify(this.selectedNode.data));
+      this.globals.debug(JSON.stringify(this.selectedNode.data, null, 2));
     }
   }
 

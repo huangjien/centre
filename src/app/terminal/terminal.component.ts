@@ -41,7 +41,7 @@ export class TerminalComponent implements OnInit {
         .ping()
         .subscribe(res => {
           // console.log(res);
-          this.response = JSON.stringify(res);
+          this.response = JSON.stringify(res, null, 2);
         });
     }
     if (this.command === 'MENU') {
@@ -50,7 +50,7 @@ export class TerminalComponent implements OnInit {
         .getMenuItems()
         .subscribe(res => {
           // console.log(res);
-          this.response = JSON.stringify(res);
+          this.response = JSON.stringify(res, null, 2);
         });
     }
     if (this.command === 'ROOT') {
@@ -59,7 +59,7 @@ export class TerminalComponent implements OnInit {
         .getTreeRootNode()
         .subscribe(res => {
           // console.log(res);
-          this.response = JSON.stringify(res);
+          this.response = JSON.stringify(res, null, 2);
         });
     }
     if (this.command.startsWith('ID ')) {
