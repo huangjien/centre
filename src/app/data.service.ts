@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../environments/environment';
@@ -9,12 +9,22 @@ export class DataService {
 
   // data: any;
   baseUrl = environment.apiUrl + 'data/';
+  headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
+  options = new RequestOptions({ headers: this.headers });
   constructor(private http: Http) {
   }
 
   ping(): Observable<any> {
     return this.http.get(environment.apiUrl + 'ping').map(this.extractData).catch((error: any) => {
       // console.error(error.message ? error.message : error.toString());
+      return Observable.throw(error);
+    });
+  }
+
+  save(content): Observable<any> {
+    console.log(this.baseUrl+'update');
+console.log(content);
+    return this.http.put(this.baseUrl + 'update', content, this.options).map(res => console.log(res)).catch((error: any) => {
       return Observable.throw(error);
     });
   }

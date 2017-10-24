@@ -53,6 +53,8 @@ export class ContentComponent implements OnInit {
           .value;
       });
     // this.form.reset();
+    this.globals.debug(this.content);
+    this.globals.save(JSON.stringify(this.content));
     this
       .globals
       .setContent(this.content);
@@ -74,6 +76,8 @@ export class ContentComponent implements OnInit {
     this
       .globals
       .setContent(this.content);
+      this.globals.debug(this.content);
+      this.globals.save(JSON.stringify(this.content));
     this
       .form
       .reset();

@@ -150,6 +150,12 @@ export class Globals {
         return this.dataService.getData('Root');
     }
 
+    save(content: string): any {
+        return this.dataService.save(content).subscribe(value => {
+            console.log(this.anythingToJson(value));
+        });
+    }
+
     getChildrenNodes(id): Observable<any> {
         if (!id) {
             return null;
@@ -167,10 +173,10 @@ export class Globals {
 
     anythingToJson(obj: any) {
         if (obj === null) {
-            return JSON.parse('{\'obj\':\'is null\'}');
+            return 'null';
         }
         if (obj === undefined) {
-            return JSON.parse('{\'obj\':\'is undefined\'}');
+            return 'undefined';
         }
         if (typeof obj === 'string') {
             return obj;
