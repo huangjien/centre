@@ -6,7 +6,6 @@ import {EditorModule, SelectButtonModule} from 'primeng/primeng';
 
 @Component({
   selector: 'app-content', templateUrl: './content.component.html',
-  // pipes: [form],
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit {

@@ -18,7 +18,11 @@
         </div>
     </p-header>
     <div class="allarea">
-        {{results}}
+        <p-dataTable [value]="results" [editable]="false" selectionMode="single" [(selection)]="selectedRow" (onRowSelect)="onRowSelect($event)" >
+            <p-column field="type" header="Type" [sortable]="true"></p-column>
+            <p-column field="name" header="Name" [sortable]="true"></p-column>
+            <p-column field="description" header="Description" [sortable]="true"></p-column>
+        </p-dataTable>
     </div>
     
   

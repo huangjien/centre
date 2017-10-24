@@ -1,4 +1,4 @@
-import { Component,  Input, forwardRef } from '@angular/core';
+import { Component, Input, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 
@@ -16,13 +16,18 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 })
 export class ReferencesComponent implements ControlValueAccessor {
 
+
   @Input() references: any;
 
-  onChange: any = () => { };
+  onChange: any = () => {
+    console.log(this.references);
+  };
   onTouched: any = () => { };
+
   writeValue(obj: any): void {
     if (obj) {
       this.references = obj;
+      console.log(this.references);
     }
   }
 
@@ -33,6 +38,7 @@ export class ReferencesComponent implements ControlValueAccessor {
   set value(val) {
     this.references = val;
     this.onChange(val);
+    console.log(this.references);
     this.onTouched();
   }
 

@@ -134,6 +134,10 @@ export class Globals {
         return this.dataService.getData('Menu');
     }
 
+    query(content): Observable<any> {
+        return this.dataService.query(content);
+    }
+
     getForms(): Observable<any> {
         return this.dataService.getData('Forms');
     }
@@ -152,7 +156,7 @@ export class Globals {
 
     save(content: string): any {
         return this.dataService.save(content).subscribe(value => {
-            console.log(this.anythingToJson(value));
+            // console.log(this.anythingToJson(value));
         });
     }
 

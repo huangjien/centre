@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TieredMenuModule, MenuItem, EditorModule, TooltipModule } from 'primeng/primeng';
+import { TieredMenuModule, MenuItem, EditorModule, TooltipModule, InputSwitchModule } from 'primeng/primeng';
 import { AppComponent } from './app.component';
 import { Observable } from 'rxjs/Rx';
 import { ChartModule, DataTableModule, MessagesModule, GrowlModule, DialogModule, ToolbarModule, OrderListModule } from 'primeng/primeng';
@@ -56,7 +56,7 @@ const appRoutes: Routes = [
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule, CommonModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule, TooltipModule,
     TieredMenuModule, PanelModule, AngularSplitModule, AdvGrowlModule, EditorModule, SelectButtonModule,
-    FormsModule, InputTextModule, TreeModule, SelectButtonModule, CheckboxModule,
+    FormsModule, InputTextModule, TreeModule, SelectButtonModule, CheckboxModule, InputSwitchModule,
     HttpModule
   ],
 

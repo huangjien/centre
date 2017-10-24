@@ -1,3 +1,17 @@
-<p>
- references is: {{ references | json }}
-</p>
+<p-accordion>
+    <p-accordionTab header="Input Data"></p-accordionTab>
+  <p-accordionTab header="Sub">
+    <p-dataTable [value]="references" reorderableColumns="true" expandableRows="true" [editable]="true">
+        <p-column field="order" header="#" [style]="{'width':'2em'}" [sortable]="true" [editable]="true" ></p-column>
+        <p-column field="disabled" header="x"  [style]="{'width':'2em'}" >
+            <!-- <p-checkbox [(ngModel)]="value" binary="true"></p-checkbox> -->
+            <ng-template let-col let-references="rowData" pTemplate="body">
+                <p-inputSwitch [(ngModel)]="references[col.field]"></p-inputSwitch>
+                <!-- <p-checkbox [(ngModel)]="references[col.field]" binary="true" required="true" appendTo="body"></p-checkbox> -->
+            </ng-template>
+        </p-column>
+    </p-dataTable>
+  </p-accordionTab>
+  <p-accordionTab header="Output Data"></p-accordionTab>
+</p-accordion>
+ 

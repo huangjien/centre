@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PanelModule } from 'primeng/primeng';
 import { SelectItem } from 'primeng/primeng';
-
-import {ButtonModule} from 'primeng/primeng';
+import { ButtonModule } from 'primeng/primeng';
 import { Globals } from '../globals';
 
 @Component({
@@ -15,24 +14,38 @@ export class SearchComponent implements OnInit {
   results: any;
   search_string: string;
   selectedTypes: string[] = ['suite', 'case'];
+  selectedRow: any;
 
   constructor(private globals: Globals) {
     this.types = [];
     this.types.push({ label: 'Suite', value: 'suite' });
     this.types.push({ label: 'Case', value: 'case' });
-    this.types.push({ label: 'Object', value: 'object' });
+    this.types.push({ label: 'Object', value: 'OUT' });
     this.types.push({ label: 'Data', value: 'data' });
     this.types.push({ label: 'Result', value: 'result' });
   }
 
-  onEnter () {
+  onRowSelect(event) {
+    this.globals.setContent(event.data);
+  }
+
+  onEnter() {
     this.search();
   }
   search() {
-    if (this.search_string) {
-      this.globals.infoMessage('Searching...', this.search_string);
-      this.results = JSON.stringify(this.globals.debugInfo, null, 2);
-      this.globals.clearMessage();
+    if (this.search_string.length > 0) {
+      let query_string = '(' + this.search_string + ') ';
+      if (this.selectedTypes.length > 0) {
+        query_string += ' AND type:( ';
+        this.selectedTypes.forEach(item => {
+          query_string += item + ' ';
+        });
+        query_string += ' )';
+      }
+      // this.globals.infoMessage('Searching...', query_string);
+      this.globals.query(query_string).subscribe(res => {
+        this.results = res;
+      });
     } else {
       this.globals.warnMessage('Search', 'You click search button, but forget to input something to search...');
     }

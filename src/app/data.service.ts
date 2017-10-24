@@ -21,9 +21,13 @@ export class DataService {
     });
   }
 
+  query(content): Observable<any> {
+    return this.http.get(this.baseUrl + 'query/q=' + content).map(this.extractData).catch((error: any) => {
+      // console.error(error.message ? error.message : error.toString());
+      return Observable.throw(error);
+    });
+  }
   save(content): Observable<any> {
-    console.log(this.baseUrl+'update');
-console.log(content);
     return this.http.put(this.baseUrl + 'update', content, this.options).map(res => console.log(res)).catch((error: any) => {
       return Observable.throw(error);
     });
