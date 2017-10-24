@@ -18,7 +18,7 @@ export class TreeComponent implements OnInit {
   // debugFlag = false;
   ngOnInit() {
     this.globals.getTreeRootNode().subscribe(res => {
-      console.log(res[0]);
+      // console.log(res[0]);
       const nodes = [];
       this.globals.rootID = res[0]['id'];
       nodes.push(this.createTreeNode(res[0]));
@@ -40,8 +40,8 @@ export class TreeComponent implements OnInit {
     if (event.node) {
       // console.log(event.node.data.id);
       this.globals.getChildrenNodes(event.node.data.id).subscribe(res => {
-        console.log ('tree.loadNode');
-        console.log(res);
+        // console.log ('tree.loadNode');
+        // console.log(res);
         // nodes = res;
         for (const node of res) {
           nodes.push(this.createTreeNode(node));

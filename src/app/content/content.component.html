@@ -51,16 +51,13 @@
         <!-- single selection -->
         <div *ngSwitchCase="'single'">
 
-          <p-selectButton [options]="control.options" id="{{control.name}}" formControlName="{{control.name}}"></p-selectButton>
+          <p-selectButton [options]="control.options" pTooltip="{{control.tooltip}}" id="{{control.name}}" formControlName="{{control.name}}"></p-selectButton>
 
         </div>
         <!-- end of single selection -->
         <!-- table format reference list -->
         <div *ngSwitchCase="'references'">
-          <span class="ui-float-label">
-            {{control}}
-            <label for="{{control.name}}">{{control.name}}</label>
-          </span>
+          <app-references id="{{control.name}}" type="references" [references]="control.references" formControlName="{{control.name}}"></app-references>
         </div>
         <!-- end of table format reference list -->
 
