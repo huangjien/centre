@@ -13,7 +13,7 @@ export class SearchComponent implements OnInit {
   types: SelectItem[];
   results: any;
   search_string: string;
-  selectedTypes: string[] = ['suite', 'case'];
+  selectedTypes: string[] = ['form'];
   selectedRow: any;
 
   constructor(private globals: Globals) {
@@ -22,10 +22,12 @@ export class SearchComponent implements OnInit {
     this.types.push({ label: 'Case', value: 'case' });
     this.types.push({ label: 'Object', value: 'OUT' });
     this.types.push({ label: 'Data', value: 'data' });
+    this.types.push({ label: 'Form', value: 'Form' });
     this.types.push({ label: 'Result', value: 'result' });
   }
 
   onRowSelect(event) {
+    this.globals.debug(event.data);
     this.globals.setContent(event.data);
   }
 
@@ -33,7 +35,10 @@ export class SearchComponent implements OnInit {
     this.search();
   }
   search() {
-    if (this.search_string.length > 0) {
+    if (!this.search_string) {
+      return;
+    }
+    if (this.search_string.length > 3) {
       let query_string = '(' + this.search_string + ') ';
       if (this.selectedTypes.length > 0) {
         query_string += ' AND type:( ';
@@ -47,7 +52,7 @@ export class SearchComponent implements OnInit {
         this.results = res;
       });
     } else {
-      this.globals.warnMessage('Search', 'You click search button, but forget to input something to search...');
+      this.globals.warnMessage('Search', 'You click search button, but forget to input something (at least 3 letters) to search...');
     }
   }
 

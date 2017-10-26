@@ -32,12 +32,12 @@ export class AppComponent implements OnInit {
         this.globals.getMenuItems().subscribe(res => {
             // console.log(res);
             this.menuItems = res;
-            this.globals.successMessage('Data Service', 'Menu Data Loaded');
+            // this.globals.successMessage('Data Service', 'Menu Data Loaded');
             // this.globals.debug(res);
         });
         this.globals.getForms().subscribe(res => {
             this.globals.forms = res;
-            this.globals.successMessage('Data Service', 'Form Data Loaded');
+            // this.globals.successMessage('Data Service', 'Form Data Loaded');
         });
     }
 
@@ -111,11 +111,16 @@ export class AppComponent implements OnInit {
                     + this.globals.uuid() + '","parentid": "' + this.globals.rootID + '"}'));
                 break;
             }
-            case 'Action': {
-                this.globals.setContent(JSON.parse('{"name": "New Action","type": "Action","id": "'
+            case 'Form': {
+                this.globals.setContent(JSON.parse('{"name": "New Form","type": "Form","id": "'
                     + this.globals.uuid() + '","parentid": "' + this.globals.rootID + '"}'));
                 break;
             }
+            // case 'Action': {
+            //     this.globals.setContent(JSON.parse('{"name": "New Action","type": "Action","id": "'
+            //         + this.globals.uuid() + '","parentid": "' + this.globals.rootID + '"}'));
+            //     break;
+            // }
             case 'Data': {
                 this.globals.setContent(JSON.parse('{"name": "New Data","type": "Data","id": "'
                     + this.globals.uuid() + '","parentid": "' + this.globals.rootID + '"}'));

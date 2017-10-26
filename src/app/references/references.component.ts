@@ -18,16 +18,27 @@ export class ReferencesComponent implements ControlValueAccessor {
 
 
   @Input() references: any;
+  cols: any[] = [];
 
   onChange: any = () => {
     console.log(this.references);
-  };
+  }
+
   onTouched: any = () => { };
 
   writeValue(obj: any): void {
     if (obj) {
       this.references = obj;
-      console.log(this.references);
+      if (this.references && this.references[0]) {
+        Object.keys(this.references[0]).forEach(item => {
+          let h = item;
+          if (item === 'order') {
+            h = '#';
+          }
+          this.cols.push({ field: item, header: h });
+        });
+      }
+
     }
   }
 
