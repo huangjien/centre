@@ -28,7 +28,9 @@ export class DataService {
     });
   }
   save(content): Observable<any> {
-    return this.http.put(this.baseUrl + 'update', content, this.options).map(res => console.log(res)).catch((error: any) => {
+    return this.http.put(this.baseUrl + 'update', content, this.options).map(res => {
+      // do nothing now, maybe later will add something here
+    } ).catch((error: any) => {
       return Observable.throw(error);
     });
   }

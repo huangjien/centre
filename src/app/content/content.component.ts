@@ -139,7 +139,7 @@ export class ContentComponent implements OnInit {
       .globals
       .contentChange
       .subscribe(value => {
-        console.log(value);
+        // console.log(value);
         this.content = value;
         this.buildForm();
       });

@@ -13,7 +13,7 @@
     </div>
   </p-header> -->
 
-  <form [formGroup]="form" ngNativeValidate *ngIf="hasContent" (ngSubmit)="onSubmit()" style="margin: 10px 0px">
+  <form #contentForm [formGroup]="form" ngNativeValidate *ngIf="hasContent" (ngSubmit)="onSubmit()" style="margin: 10px 0px">
 
     <ng-container *ngFor=" let control of config">
       <p></p>
@@ -69,7 +69,7 @@
     </ng-container>
 
     <p></p>
-    <div class="ui-inputgroup" style="float:right;">
+    <div class="ui-inputgroup" >
       <button pButton type="button" (click)="onCancel()" label="Cancel" icon="fa-close"></button>
       <button pButton type="button" (click)="onSave()" label="Save" icon="fa-save" [disabled]="formValid()"></button>      
       <button pButton type="submit" label="Save & Close" icon="fa-check" [disabled]="formValid()"></button>

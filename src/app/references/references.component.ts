@@ -18,7 +18,12 @@ export class ReferencesComponent implements ControlValueAccessor {
 
 
   @Input() references: any;
+  selectedRow: any;
   cols: any[] = [];
+  formTypeOptions = [ {label: 'Select ...', value: null},
+    {label: 'id', value: 'id'}, {label: 'text', value: 'text'},
+    {label: 'editor', value: 'editor'}, {label: 'multi', value: 'multi'},
+    {label: 'single', value: 'single'}, {label: 'references', value: 'references'}];
 
   onChange: any = () => {
     console.log(this.references);
@@ -26,6 +31,9 @@ export class ReferencesComponent implements ControlValueAccessor {
 
   onTouched: any = () => { };
 
+  isChosen(): boolean {
+    return this.selectedRow;
+  }
   writeValue(obj: any): void {
     if (obj) {
       this.references = obj;

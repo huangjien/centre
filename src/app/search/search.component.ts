@@ -13,7 +13,7 @@ export class SearchComponent implements OnInit {
   types: SelectItem[];
   results: any;
   search_string: string;
-  selectedTypes: string[] = ['form'];
+  selectedTypes: string[] = ['Form'];
   selectedRow: any;
 
   constructor(private globals: Globals) {

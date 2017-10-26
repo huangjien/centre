@@ -1,28 +1,22 @@
 <p-accordion>
-    <p-accordionTab header="Input Data"></p-accordionTab>
-    <p-accordionTab header="Sub">
-        <p-dataTable [value]="references"  [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[10,20,30,40,50,100]"
-        resizableColumns="true" columnResizeMode="expand" reorderableColumns="true" expandableRows="true" [editable]="true">
-            <!-- <p-column field="order" header="#" [style]="{'width':'2em'}" [sortable]="true" [editable]="true" ></p-column>
-        <ngContainer *ngIf="references.disabled" >
-            <p-column field="disabled" header="Disabled"  [style]="{'width':'2em'}" >
-                <!-- <p-checkbox [(ngModel)]="value" binary="true"></p-checkbox> -->
-            <!-- <ng-template let-col let-references="rowData" pTemplate="body">
-                    <p-inputSwitch [(ngModel)]="references[col.field]"></p-inputSwitch>
-                    <!-- <p-checkbox [(ngModel)]="references[col.field]" binary="true" required="true" appendTo="body"></p-checkbox> -->
-            <!-- </ng-template>
-            </p-column>
-        </ngContainer>
-        <ngContainer *ngIf="references.readonly" >
-            <p-column field="readonly" header="Read Only"  [style]="{'width':'2em'}" >
-                <!-- <p-checkbox [(ngModel)]="value" binary="true"></p-checkbox> -->
-            <!-- <ng-template let-col let-references="rowData" pTemplate="body">
-                    <p-inputSwitch [(ngModel)]="references[col.field]"></p-inputSwitch>
-                    <!-- <p-checkbox [(ngModel)]="references[col.field]" binary="true" required="true" appendTo="body"></p-checkbox> -->
-            <!-- </ng-template>
-            </p-column>
-        </ngContainer> -->--> --> --> -->
-            <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" editable="true" filter="true" filterMatchMode="contains" sortable="true">
+    
+    <p-accordionTab >
+        <p-header>
+            references
+            
+        </p-header>
+        <div class="ui-inputgroup" >
+                <button pButton type="button" (click)="onDelete()" label="Delete" icon="fa-close" [disabled]="!isChosen()"></button>
+                <button pButton type="button" (click)="onAdd()" label="Add" icon="fa-add" ></button>      
+        </div>
+        <p></p>
+        <div>
+        <p-dataTable [value]="references" [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[10,20,30,40,50,100]"
+            resizableColumns="true" columnResizeMode="expand" reorderableColumns="true" expandableRows="true" [editable]="true"
+            selectionMode="single" [(selection)]="selectedRow">
+           
+            <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" editable="true" filter="true" filterMatchMode="contains"
+                sortable="true">
                 <ng-container *ngIf="col.field === 'order'">
                     <ng-template let-col let-row="rowData">
                         <input pInputText [(ngModel)]="row[col.field]" [style]="{'width':'2em'}" pTemplate="editor" />
@@ -31,24 +25,31 @@
 
                 <ng-container *ngIf="col.field === 'disabled' || col.field === 'readOnly'">
                     <ng-template let-col let-row="rowData" pTemplate="body">
-                        <p-inputSwitch [ngModel]="row[col.field]"  [style]="{'width':'100%'}" ></p-inputSwitch>
+                        <p-inputSwitch [ngModel]="row[col.field]" [style]="{'width':'100%'}"></p-inputSwitch>
                     </ng-template>
                     <ng-template let-col let-row="rowData" pTemplate="editor">
-                            <p-inputSwitch [(ngModel)]="row[col.field]"  [style]="{'width':'100%'}" ></p-inputSwitch>
-                        </ng-template>
+                        <p-inputSwitch [(ngModel)]="row[col.field]" [style]="{'width':'100%'}"></p-inputSwitch>
+                    </ng-template>
                 </ng-container>
 
                 <ng-container *ngIf="col.field === 'validators'">
-                        <ng-template let-col let-row="rowData" pTemplate="body">
-                            <p-chips [ngModel]="row[col.field]"  [style]="{'width':'100%'}"></p-chips>
-                        </ng-template>
-                        <ng-template let-col let-row="rowData" pTemplate="editor">
-                                <p-chips [(ngModel)]="row[col.field]"  [style]="{'width':'100%'}"></p-chips>
-                            </ng-template>
-                    </ng-container>
+                    <ng-template let-col let-row="rowData" pTemplate="body">
+                        <p-chips [ngModel]="row[col.field]" [style]="{'width':'100%'}"></p-chips>
+                    </ng-template>
+                    <ng-template let-col let-row="rowData" pTemplate="editor">
+                        <p-chips [(ngModel)]="row[col.field]" [style]="{'width':'100%'}"></p-chips>
+                    </ng-template>
+                </ng-container>
+
+                <ng-container *ngIf="col.field === 'type' ">
+                    <ng-template let-col let-row="rowData" pTemplate="editor">
+                        <p-dropdown [(ngModel)]="row[col.field]" [style]="{'width':'100%'}" appendTo="body" [options]="formTypeOptions" ></p-dropdown>
+                    </ng-template>
+                </ng-container>
 
             </p-column>
         </p-dataTable>
+    </div>
     </p-accordionTab>
-    <p-accordionTab header="Output Data"></p-accordionTab>
+    
 </p-accordion>
