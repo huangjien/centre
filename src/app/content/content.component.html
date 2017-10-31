@@ -1,18 +1,5 @@
 <p-panel>
 
-  <!-- <p-header>
-    <div class="ui-helper-clearfix">
-      <div class="ui-inputgroup">
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-        <p-checkbox [(ngModel)]="readOnly" binary="true"></p-checkbox>
-        <span>&nbsp;&nbsp;&nbsp;Disabled&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
-
-
-      </div>
-
-    </div>
-  </p-header> -->
-
   <form #contentForm [formGroup]="form" ngNativeValidate *ngIf="hasContent" (ngSubmit)="onSubmit()" style="margin: 10px 0px">
 
     <ng-container *ngFor=" let control of config">
@@ -57,7 +44,7 @@
         <!-- end of single selection -->
         <!-- table format reference list -->
         <div *ngSwitchCase="'references'">
-          <app-references id="{{control.name}}" type="references" [references]="control.references" formControlName="{{control.name}}"></app-references>
+          <app-references id="{{control.name}}" [header]="control.type" [ref_type]="control.type" [(references)]="content[control.name]"  formControlName="{{control.name}}"></app-references>
         </div>
         <!-- end of table format reference list -->
 
@@ -68,11 +55,13 @@
 
     </ng-container>
 
-    <p></p>
+    <p>{{content|json}}</p>
     <div class="ui-inputgroup" >
       <button pButton type="button" (click)="onCancel()" label="Cancel" icon="fa-close"></button>
       <button pButton type="button" (click)="onSave()" label="Save" icon="fa-save" [disabled]="formValid()"></button>      
       <button pButton type="submit" label="Save & Close" icon="fa-check" [disabled]="formValid()"></button>
+      <button pButton type="button" (click)="onDelete()" label="Delete" icon="fa-trash" ></button>      
+      
     </div>
   </form>
 </p-panel>

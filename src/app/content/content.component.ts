@@ -14,7 +14,7 @@ export class ContentComponent implements OnInit {
   // we will use this later
   hasContent = false;
   readOnly = false;
-  @Input()config: any[] = [];
+  @Input() config: any;
   content = this.globals.content;
 
   constructor(private fb: FormBuilder, private globals: Globals) {}
@@ -36,6 +36,18 @@ export class ContentComponent implements OnInit {
     this.hasContent = false;
   }
 
+  onDelete() {
+    const id = this.content['id'];
+    console.log(id);
+    if (id) {
+      this.globals.remove(id);
+      this
+      .form
+      .reset();
+    this.hasContent = false;
+    }
+  }
+
   // re-draw form issue not solved !!!
   onSave() {
     // save data to somewhere
@@ -45,38 +57,16 @@ export class ContentComponent implements OnInit {
     Object
       .keys(this.form.controls)
       .forEach(key => {
-        // console.log(this.form.get(key).value);
-        this.content[key] = this
-          .form
-          .get(key)
-          .value;
+        this.content[key] = this.form.get(key).value;
       });
-    // this.form.reset();
+    console.log(this.content);
     this.globals.debug(this.content);
-    this.globals.save(JSON.stringify(this.content));
-    this
-      .globals
-      .setContent(this.content);
+    this.globals.save(this.content);
+    this.globals.setContent(this.content);
   }
 
   onSubmit() {
-    this
-      .globals
-      .successMessage('Form', JSON.stringify(this.form.value, null, 2));
-    Object
-      .keys(this.form.controls)
-      .forEach(key => {
-        // console.log(this.form.get(key).value);
-        this.content[key] = this
-          .form
-          .get(key)
-          .value;
-      });
-    this
-      .globals
-      .setContent(this.content);
-      this.globals.debug(this.content);
-      this.globals.save(JSON.stringify(this.content));
+    this.onSave();
     this
       .form
       .reset();
@@ -104,7 +94,11 @@ export class ContentComponent implements OnInit {
         // build controls with data and validations
         const value = this.content[control.name];
         const validators = this.getValidators(control.validators);
-        group.addControl(control.name, this.fb.control(value, validators));
+        const form_control = this.fb.control(value, validators);
+        form_control.setValue(value,
+          { onlySelf: false, emitEvent: true,
+            emitModelToViewChange: true, emitViewToModelChange: true});
+        group.addControl(control.name, form_control);
       });
     this.form = group;
     this.hasContent = true;

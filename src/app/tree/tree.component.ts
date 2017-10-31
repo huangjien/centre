@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PanelModule } from 'primeng/primeng';
-import { TreeModule, TreeNode } from 'primeng/primeng';
+import { TreeModule, TreeNode, DragDropModule, MenuItem, ContextMenuModule } from 'primeng/primeng';
 import { Globals } from '../globals';
-import { TreeDragDropService } from 'primeng/primeng';
+
 @Component({
   selector: 'app-tree',
   templateUrl: './tree.component.html',
@@ -12,6 +12,7 @@ export class TreeComponent implements OnInit {
 
   nodes: TreeNode[];
   selectedNode: TreeNode;
+  treeContextMenuItems: MenuItem[];
 
   constructor(private globals: Globals) { }
 
@@ -25,6 +26,69 @@ export class TreeComponent implements OnInit {
       this.nodes = nodes;
       this.globals.debug(res[0]);
     });
+    this.treeContextMenuItems = [
+      { label: 'View', disabled: false, icon: 'fa-search', command: (event) => this.viewNode(event) },
+      { label: 'Add References', disabled: false, icon: 'fa-plus-square', command: (event) => this.addReference(event) },
+      { label: 'Add Input Paremeter', disabled: false, icon: 'fa-plus-square', command: (event) => this.addInputParameter(event) }
+    ];
+  }
+
+  viewNode(event) {
+    if (!this.selectedNode) {
+      return ;
+    }
+
+    const node_type = this.selectedNode.data['type'];
+    if (!node_type) {
+      return ;
+    }
+    if (node_type === 'Root') {
+      return ;
+    }
+
+    this.globals.setContent(this.selectedNode.data);
+    const currentid = this.selectedNode.data['id'];
+    this.globals.contentChange.subscribe(res => {
+      if (currentid === res['id']) {
+        this.selectedNode.label = res['name'];
+      }
+    });
+    this.globals.debug(JSON.stringify(this.selectedNode.data, null, 2));
+
+  }
+
+  addInputParameter(event) {
+    if (!this.selectedNode) {
+      return ;
+    }
+
+    const node_type = this.selectedNode.data['type'];
+    if (!node_type) {
+      return ;
+    }
+    if (node_type !== 'Data' ) {
+      return ;
+    }
+    const currentid = this.selectedNode.data['id'];
+    this.globals.add_InputParameter(this.selectedNode.data);
+    this.globals.debug(JSON.stringify(this.selectedNode.data, null, 2));
+  }
+
+  addReference(event) {
+    if (!this.selectedNode) {
+      return ;
+    }
+
+    const node_type = this.selectedNode.data['type'];
+    if (!node_type) {
+      return ;
+    }
+    if (node_type === 'Root' || node_type === 'Project' || node_type === 'Folder' || node_type === 'Data' ) {
+      return ;
+    }
+    const currentid = this.selectedNode.data['id'];
+    this.globals.add_Reference(this.selectedNode.data);
+    this.globals.debug(JSON.stringify(this.selectedNode.data, null, 2));
   }
 
   dropOnNode(event) {
@@ -36,9 +100,20 @@ export class TreeComponent implements OnInit {
     // folder: allow data, OUT, action, suite, case
     // suite: allow nothing
     this.globals.save(JSON.stringify(source.data));
-    
   }
 
+  // dragStart(event, node: TreeNode) {
+  //   console.log('dragStart');
+  //   console.log(node);
+  //   console.log(event);
+  //   console.log(event.srcElement.id);
+  //   // this.globals.dragAndDropItem = node;
+  // }
+
+  // dragEnd(event) {
+  //   console.log('dragEnd');
+  //   console.log(event);
+  // }
   loadNode(event) {
     const nodes = [];
     if (event.node) {
@@ -62,7 +137,8 @@ export class TreeComponent implements OnInit {
 
   selectNode(event) {
     if (event.node) {
-      this.globals.setContent(this.selectedNode.data);
+      // this.globals.setContent(this.selectedNode.data);
+      // this.setMenuItemsDisabled(this.selectedNode.data['type']);
       const currentid = this.selectedNode.data['id'];
       this.globals.contentChange.subscribe(res => {
         if (currentid === res['id']) {
@@ -75,9 +151,9 @@ export class TreeComponent implements OnInit {
 
   createTreeNode(obj: any): TreeNode {
     const treeNode = {
-      data: obj, label: obj.name, type: obj.type,
+      data: obj, label: obj.name, type: obj.type, pDraggable: 'references',
       expandedIcon: 'fa-folder-open', collapsedIcon: 'fa-folder',
-      icon: this.getIcon(obj.type),
+      icon: this.getIcon(obj.type), id: obj.id, name: obj.id,
       draggable: this.isDraggable(obj.type),
       droppable: this.isDroppable(obj.type),
       selectable: this.isSelectable(obj.type),
@@ -86,6 +162,44 @@ export class TreeComponent implements OnInit {
 
     return treeNode;
 
+  }
+
+  setMenuItemsDisabled(type: string) {
+    if (type === 'Project') {
+      this.setOneMenuItemDisabled(false, true, true);
+    }
+    if (type === 'Folder') {
+      this.setOneMenuItemDisabled(false, true, true);
+    }
+    if (type === 'Suite') {
+      this.setOneMenuItemDisabled(false, false, true);
+    }
+    if (type === 'Case') {
+      this.setOneMenuItemDisabled(false, false, true);
+    }
+    if (type === 'OUT') {
+      this.setOneMenuItemDisabled(false, false, true);
+    }
+    if (type === 'Data') {
+      this.setOneMenuItemDisabled(false, false, true);
+    }
+    if (type === 'Root') {
+      this.setOneMenuItemDisabled(true, true, true);
+    }
+  }
+
+  setOneMenuItemDisabled(view: boolean, addReference: boolean, addInput: boolean) {
+    this.treeContextMenuItems.forEach(item => {
+      if (item['label'] === 'View') {
+        item['disabled'] = view;
+      }
+      if (item['label'] === 'Add Reference') {
+        item['disabled'] = addReference;
+      }
+      if (item['label'] === 'Add Input Paremeter') {
+        item['disabled'] = addInput;
+      }
+    });
   }
 
   getIcon(type: string): string {
@@ -103,9 +217,6 @@ export class TreeComponent implements OnInit {
     }
     if (type === 'OUT') {
       return 'fa-suitcase';
-    }
-    if (type === 'Action') {
-      return 'fa-flash';
     }
     if (type === 'Data') {
       return 'fa-database';

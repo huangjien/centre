@@ -1,55 +1,57 @@
-<p-accordion>
-    
-    <p-accordionTab >
-        <p-header>
-            references
-            
-        </p-header>
-        <div class="ui-inputgroup" >
+
+    <p-accordion pDroppable="references" (onDrop)="drop($event)">
+
+        <p-accordionTab>
+            <p-header>
+                {{header}}
+
+            </p-header>
+            <div class="ui-inputgroup">
                 <button pButton type="button" (click)="onDelete()" label="Delete" icon="fa-close" [disabled]="!isChosen()"></button>
-                <button pButton type="button" (click)="onAdd()" label="Add" icon="fa-add" ></button>      
-        </div>
-        <p></p>
-        <div>
-        <p-dataTable [value]="references" [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[10,20,30,40,50,100]"
-            resizableColumns="true" columnResizeMode="expand" reorderableColumns="true" expandableRows="true" [editable]="true"
-            selectionMode="single" [(selection)]="selectedRow">
-           
-            <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" editable="true" filter="true" filterMatchMode="contains"
-                sortable="true">
-                <ng-container *ngIf="col.field === 'order'">
-                    <ng-template let-col let-row="rowData">
-                        <input pInputText [(ngModel)]="row[col.field]" [style]="{'width':'2em'}" pTemplate="editor" />
-                    </ng-template>
-                </ng-container>
+                <button pButton type="button" (click)="onAdd()" label="Add" icon="fa-plus"></button>
+            </div>
+            <p></p>
+            <div >
+                <p-dataTable [(value)]="references" [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[10,20,30,40,50,100]"
+                    resizableColumns="true" columnResizeMode="expand" reorderableColumns="true" expandableRows="true" [editable]="true"
+                    selectionMode="single" [(selection)]="selectedRow" 
+                    (onEdit)="tableChanged($event)" (onEditComplete)="tableChanged($event)" >
 
-                <ng-container *ngIf="col.field === 'disabled' || col.field === 'readOnly'">
-                    <ng-template let-col let-row="rowData" pTemplate="body">
-                        <p-inputSwitch [ngModel]="row[col.field]" [style]="{'width':'100%'}"></p-inputSwitch>
-                    </ng-template>
-                    <ng-template let-col let-row="rowData" pTemplate="editor">
-                        <p-inputSwitch [(ngModel)]="row[col.field]" [style]="{'width':'100%'}"></p-inputSwitch>
-                    </ng-template>
-                </ng-container>
+                    <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [editable]="true" filter="true" filterMatchMode="contains"
+                        sortable="true">
+                        <ng-container *ngIf="col.field === 'order'">
+                            <ng-template let-col let-row="rowData">
+                                <input pInputText [(ngModel)]="references[col.field]" [style]="{'width':'2em'}" (onchange)="tableChanged($event)" pTemplate="editor" />
+                            </ng-template>
+                        </ng-container>
 
-                <ng-container *ngIf="col.field === 'validators'">
-                    <ng-template let-col let-row="rowData" pTemplate="body">
-                        <p-chips [ngModel]="row[col.field]" [style]="{'width':'100%'}"></p-chips>
-                    </ng-template>
-                    <ng-template let-col let-row="rowData" pTemplate="editor">
-                        <p-chips [(ngModel)]="row[col.field]" [style]="{'width':'100%'}"></p-chips>
-                    </ng-template>
-                </ng-container>
+                        <ng-container *ngIf="col.field === 'disabled' || col.field === 'readOnly'">
+                            <ng-template let-col let-row="rowData" pTemplate="body">
+                                <p-inputSwitch [ngModel]="references[col.field]" [style]="{'width':'100%'}"></p-inputSwitch>
+                            </ng-template>
+                            <ng-template let-col let-row="rowData" pTemplate="editor">
+                                <p-inputSwitch [(ngModel)]="references[col.field]" (onchange)="tableChanged($event)" [style]="{'width':'100%'}"></p-inputSwitch>
+                            </ng-template>
+                        </ng-container>
 
-                <ng-container *ngIf="col.field === 'type' ">
-                    <ng-template let-col let-row="rowData" pTemplate="editor">
-                        <p-dropdown [(ngModel)]="row[col.field]" [style]="{'width':'100%'}" appendTo="body" [options]="formTypeOptions" ></p-dropdown>
-                    </ng-template>
-                </ng-container>
+                        <ng-container *ngIf="col.field === 'validators'">
+                            <ng-template let-col let-row="rowData" pTemplate="body">
+                                <p-chips [ngModel]="references[col.field]" [style]="{'width':'100%'}"></p-chips>
+                            </ng-template>
+                            <ng-template let-col let-row="rowData" pTemplate="editor">
+                                <p-chips [(ngModel)]="references[col.field]" (onchange)="tableChanged($event)" [style]="{'width':'100%'}"></p-chips>
+                            </ng-template>
+                        </ng-container>
 
-            </p-column>
-        </p-dataTable>
-    </div>
-    </p-accordionTab>
-    
-</p-accordion>
+                        <ng-container *ngIf="col.field === 'type' ">
+                            <ng-template let-col let-row="rowData" pTemplate="editor">
+                                <p-dropdown [(ngModel)]="references[col.field]" (onchange)="tableChanged($event)" [style]="{'width':'100%'}" appendTo="body" [options]="formTypeOptions"></p-dropdown>
+                            </ng-template>
+                        </ng-container>
+
+                    </p-column>
+                </p-dataTable>
+            </div>
+        </p-accordionTab>
+
+    </p-accordion>

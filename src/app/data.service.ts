@@ -21,6 +21,20 @@ export class DataService {
     });
   }
 
+  delete(id): Observable<any> {
+    return this.http.delete(this.baseUrl + 'delete/' + id).map(this.extractData).catch((error: any) => {
+      // console.error(error.message ? error.message : error.toString());
+      return Observable.throw(error);
+    });
+  }
+
+  id(id): Observable<any> {
+    return this.http.get(this.baseUrl+ 'id/' + id).map(this.extractData).catch((error: any) => {
+      // console.error(error.message ? error.message : error.toString());
+      return Observable.throw(error);
+    });
+  }
+
   query(content): Observable<any> {
     return this.http.get(this.baseUrl + 'query/q=' + content).map(this.extractData).catch((error: any) => {
       // console.error(error.message ? error.message : error.toString());

@@ -18,6 +18,12 @@ export class Globals {
     debugViewVisible = true;
     debugVisibilityChange: Subject<boolean> = new Subject<boolean>();
 
+    addReferenceItem: any;
+    addInputParameterItem: any;
+
+    addReference: Subject<any> = new Subject<any>();
+    addInputParameter: Subject<any> = new Subject<any>();
+
     // debug info
     debugInfo = '';
     debugInfoChange: Subject<string> = new Subject<string>();
@@ -65,6 +71,14 @@ export class Globals {
             this.content = value;
         });
 
+        this.addInputParameter.subscribe(value => {
+            this.addInputParameter = value;
+        });
+
+        this.addReference.subscribe(value => {
+            this.addReferenceItem = value;
+        });
+
     }
 
     toggleTreeViewVisibility() {
@@ -85,6 +99,16 @@ export class Globals {
 
     debug(info: string) {
         this.debugInfoChange.next(info);
+    }
+
+    add_Reference(content: any) {
+        this.addReferenceItem = content;
+        this.addReference.next(this.addReferenceItem);
+    }
+
+    add_InputParameter(content: any) {
+        this.addInputParameterItem = content;
+        this.addInputParameter.next(this.addInputParameterItem);
     }
 
     setContent(content: any) {
@@ -157,6 +181,18 @@ export class Globals {
     save(content: string): any {
         return this.dataService.save(content).subscribe(value => {
             // console.log(this.anythingToJson(value));
+        });
+    }
+
+    remove(id: string): any {
+        return this.dataService.delete(id).subscribe(value => {
+
+        });
+    }
+
+    id(id: string): any {
+        return this.dataService.delete(id).subscribe(value => {
+            console.log(value);
         });
     }
 
