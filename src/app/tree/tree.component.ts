@@ -216,7 +216,7 @@ export class TreeComponent implements OnInit {
       return 'fa-briefcase';
     }
     if (type === 'OUT') {
-      return 'fa-suitcase';
+      return 'fa-th-list';
     }
     if (type === 'Data') {
       return 'fa-database';

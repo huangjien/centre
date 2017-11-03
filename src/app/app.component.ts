@@ -8,7 +8,7 @@ import { AboutComponent } from './about/about.component';
 import { Router } from '@angular/router';
 import { DataService } from './data.service';
 import { Message } from 'primeng/components/common/api';
-import { AdvGrowlService } from 'primeng-advanced-growl';
+
 // import { MessageService } from 'primeng/components/common/messageservice';
 import { Globals } from './globals';
 
@@ -23,8 +23,7 @@ export class AppComponent implements OnInit {
     messages = [];
     // msgs: Message[] = [];
     innerHeight: any;
-    constructor(private growlService: AdvGrowlService, private globals: Globals) {
-        this.globals.setGrowlService(this.growlService);
+    constructor(private globals: Globals) {
         this.innerHeight = window.innerHeight;
     }
 

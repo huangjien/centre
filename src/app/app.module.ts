@@ -12,7 +12,6 @@ import { PanelModule, TreeModule, SelectButtonModule, TreeDragDropService, Check
 import { ChartModule, DataTableModule, MessagesModule, GrowlModule, DialogModule, ToolbarModule, OrderListModule } from 'primeng/primeng';
 import { InputTextModule, AccordionModule, SharedModule, ButtonModule, ContextMenuModule } from 'primeng/primeng';
 import { MessageService } from 'primeng/components/common/messageservice';
-import { AdvGrowlModule, AdvGrowlService } from 'primeng-advanced-growl';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { AboutComponent } from './about/about.component';
@@ -56,13 +55,13 @@ const appRoutes: Routes = [
     BrowserModule, BrowserAnimationsModule, ToolbarModule, HttpClientModule, ReactiveFormsModule, DragDropModule,
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule, CommonModule, DropdownModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule, TooltipModule, ChipsModule,
-    TieredMenuModule, PanelModule, AngularSplitModule, AdvGrowlModule, EditorModule, SelectButtonModule,
+    TieredMenuModule, PanelModule, AngularSplitModule, EditorModule, SelectButtonModule,
     FormsModule, InputTextModule, TreeModule, SelectButtonModule, CheckboxModule, InputSwitchModule,
     HttpModule, ContextMenuModule
   ],
 
   providers: [DataService, MessageService, Globals, TreeDragDropService,
-    AdvGrowlService, FormBuilder],
+    FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

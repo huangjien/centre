@@ -3,8 +3,7 @@ import { Observable, Subject } from 'rxjs/Rx';
 import { MenuItem } from 'primeng/primeng';
 import { DataService } from './data.service';
 import { Message } from 'primeng/components/common/api';
-import { AdvGrowlService } from 'primeng-advanced-growl';
-// import { MessageService } from 'primeng/components/common/messageservice';
+import { MessageService } from 'primeng/components/common/messageservice';
 @Injectable()
 export class Globals {
 
@@ -43,11 +42,10 @@ export class Globals {
 
     messages = [];
     // messages
-    // msgs: Message[] = [];
-    // messageChange: Subject<Message[]> = new Subject<Message[]>();
-    advGrowlService: AdvGrowlService;
+    msgs: Message[] = [];
+    messageChange: Subject<Message[]> = new Subject<Message[]>();
     // services
-    constructor(private dataService: DataService) {
+    constructor(private dataService: DataService, private messageService: MessageService) {
         // subscribe view visibility changes
         this.treeViewVisibilityChange.subscribe((value) => {
             this.treeViewVisible = value;
@@ -117,41 +115,27 @@ export class Globals {
     }
 
     successMessage(_summary: string, _message: string) {
-        this.advGrowlService.createSuccessMessage(_message, _summary);
-        // this.showMessage('success', _summary, _message);
+        this.showMessage('success', _summary, _message);
     }
 
     infoMessage(_summary: string, _message: string) {
-        this.advGrowlService.createInfoMessage(_message, _summary);
-        // this.showMessage('info', _summary, _message);
+        this.showMessage('info', _summary, _message);
     }
 
     warnMessage(_summary: string, _message: string) {
-        this.advGrowlService.createWarningMessage(_message, _summary);
-        // this.showMessage('warn', _summary, _message);
+        this.showMessage('warn', _summary, _message);
     }
 
     errorMessage(_summary: string, _message: string) {
-        this.advGrowlService.createErrorMessage(_message, _summary);
-        // this.showMessage('error', _summary, _message);
+        this.showMessage('error', _summary, _message);
     }
 
-    // showMessage(_serverity: string, _summary: string, _message: string) {
-    //     this.advGrowlService.
-    //     // this.msgs.push({ severity: _serverity, summary: _summary, detail: _message });
-
-    //     // this.messageChange.next(this.msgs);
-    //     // setTimeout(() => {
-    //     //     this.msgs = [];
-    //     // }, 3000);
-    // }
-
-    setGrowlService(growlService: AdvGrowlService) {
-        this.advGrowlService = growlService;
+    showMessage(_serverity: string, _summary: string, _message: string) {
+        this.messageService.add({severity: _serverity, summary: _summary, detail: _message});
     }
 
     clearMessage() {
-        this.advGrowlService.clearMessages();
+        this.messageService.clear();
     }
 
     getMenuItems(): Observable<any> {
