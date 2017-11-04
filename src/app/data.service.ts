@@ -29,7 +29,7 @@ export class DataService {
   }
 
   id(id): Observable<any> {
-    return this.http.get(this.baseUrl+ 'id/' + id).map(this.extractData).catch((error: any) => {
+    return this.http.get(this.baseUrl + 'id/' + id).map(this.extractData).catch((error: any) => {
       // console.error(error.message ? error.message : error.toString());
       return Observable.throw(error);
     });

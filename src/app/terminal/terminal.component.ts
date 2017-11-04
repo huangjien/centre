@@ -69,7 +69,6 @@ export class TerminalComponent implements OnInit {
 
     if (this.command.startsWith('KIDS ')) {
       const commandParameter = this.command.substr(4);
-      
       // TODO: to be implemented
     }
 

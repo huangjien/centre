@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, forwardRef, EventEmitter, Output } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Input, OnInit, forwardRef, ElementRef, EventEmitter, Output } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Globals } from '../globals';
 @Component({
@@ -9,6 +9,7 @@ import { Globals } from '../globals';
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
+      // tslint:disable-next-line:no-forward-ref
       useExisting: forwardRef(() => ReferencesComponent),
       multi: true
     }
@@ -19,7 +20,7 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
   @Input() references: any;
   @Input() header: string;
   @Input() ref_type: string;
-  @Output() referencesChange = new EventEmitter();
+  @Output() private valueChange = new EventEmitter();
   selectedRow: any;
   cols: any[] = [];
   formTypeOptions = [{ label: 'Select ...', value: null },
@@ -54,30 +55,11 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
     });
   }
 
-  drop(event) {
-
-    // decide if this will accept this drop
-
-    // add a new item, only need id
-    console.log(event);
-  }
-
-  removePrimengIssue(obj) {
-    obj.forEach(item => {
-      delete item['_$visited'];
-    });
-    return obj;
-  }
-
-  onChange = (obj: any) => {
+  onChanged = (obj: any) => {
     console.log('onChange() called');
-    // remove the _$visited
-    this.removePrimengIssue(obj);
-    console.log(obj);
-    // this.references = this.value;
+    // console.log(obj);
+    // // this.references = this.value;
   }
-
-  onTouched = () => { };
 
   isChosen(): boolean {
     return this.selectedRow;
@@ -108,7 +90,6 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
     this.references = [...this.references, newObject];
     // this.references.push(newObject);
     this.writeValue(this.references);
-    this.referencesChange.emit(this.references);
     this.value = this.references;
   }
 
@@ -116,15 +97,18 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
     // delete the selected
     this.references = this.references.filter(item => item !== this.selectedRow);
     this.writeValue(this.references);
-    this.referencesChange.emit(this.references);
     this.value = this.references;
   }
   writeValue(obj: any): void {
+    console.log('writeValue');
+    console.log(obj);
     if (obj) {
-      obj = this.removePrimengIssue(obj);
       if (obj !== this.references) {
+        console.log('reference !== obj');
         this.references = obj;
       }
+      this.value = obj;
+      this.valueChange.emit(this.value);
     }
   }
 
@@ -138,39 +122,42 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
     let max = this.references.length + 1;
     this.references.forEach(item => {
       if (!item['order']) {
-        return this.references.length + 1;
+        max = this.references.length + 1;
       }
-      if (item['order'] === max) {
+      if (+item['order'] === max) {
         max = max + 1;
       }
-      if (item['order'] > max) {
-        max = item['order'] + 1;
+      if (+item['order'] > max) {
+        max = +item['order'] + 1;
       }
     });
     return max.toString();
   }
 
+  onOrderChanged(event, i) {
+    this.references[i]['order'] = event.target.value;
+  }
+  disabledChanged(boolFlag, i) {
+    this.references[i]['disabled'] = boolFlag.toString();
+  }
   tableChanged(event) {
-
-    console.log(event);
-    this.onChange(event.data);
+    console.log('tableChanged');
     this.value = this.references;
-    this.referencesChange.emit(event);
   }
 
   set value(val) {
     console.log('set value(val)');
-
-    this.onChange(val);
-    this.onTouched();
+console.log(val);
+    // this.onChanged(val);
+    // this.onTouched();
   }
 
   registerOnChange(fn) {
-    this.onChange = fn;
+    this.onChanged = fn;
   }
 
   registerOnTouched(fn) {
-    this.onTouched = fn;
+    // this.onTouched = fn;
   }
 
   setDisabledState?(isDisabled: boolean): void {
