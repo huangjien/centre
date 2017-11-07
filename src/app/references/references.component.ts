@@ -32,15 +32,29 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
 
   }
 
+  get value() {
+    return this.references;
+  }
+
   ngOnInit() {
     this.value = this.references;
     if (this.references && this.references[0]) {
       Object.keys(this.references[0]).forEach(item => {
         let h = item;
+        let definedStyle = {};
         if (item === 'order') {
           h = '#';
+          definedStyle = { 'width': '3em', 'text-align': 'center' };
         }
-        this.cols.push({ field: item, header: h });
+        if (item === 'disabled') {
+          h = 'Disabled';
+          definedStyle = { 'width': '8em', 'text-align': 'center' };
+        }
+        if (item === 'readOnly') {
+          h = 'Read Only';
+          definedStyle = { 'width': '8em', 'text-align': 'center' };
+        }
+        this.cols.push({ field: item, header: h, style: definedStyle });
       });
     }
     console.log('ref_type:' + this.ref_type);
@@ -49,16 +63,11 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
       console.log(value);
     });
     this.globals.addReference.subscribe(value => {
-      console.log('add reference:');
-      console.log(value);
       this.add(value);
     });
   }
 
   onChanged = (obj: any) => {
-    console.log('onChange() called');
-    // console.log(obj);
-    // // this.references = this.value;
   }
 
   isChosen(): boolean {
@@ -90,6 +99,7 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
     this.references = [...this.references, newObject];
     // this.references.push(newObject);
     this.writeValue(this.references);
+    this.valueChange.emit(this.references);
     this.value = this.references;
   }
 
@@ -97,6 +107,7 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
     // delete the selected
     this.references = this.references.filter(item => item !== this.selectedRow);
     this.writeValue(this.references);
+    this.valueChange.emit(this.references);
     this.value = this.references;
   }
   writeValue(obj: any): void {
@@ -107,8 +118,6 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
         console.log('reference !== obj');
         this.references = obj;
       }
-      this.value = obj;
-      this.valueChange.emit(this.value);
     }
   }
 
@@ -138,18 +147,14 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
     this.references[i]['order'] = event.target.value;
   }
   disabledChanged(boolFlag, i) {
-    this.references[i]['disabled'] = boolFlag.toString();
-  }
-  tableChanged(event) {
-    console.log('tableChanged');
-    this.value = this.references;
+    this.references[i]['disabled'] = boolFlag;
   }
 
   set value(val) {
-    console.log('set value(val)');
-console.log(val);
+    this.references = val;
+    this.onChanged(val);
     // this.onChanged(val);
-    // this.onTouched();
+    this.onTouched();
   }
 
   registerOnChange(fn) {
@@ -157,8 +162,10 @@ console.log(val);
   }
 
   registerOnTouched(fn) {
-    // this.onTouched = fn;
+    this.onTouched = fn;
   }
+
+  onTouched: any = () => { };
 
   setDisabledState?(isDisabled: boolean): void {
     throw new Error('Method not implemented.');

@@ -17,38 +17,38 @@
                     selectionMode="single" [(selection)]="selectedRow" 
                     (onEditComplete)="tableChanged($event)" dataKey="order">
 
-                    <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [editable]="true" filter="true" filterMatchMode="contains"
+                    <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" [editable]="true" filter="true" filterMatchMode="contains" [style]="col.style"
                         sortable="true">
                         <ng-container *ngIf="col.field === 'order'">
                             <ng-template let-col let-row="rowData" let-i="rowIndex" pTemplate="body"  >
-                                <input pInputText [ngModel]="row[col.field]"   (keyup)="onOrderChanged($event, i)"  required />
+                                <input pInputText [(ngModel)]="row['order']"   (keyup)="onOrderChanged($event, i)"  required />
                             </ng-template>
-                            <ng-template let-col let-row="rowData" let-i="rowIndex" pTemplate="editor" >
-                                <input pInputText [ngModel]="row[col.field]"  />
-                            </ng-template>
+                            <!-- <ng-template let-col let-row="rowData" let-i="rowIndex" pTemplate="editor" >
+                                <input pInputText [(ngModel)]="row['order']"  />
+                            </ng-template> -->
                         </ng-container>
 
                         <ng-container *ngIf="col.field === 'disabled' || col.field === 'readOnly'">
                             <ng-template let-col let-row="rowData" let-i="rowIndex" pTemplate="body">
-                                <p-inputSwitch [ngModel]="references[col.field]" (onChange)="disabledChanged($event.checked, i)" [style]="{'width':'100%'}"></p-inputSwitch>
+                                <p-inputSwitch  onLabel="Yes" offLabel="No" [(ngModel)]="row[col.field]" (onChange)="disabledChanged($event.checked, i)"></p-inputSwitch>
                             </ng-template>
-                            <ng-template let-col let-row="rowData" pTemplate="editor">
-                                <p-inputSwitch [ngModel]="references[col.field]"  [style]="{'width':'100%'}"></p-inputSwitch>
-                            </ng-template>
+                            <!-- <ng-template let-col let-row="rowData" pTemplate="editor">
+                                <p-inputSwitch [ngModel]="references[col.field]"  ></p-inputSwitch>
+                            </ng-template> -->
                         </ng-container>
 
                         <ng-container *ngIf="col.field === 'validators'">
                             <ng-template let-col let-row="rowData" pTemplate="body">
-                                <p-chips [ngModel]="references[col.field]" (onChange)="tableChanged($event)" [style]="{'width':'100%'}"></p-chips>
+                                <p-chips [ngModel]="row[col.field]" (onChange)="tableChanged($event)"></p-chips>
                             </ng-template>
                             <ng-template let-col let-row="rowData" pTemplate="editor">
-                                <p-chips [(ngModel)]="references[col.field]"  [style]="{'width':'100%'}"></p-chips>
+                                <p-chips [(ngModel)]="row[col.field]" ></p-chips>
                             </ng-template>
                         </ng-container>
 
                         <ng-container *ngIf="col.field === 'type' ">
                             <ng-template let-col let-row="rowData" pTemplate="editor">
-                                <p-dropdown [(ngModel)]="references[col.field]" (onChange)="tableChanged($event)" [style]="{'width':'100%'}" appendTo="body" [options]="formTypeOptions"></p-dropdown>
+                                <p-dropdown [(ngModel)]="references[col.field]" (onChange)="tableChanged($event)"  appendTo="body" [options]="formTypeOptions"></p-dropdown>
                             </ng-template>
                         </ng-container>
 
