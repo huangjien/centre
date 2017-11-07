@@ -38,6 +38,8 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit() {
     this.value = this.references;
+    let containId = false;
+    // set the column header
     if (this.references && this.references[0]) {
       Object.keys(this.references[0]).forEach(item => {
         let h = item;
@@ -45,19 +47,44 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
         if (item === 'order') {
           h = '#';
           definedStyle = { 'width': '3em', 'text-align': 'center' };
-        }
+          this.cols.push({ field: item, header: h, style: definedStyle });
+        } else
         if (item === 'disabled') {
           h = 'Disabled';
           definedStyle = { 'width': '8em', 'text-align': 'center' };
-        }
+          this.cols.push({ field: item, header: h, style: definedStyle });
+        } else
         if (item === 'readOnly') {
           h = 'Read Only';
           definedStyle = { 'width': '8em', 'text-align': 'center' };
+          this.cols.push({ field: item, header: h, style: definedStyle });
+        } else
+        if (item === 'id') {
+          containId = true;
+          this.cols.push( {field: 'name', header: 'Name', style: definedStyle });
+          this.cols.push( {field: 'type', header: 'Type', style: definedStyle });
+        } else {
+          definedStyle = { 'display': 'none' };
+          this.cols.push({ field: item, header: h, style: definedStyle });
         }
-        this.cols.push({ field: item, header: h, style: definedStyle });
       });
     }
     console.log('ref_type:' + this.ref_type);
+
+if (containId) {
+  // update the references, add name, type, description
+  this.references.forEach(element => {
+    const id = element['id'];
+    this.globals.id(id).subscribe(item => {
+      const wholeElement = item[0];
+      element['name'] = wholeElement['name'];
+      element['type'] = wholeElement['type'];
+      element['description'] = wholeElement['description'];
+    });
+    // tslint:disable-next-line:no-bitwise
+  });
+}
+
     this.globals.addInputParameter.subscribe(value => {
       console.log('add input parameter:');
       console.log(value);
@@ -96,6 +123,12 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
   }
 
   addReference(newObject) {
+    this.globals.id(newObject['id']).subscribe(item => {
+      const wholeElement = item[0];
+      newObject['name'] = wholeElement['name'];
+      newObject['type'] = wholeElement['type'];
+      newObject['description'] = wholeElement['description'];
+    });
     this.references = [...this.references, newObject];
     // this.references.push(newObject);
     this.writeValue(this.references);
@@ -111,8 +144,6 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
     this.value = this.references;
   }
   writeValue(obj: any): void {
-    console.log('writeValue');
-    console.log(obj);
     if (obj) {
       if (obj !== this.references) {
         console.log('reference !== obj');

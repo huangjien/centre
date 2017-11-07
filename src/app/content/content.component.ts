@@ -21,12 +21,12 @@ export class ContentComponent implements OnInit {
 
   formValid() {
     if (!this.form) {
-      return true;
+      return false;
     }
     if (this.readOnly) {
-      return true;
+      return false;
     }
-    return !this.form.valid;
+    return this.form.valid && this.form.dirty;
   }
 
   onCancel() {
@@ -118,7 +118,18 @@ export class ContentComponent implements OnInit {
             ret.push(Validators.minLength(3));
             break;
           }
-
+          case 'maxlength=32': {
+            ret.push(Validators.maxLength(32));
+            break;
+          }
+          case 'email': {
+            ret.push(Validators.email);
+            break;
+          }
+          case 'variablename': {
+            ret.push(Validators.pattern('[a-zA-Z0-9]+'));
+            break;
+          }
         default:
           {
             console.warn('We encounter some unknown validator:' + item);

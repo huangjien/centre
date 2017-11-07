@@ -55,11 +55,11 @@
 
     </ng-container>
 
-    <p>{{content|json}}</p>
+    <!-- <p>{{content|json}}</p> -->
     <div class="ui-inputgroup" >
       <button pButton type="button" (click)="onCancel()" label="Cancel" icon="fa-close"></button>
-      <button pButton type="button" (click)="onSave()" label="Save" icon="fa-save" [disabled]="formValid()"></button>      
-      <button pButton type="submit" label="Save & Close" icon="fa-check" [disabled]="formValid()"></button>
+      <button pButton type="button" (click)="onSave()" label="Save" icon="fa-save" [disabled]="!formValid()"></button>      
+      <button pButton type="submit" label="Save & Close" icon="fa-check" [disabled]="!formValid()"></button>
       <button pButton type="button" (click)="onDelete()" label="Delete" icon="fa-trash" ></button>      
       
     </div>

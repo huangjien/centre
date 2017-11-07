@@ -175,9 +175,7 @@ export class Globals {
     }
 
     id(id: string): any {
-        return this.dataService.delete(id).subscribe(value => {
-            console.log(value);
-        });
+        return this.dataService.id(id);
     }
 
     getChildrenNodes(id): Observable<any> {
