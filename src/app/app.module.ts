@@ -25,7 +25,8 @@ import { TerminalComponent } from './terminal/terminal.component';
 import { AngularSplitModule } from 'angular-split';
 import { ContentComponent } from './content/content.component';
 import { ReferencesComponent } from './references/references.component';
-
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
   {
@@ -51,7 +52,7 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(appRoutes
       // , {enableTracing: true} // <-- debugging purposes only
-    ),
+    ), environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
     BrowserModule, BrowserAnimationsModule, ToolbarModule, HttpClientModule, ReactiveFormsModule, DragDropModule,
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule, CommonModule, DropdownModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule, TooltipModule, ChipsModule,

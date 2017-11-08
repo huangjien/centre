@@ -95,6 +95,7 @@ if (containId) {
   }
 
   onChanged = (obj: any) => {
+    this.valueChange.emit(this.references);
   }
 
   isChosen(): boolean {
@@ -132,7 +133,7 @@ if (containId) {
     this.references = [...this.references, newObject];
     // this.references.push(newObject);
     this.writeValue(this.references);
-    this.valueChange.emit(this.references);
+    this.onChanged(this.references);
     this.value = this.references;
   }
 
@@ -140,7 +141,7 @@ if (containId) {
     // delete the selected
     this.references = this.references.filter(item => item !== this.selectedRow);
     this.writeValue(this.references);
-    this.valueChange.emit(this.references);
+    this.onChanged(this.references);
     this.value = this.references;
   }
   writeValue(obj: any): void {
@@ -176,9 +177,11 @@ if (containId) {
 
   onOrderChanged(event, i) {
     this.references[i]['order'] = event.target.value;
+    this.onChanged(this.references);
   }
   disabledChanged(boolFlag, i) {
     this.references[i]['disabled'] = boolFlag;
+    this.onChanged(this.references);
   }
 
   set value(val) {
