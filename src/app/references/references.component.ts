@@ -2,6 +2,7 @@ import { Component, Input, OnInit, forwardRef, ElementRef, EventEmitter, Output 
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Globals } from '../globals';
+import { Helper } from './references.helper';
 @Component({
   selector: 'app-references',
   templateUrl: './references.component.html',
@@ -22,13 +23,25 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
   @Input() ref_type: string;
   @Output() private valueChange = new EventEmitter();
   selectedRow: any;
+  containId = false;
   cols: any[] = [];
   formTypeOptions = [{ label: 'Select ...', value: null },
   { label: 'id', value: 'id' }, { label: 'text', value: 'text' },
   { label: 'editor', value: 'editor' }, { label: 'multi', value: 'multi' },
   { label: 'single', value: 'single' }, { label: 'references', value: 'references' }];
 
-  constructor(private globals: Globals) {
+  wayOptions = [
+    { label: 'id', value: 'id' },
+    { label: 'tagName', value: 'tagName' },
+    { label: 'xpath', value: 'xpath' },
+    { label: 'className', value: 'className' },
+    { label: 'csssSelector', value: 'csssSelector' },
+    { label: 'linkText', value: 'linkText' },
+    { label: 'name', value: 'name' },
+    { label: 'partialLinkText', value: 'partialLinkText' }
+  ];
+
+  constructor(private globals: Globals, private helper: Helper) {
 
   }
 
@@ -38,52 +51,25 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
 
   ngOnInit() {
     this.value = this.references;
-    let containId = false;
     // set the column header
-    if (this.references && this.references[0]) {
-      Object.keys(this.references[0]).forEach(item => {
-        let h = item;
-        let definedStyle = {};
-        if (item === 'order') {
-          h = '#';
-          definedStyle = { 'width': '3em', 'text-align': 'center' };
-          this.cols.push({ field: item, header: h, style: definedStyle });
-        } else
-        if (item === 'disabled') {
-          h = 'Disabled';
-          definedStyle = { 'width': '8em', 'text-align': 'center' };
-          this.cols.push({ field: item, header: h, style: definedStyle });
-        } else
-        if (item === 'readOnly') {
-          h = 'Read Only';
-          definedStyle = { 'width': '8em', 'text-align': 'center' };
-          this.cols.push({ field: item, header: h, style: definedStyle });
-        } else
-        if (item === 'id') {
-          containId = true;
-          this.cols.push( {field: 'name', header: 'Name', style: definedStyle });
-          this.cols.push( {field: 'type', header: 'Type', style: definedStyle });
-        } else {
-          definedStyle = { 'display': 'none' };
-          this.cols.push({ field: item, header: h, style: definedStyle });
-        }
-      });
-    }
+
+    this.cols = this.helper.getCols(this.ref_type);
+
     console.log('ref_type:' + this.ref_type);
 
-if (containId) {
-  // update the references, add name, type, description
-  this.references.forEach(element => {
-    const id = element['id'];
-    this.globals.id(id).subscribe(item => {
-      const wholeElement = item[0];
-      element['name'] = wholeElement['name'];
-      element['type'] = wholeElement['type'];
-      element['description'] = wholeElement['description'];
-    });
-    // tslint:disable-next-line:no-bitwise
-  });
-}
+    if (this.ref_type === 'references') {
+      // update the references, add name, type, description
+      this.references.forEach(element => {
+        const id = element['id'];
+        this.globals.id(id).subscribe(item => {
+          const wholeElement = item[0];
+          element['name'] = wholeElement['name'];
+          element['type'] = wholeElement['type'];
+          element['description'] = wholeElement['description'];
+        });
+        // tslint:disable-next-line:no-bitwise
+      });
+    }
 
     this.globals.addInputParameter.subscribe(value => {
       console.log('add input parameter:');
@@ -100,6 +86,10 @@ if (containId) {
 
   isChosen(): boolean {
     return this.selectedRow;
+  }
+
+  canAddedManually(): boolean {
+    return this.ref_type === 'objects' || this.ref_type === 'data';
   }
 
   add(obj: any) {
@@ -179,8 +169,18 @@ if (containId) {
     this.references[i]['order'] = event.target.value;
     this.onChanged(this.references);
   }
+
+  onIdentityChanged(event, i) {
+    this.onChanged(this.references);
+  }
+
   disabledChanged(boolFlag, i) {
     this.references[i]['disabled'] = boolFlag;
+    this.onChanged(this.references);
+  }
+
+  wayChanged(boolFlag, i) {
+    // this.references[i]['way'] = boolFlag;
     this.onChanged(this.references);
   }
 

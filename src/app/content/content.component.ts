@@ -127,7 +127,7 @@ export class ContentComponent implements OnInit {
             break;
           }
           case 'variablename': {
-            ret.push(Validators.pattern('[a-zA-Z0-9]+'));
+            ret.push(Validators.pattern('[a-zA-Z0-9_.]+'));
             break;
           }
         default:

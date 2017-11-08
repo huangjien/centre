@@ -25,6 +25,7 @@ import { TerminalComponent } from './terminal/terminal.component';
 import { AngularSplitModule } from 'angular-split';
 import { ContentComponent } from './content/content.component';
 import { ReferencesComponent } from './references/references.component';
+import { Helper } from './references/references.helper';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 
@@ -61,7 +62,7 @@ const appRoutes: Routes = [
     HttpModule, ContextMenuModule
   ],
 
-  providers: [DataService, MessageService, Globals, TreeDragDropService,
+  providers: [DataService, MessageService, Globals, TreeDragDropService, Helper,
     FormBuilder],
   bootstrap: [AppComponent]
 })

@@ -44,7 +44,7 @@
         <!-- end of single selection -->
         <!-- table format reference list -->
         <div *ngSwitchCase="'references'">
-          <app-references id="{{control.name}}" [header]="control.type" [ref_type]="control.type" [(references)]="content[control.name]"  formControlName="{{control.name}}"></app-references>
+          <app-references id="{{control.name}}" [header]="control.type" [ref_type]="control.name" [(references)]="content[control.name]"  formControlName="{{control.name}}"></app-references>
         </div>
         <!-- end of table format reference list -->
 

@@ -1,12 +1,12 @@
-<!-- <p-panel header="Tree View" > -->
+
   <p-tree [value]="nodes" [loadingIcon]="fa-circle-o-notch" 
-  (onNodeExpand)="loadNode($event)" 
+  (onNodeExpand)="loadNode($event)"  class="allarea"
   (onNodeSelect)="selectNode($event)" selectionMode="single" [(selection)]="selectedNode"
-  draggableNodes="true" droppableNodes="true" class="allarea" (onNodeDrop)="dropOnNode($event)"
+  draggableNodes="true" droppableNodes="true"  (onNodeDrop)="dropOnNode($event)"
   [contextMenu]="cm"
   >
   
 
   </p-tree>
   <p-contextMenu #cm [model]="treeContextMenuItems"></p-contextMenu>
-<!-- </p-panel> -->
+
