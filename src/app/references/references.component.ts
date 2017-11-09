@@ -22,6 +22,7 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
   @Input() header: string;
   @Input() ref_type: string;
   @Output() private valueChange = new EventEmitter();
+  disabled = false;
   selectedRow: any;
   containId = false;
   cols: any[] = [];
@@ -165,19 +166,19 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
     return max.toString();
   }
 
-  onOrderChanged(event, i) {
-    this.references[i]['order'] = event.target.value;
-    this.onChanged(this.references);
-  }
+  // onOrderChanged(event, i) {
+  //   this.references[i]['order'] = event.target.value;
+  //   this.onChanged(this.references);
+  // }
 
-  onIdentityChanged(event, i) {
-    this.onChanged(this.references);
-  }
+  // onIdentityChanged(event, i) {
+  //   this.onChanged(this.references);
+  // }
 
-  disabledChanged(boolFlag, i) {
-    this.references[i]['disabled'] = boolFlag;
-    this.onChanged(this.references);
-  }
+  // disabledChanged(boolFlag, i) {
+  //   this.references[i]['disabled'] = boolFlag;
+  //   this.onChanged(this.references);
+  // }
 
   tableChanged() {
     // this.references[i]['way'] = boolFlag;
@@ -202,7 +203,7 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
   onTouched: any = () => { };
 
   setDisabledState?(isDisabled: boolean): void {
-    throw new Error('Method not implemented.');
+    this.disabled = isDisabled;
   }
 
 

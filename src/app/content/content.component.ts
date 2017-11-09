@@ -95,6 +95,12 @@ export class ContentComponent implements OnInit {
         const value = this.content[control.name];
         const validators = this.getValidators(control.validators);
         const form_control = this.fb.control(value, validators);
+        console.log(value );
+        console.log(control);
+        if ( control.readOnly ) {
+          console.log('disabled ' + control);
+          form_control.disable();
+        }
         form_control.setValue(value,
           {
             onlySelf: false, emitEvent: true,
