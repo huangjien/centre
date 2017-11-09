@@ -3,65 +3,65 @@
   <form #contentForm [formGroup]="form" ngNativeValidate *ngIf="hasContent" (ngSubmit)="onSubmit()" style="margin: 10px 0px">
 
     <ng-container *ngFor=" let control of config">
-      <p></p>
-      <ng-container [ngSwitch]="control.type">
-        <!-- id -->
-        <div *ngSwitchCase="'id'">
-          <input style="display:none;" type="text" id="id" disabled="true" />
-        </div>
-        <!-- end of id -->
-        <!-- input text -->
-        <div *ngSwitchCase="'text'">
-          <span class="ui-float-label">
-            <input id="{{control.name}}" type="text" pInputText formControlName="{{control.name}}">
-            <label for="{{control.name}}">{{control.name}}</label>
-          </span>
-        </div>
-        <!-- end of input text -->
-        <!-- editor -->
-        <div *ngSwitchCase="'editor'">
-          
-            <textarea placeholder="Description" [rows]="5" 
-            pInputTextarea id="{{control.name}}" formControlName="{{control.name}}"
-            style="min-width: 640px"></textarea>
-            
-          <!-- <p-editor id="{{control.name}}" formControlName="{{control.name}}" [style]="{'height':'160px'}"></p-editor> -->
-        </div>
-        <!-- end of editor -->
-        <!-- multi selection -->
-        <div *ngSwitchCase="'multi'">
+      <ng-container *ngIf="!control.disabled">
+        <p></p>
+        <ng-container [ngSwitch]="control.type">
+          <!-- id -->
+          <div *ngSwitchCase="'id'">
+            <input style="display:none;" type="text" id="id" disabled="true" />
+          </div>
+          <!-- end of id -->
+          <!-- input text -->
+          <div *ngSwitchCase="'text'">
+            <span class="ui-float-label">
+              <input id="{{control.name}}" type="text" pInputText formControlName="{{control.name}}">
+              <label for="{{control.name}}">{{control.name}}</label>
+            </span>
+          </div>
+          <!-- end of input text -->
+          <!-- editor -->
+          <div *ngSwitchCase="'editor'">
 
-          <p-selectButton [options]="control.options" multiple="multiple" id="{{control.name}}" formControlName="{{control.name}}"></p-selectButton>
+            <textarea placeholder="Description" [rows]="5" pInputTextarea id="{{control.name}}" formControlName="{{control.name}}" style="min-width: 640px"></textarea>
 
-        </div>
-        <!-- end of multi selection -->
-        <!-- single selection -->
-        <div *ngSwitchCase="'single'">
+            <!-- <p-editor id="{{control.name}}" formControlName="{{control.name}}" [style]="{'height':'160px'}"></p-editor> -->
+          </div>
+          <!-- end of editor -->
+          <!-- multi selection -->
+          <div *ngSwitchCase="'multi'">
 
-          <p-selectButton [options]="control.options" pTooltip="{{control.tooltip}}" id="{{control.name}}" formControlName="{{control.name}}"></p-selectButton>
+            <p-selectButton [options]="control.options" multiple="multiple" id="{{control.name}}" formControlName="{{control.name}}"></p-selectButton>
 
-        </div>
-        <!-- end of single selection -->
-        <!-- table format reference list -->
-        <div *ngSwitchCase="'references'">
-          <app-references id="{{control.name}}" [header]="control.type" [ref_type]="control.name" [(references)]="content[control.name]"  formControlName="{{control.name}}"></app-references>
-        </div>
-        <!-- end of table format reference list -->
+          </div>
+          <!-- end of multi selection -->
+          <!-- single selection -->
+          <div *ngSwitchCase="'single'">
 
-        <div *ngSwitchDefault>
-          <label>un-recognized control type "{{control.type}}", name:"{{control.name}}"</label>
-        </div>
+            <p-selectButton [options]="control.options" pTooltip="{{control.tooltip}}" id="{{control.name}}" formControlName="{{control.name}}"></p-selectButton>
+
+          </div>
+          <!-- end of single selection -->
+          <!-- table format reference list -->
+          <div *ngSwitchCase="'references'">
+            <app-references id="{{control.name}}" [header]="control.type" [ref_type]="control.name" [(references)]="content[control.name]"
+              formControlName="{{control.name}}"></app-references>
+          </div>
+          <!-- end of table format reference list -->
+
+          <div *ngSwitchDefault>
+            <label>un-recognized control type "{{control.type}}", name:"{{control.name}}"</label>
+          </div>
+        </ng-container>
       </ng-container>
-
     </ng-container>
 
     <!-- <p>{{content|json}}</p> -->
-    <div class="ui-inputgroup" >
+    <div class="ui-inputgroup">
       <button pButton type="button" (click)="onCancel()" label="Cancel" icon="fa-close"></button>
-      <button pButton type="button" (click)="onSave()" label="Save" icon="fa-save" [disabled]="!formValid()"></button>      
+      <button pButton type="button" (click)="onSave()" label="Save" icon="fa-save" [disabled]="!formValid()"></button>
       <button pButton type="submit" label="Save & Close" icon="fa-check" [disabled]="!formValid()"></button>
-      <button pButton type="button" (click)="onDelete()" label="Delete" icon="fa-trash" ></button>      
-      
+      <button pButton type="button" (click)="onDelete()" label="Delete" icon="fa-trash"></button>
+
     </div>
   </form>
 </p-panel>

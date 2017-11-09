@@ -179,7 +179,7 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
     this.onChanged(this.references);
   }
 
-  wayChanged(boolFlag, i) {
+  tableChanged() {
     // this.references[i]['way'] = boolFlag;
     this.onChanged(this.references);
   }

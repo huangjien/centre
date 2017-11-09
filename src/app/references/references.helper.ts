@@ -10,6 +10,9 @@ export class Helper {
         if (ref_type === 'objects') {
             return {'order': maxOrder, 'name': 'newName', 'way': 'id', 'identity': 'newName', 'disabled': true };
         }
+        if (ref_type === 'fields') {
+            return {'order': maxOrder, 'name': 'newName', 'type': 'text', 'readOnly': false, 'validators': [], 'disabled': true };
+        }
     }
     getCols(ref_type: string): any[] {
         const cols: any[] = [];
@@ -28,6 +31,11 @@ export class Helper {
             cols.push({ field: 'key', header: 'Key', style: {} });
             cols.push({ field: 'value', header: 'Value', style: {} });
         }
+        if (ref_type === 'inputs') {
+            cols.push({ field: 'name', header: 'Name', style: {} });
+            cols.push({ field: 'key', header: 'Key', style: {} });
+            cols.push({ field: 'value', header: 'Value', style: {} });
+        }
         if (ref_type === 'fields') {
             cols.push({ field: 'name', header: 'Name', style: {} });
             cols.push({ field: 'type', header: 'Type', style: {} });
@@ -43,6 +51,11 @@ export class Helper {
             cols.push({ field: 'subData', header: 'Data Key', style: {} });
             cols.push({ field: 'retrive', header: 'Retrive', style: {} });
             cols.push({ field: 'outputVariable', header: 'Output Variable', style: {} });
+        }
+        if (ref_type === 'logs') {
+            cols.push({ field: 'dateTime', header: 'Date Time', style: {} });
+            cols.push({ field: 'result', header: 'Result', style: {} });
+            cols.push({ field: 'log', header: 'Log', style: {} });
         }
 
         cols.push({ field: 'disabled', header: 'Disabled', style: { 'width': '8em', 'text-align': 'center' } });

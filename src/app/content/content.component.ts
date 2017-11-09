@@ -1,8 +1,8 @@
-import {Component, OnInit, Pipe, Input} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {Validators, FormControl, FormGroup, FormBuilder, ValidatorFn} from '@angular/forms';
-import {Globals} from '../globals';
-import {EditorModule, SelectButtonModule} from 'primeng/primeng';
+import { Component, OnInit, Pipe, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Validators, FormControl, FormGroup, FormBuilder, ValidatorFn } from '@angular/forms';
+import { Globals } from '../globals';
+import { EditorModule, SelectButtonModule } from 'primeng/primeng';
 
 @Component({
   selector: 'app-content', templateUrl: './content.component.html',
@@ -17,7 +17,7 @@ export class ContentComponent implements OnInit {
   @Input() config: any;
   content = this.globals.content;
 
-  constructor(private fb: FormBuilder, private globals: Globals) {}
+  constructor(private fb: FormBuilder, private globals: Globals) { }
 
   formValid() {
     if (!this.form) {
@@ -42,9 +42,9 @@ export class ContentComponent implements OnInit {
     if (id) {
       this.globals.remove(id);
       this
-      .form
-      .reset();
-    this.hasContent = false;
+        .form
+        .reset();
+      this.hasContent = false;
     }
   }
 
@@ -96,8 +96,10 @@ export class ContentComponent implements OnInit {
         const validators = this.getValidators(control.validators);
         const form_control = this.fb.control(value, validators);
         form_control.setValue(value,
-          { onlySelf: false, emitEvent: true,
-            emitModelToViewChange: true, emitViewToModelChange: true});
+          {
+            onlySelf: false, emitEvent: true,
+            emitModelToViewChange: true, emitViewToModelChange: true
+          });
         group.addControl(control.name, form_control);
       });
     this.form = group;
@@ -118,18 +120,18 @@ export class ContentComponent implements OnInit {
             ret.push(Validators.minLength(3));
             break;
           }
-          case 'maxlength=32': {
-            ret.push(Validators.maxLength(32));
-            break;
-          }
-          case 'email': {
-            ret.push(Validators.email);
-            break;
-          }
-          case 'variablename': {
-            ret.push(Validators.pattern('[a-zA-Z0-9_.]+'));
-            break;
-          }
+        case 'maxlength=32': {
+          ret.push(Validators.maxLength(32));
+          break;
+        }
+        case 'email': {
+          ret.push(Validators.email);
+          break;
+        }
+        case 'variablename': {
+          ret.push(Validators.pattern('[a-zA-Z0-9_.]+'));
+          break;
+        }
         default:
           {
             console.warn('We encounter some unknown validator:' + item);

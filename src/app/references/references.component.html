@@ -20,31 +20,31 @@
 
                     <ng-container *ngIf="col.field === 'order'">
                         <ng-template let-col let-row="rowData" let-i="rowIndex" pTemplate="body">
-                            <input pInputText [(ngModel)]="row['order']" (keyup)="onOrderChanged($event, i)" required />
+                            <input pInputText [(ngModel)]="row['order']" (keyup)="tableChanged()" required />
                         </ng-template>
                     </ng-container>
 
                     <ng-container *ngIf="col.field === 'identity' || col.field === 'key' || col.field === 'value' ">
                             <ng-template let-col let-row="rowData" let-i="rowIndex" pTemplate="body">
-                                <input pInputText [(ngModel)]="row[col.field]" (keyup)="onIdentityChanged($event, i)" required />
+                                <input pInputText [(ngModel)]="row[col.field]" (keyup)="tableChanged()" required />
                             </ng-template>
                         </ng-container>
 
                     <ng-container *ngIf="col.field === 'disabled' || col.field === 'readOnly'">
                         <ng-template let-col let-row="rowData" let-i="rowIndex" pTemplate="body">
-                            <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="row[col.field]" (onChange)="disabledChanged($event.checked, i)"></p-inputSwitch>
+                            <p-inputSwitch onLabel="Yes" offLabel="No" [(ngModel)]="row[col.field]" (onChange)="tableChanged()"></p-inputSwitch>
                         </ng-template>
                     </ng-container>
 
                     <ng-container *ngIf="col.field === 'way'">
                         <ng-template let-col let-row="rowData" let-i="rowIndex" pTemplate="body">
-                            <p-dropdown [options]="wayOptions" [(ngModel)]="row[col.field]" (onChange)="wayChanged($event, i)"></p-dropdown>
+                            <p-dropdown [options]="wayOptions" [(ngModel)]="row[col.field]" (onChange)="tableChanged()"></p-dropdown>
                         </ng-template>
                     </ng-container>
 
                     <ng-container *ngIf="col.field === 'validators'">
                         <ng-template let-col let-row="rowData" pTemplate="body">
-                            <p-chips [ngModel]="row[col.field]" (onChange)="tableChanged($event)"></p-chips>
+                            <p-chips [ngModel]="row[col.field]" (onChange)="tableChanged()"></p-chips>
                         </ng-template>
                         <ng-template let-col let-row="rowData" pTemplate="editor">
                             <p-chips [(ngModel)]="row[col.field]"></p-chips>
@@ -53,7 +53,7 @@
 
                     <ng-container *ngIf="col.field === 'type' ">
                         <ng-template let-col let-row="rowData" pTemplate="editor">
-                            <p-dropdown [(ngModel)]="references[col.field]" (onChange)="tableChanged($event)" appendTo="body" [options]="formTypeOptions"></p-dropdown>
+                            <p-dropdown [(ngModel)]="references[col.field]" (onChange)="tableChanged()" appendTo="body" [options]="formTypeOptions"></p-dropdown>
                         </ng-template>
                     </ng-container>
 
