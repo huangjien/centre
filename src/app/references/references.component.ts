@@ -96,7 +96,8 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit, OnChan
   }
 
   dropNode(event: DragEvent) {
-    console.log('something falling from the sky');
+    // console.log('something falling from the sky');
+    // console.log(event.dataTransfer.getData('testing'));
     const droppedData = JSON.parse(event.dataTransfer.getData('testing'));
     if (this.helper.isDroppedAllowed(droppedData.type, this.ref_type)) {
       console.log(droppedData, 'allow to drop here');

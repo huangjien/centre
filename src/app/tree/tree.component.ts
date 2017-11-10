@@ -77,10 +77,10 @@ export class TreeComponent implements OnInit {
   }
 
   dragStart(event: DragEvent, data) {
-    console.log('drag start');
+    // console.log('drag start');
     event.dataTransfer.setData('testing', JSON.stringify(data));
-    console.log(event.dataTransfer.getData('testing'));
-    console.log(event);
+    // console.log(event.dataTransfer.getData('testing'));
+    // console.log(event);
     return;
   }
 
@@ -92,79 +92,79 @@ export class TreeComponent implements OnInit {
   //     .show(event);
   //   return false;
   // }
-  viewNode(event) {
-    console.log(event);
-    if (!this.selectedNode) {
-      return;
-    }
+  // viewNode(event) {
+  //   console.log(event);
+  //   if (!this.selectedNode) {
+  //     return;
+  //   }
 
-    const node_type = this.selectedNode.data['type'];
-    if (!node_type) {
-      return;
-    }
-    if (node_type === 'Root') {
-      return;
-    }
+  //   const node_type = this.selectedNode.data['type'];
+  //   if (!node_type) {
+  //     return;
+  //   }
+  //   if (node_type === 'Root') {
+  //     return;
+  //   }
 
-    this
-      .globals
-      .setContent(this.selectedNode.data);
-    const currentid = this.selectedNode.data['id'];
-    this
-      .globals
-      .contentChange
-      .subscribe(res => {
-        if (currentid === res['id']) {
-          this.selectedNode.label = res['name'];
-        }
-      });
-    this
-      .globals
-      .debug(JSON.stringify(this.selectedNode.data, null, 2));
+  //   this
+  //     .globals
+  //     .setContent(this.selectedNode.data);
+  //   const currentid = this.selectedNode.data['id'];
+  //   this
+  //     .globals
+  //     .contentChange
+  //     .subscribe(res => {
+  //       if (currentid === res['id']) {
+  //         this.selectedNode.label = res['name'];
+  //       }
+  //     });
+  //   this
+  //     .globals
+  //     .debug(JSON.stringify(this.selectedNode.data, null, 2));
 
-  }
+  // }
 
-  addInputParameter(event) {
-    if (!this.selectedNode) {
-      return;
-    }
+  // addInputParameter(event) {
+  //   if (!this.selectedNode) {
+  //     return;
+  //   }
 
-    const node_type = this.selectedNode.data['type'];
-    if (!node_type) {
-      return;
-    }
-    if (node_type !== 'Data') {
-      return;
-    }
-    const currentid = this.selectedNode.data['id'];
-    this
-      .globals
-      .add_InputParameter(this.selectedNode.data);
-    this
-      .globals
-      .debug(JSON.stringify(this.selectedNode.data, null, 2));
-  }
+  //   const node_type = this.selectedNode.data['type'];
+  //   if (!node_type) {
+  //     return;
+  //   }
+  //   if (node_type !== 'Data') {
+  //     return;
+  //   }
+  //   const currentid = this.selectedNode.data['id'];
+  //   this
+  //     .globals
+  //     .add_InputParameter(this.selectedNode.data);
+  //   this
+  //     .globals
+  //     .debug(JSON.stringify(this.selectedNode.data, null, 2));
+  // }
 
-  addReference(event) {
-    if (!this.selectedNode) {
-      return;
-    }
+  // addReference(event) {
+  //   if (!this.selectedNode) {
+  //     return;
+  //   }
 
-    const node_type = this.selectedNode.data['type'];
-    if (!node_type) {
-      return;
-    }
-    if (node_type === 'Root' || node_type === 'Project' || node_type === 'Folder' || node_type === 'Data') {
-      return;
-    }
-    const currentid = this.selectedNode.data['id'];
-    this
-      .globals
-      .add_Reference(this.selectedNode.data);
-    this
-      .globals
-      .debug(JSON.stringify(this.selectedNode.data, null, 2));
-  }
+  //   const node_type = this.selectedNode.data['type'];
+  //   if (!node_type) {
+  //     return;
+  //   }
+  //   if (node_type === 'Root' || node_type === 'Project' || node_type === 'Folder' || node_type === 'Data') {
+  //     return;
+  //   }
+  //   const currentid = this.selectedNode.data['id'];
+  //   this
+  //     .globals
+  //     .add_Reference(this.selectedNode.data);
+  //   this
+  //     .globals
+  //     .debug(JSON.stringify(this.selectedNode.data, null, 2));
+  // }
 
   dropOnNode(event) {
     const source = event.dragNode;

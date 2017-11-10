@@ -56,6 +56,14 @@ export class SearchComponent implements OnInit {
     }
   }
 
+  dragStart(event: DragEvent, data) {
+    // console.log('drag start');
+    event.dataTransfer.setData('testing', JSON.stringify(data));
+    // console.log(event.dataTransfer.getData('testing'));
+    // console.log(event);
+    return;
+  }
+
   ngOnInit() {
   }
 
