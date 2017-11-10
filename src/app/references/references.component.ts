@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, forwardRef, ElementRef, EventEmitter, Output } from '@angular/core';
+import { Component, Input, OnInit, forwardRef, ElementRef, EventEmitter, Output, OnChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular/forms';
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Globals } from '../globals';
@@ -17,7 +17,7 @@ import { DragDropModule } from 'primeng/components/dragdrop/dragdrop';
     }
   ]
 })
-export class ReferencesComponent implements ControlValueAccessor, OnInit {
+export class ReferencesComponent implements ControlValueAccessor, OnInit, OnChanges {
 
   @Input() references: any;
   @Input() header: string;
@@ -51,7 +51,12 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
     return this.references;
   }
 
-  ngOnInit() {
+  ngOnChanges() {
+
+    if (!this.references) {
+      // original is undefined, then will caused error
+      this.references = null;
+    }
     this.value = this.references;
     // set the column header
     this.cols = this.helper.getCols(this.ref_type);
@@ -70,13 +75,16 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
       });
     }
 
-    this.globals.addInputParameter.subscribe(value => {
-      console.log('add input parameter:');
-      console.log(value);
-    });
-    this.globals.addReference.subscribe(value => {
-      this.add(value);
-    });
+    // this.globals.addInputParameter.subscribe(value => {
+    //   console.log('add input parameter:');
+    //   console.log(value);
+    // });
+    // this.globals.addReference.subscribe(value => {
+    //   this.add(value);
+    // });
+  }
+
+  ngOnInit() {
   }
 
   onChanged = (obj: any) => {
@@ -142,6 +150,7 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
   writeValue(obj: any): void {
     if (obj) {
       if (obj !== this.references) {
+        console.log('object !== references');
         this.references = obj;
       }
     }

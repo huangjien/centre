@@ -4,6 +4,7 @@ import { MenuItem } from 'primeng/primeng';
 import { DataService } from './data.service';
 import { Message } from 'primeng/components/common/api';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { ContentComponent } from './content/content.component';
 @Injectable()
 export class Globals {
 
@@ -41,6 +42,8 @@ export class Globals {
     forms: any[];
 
     messages = [];
+
+    contentFormHook: ContentComponent;
     // messages
     msgs: Message[] = [];
     messageChange: Subject<Message[]> = new Subject<Message[]>();
@@ -111,7 +114,18 @@ export class Globals {
 
     setContent(content: any) {
         // this.content = content;
+        const contentId = content.id;
+        if (this.contentFormHook.form) {
+            const formContentId = this.contentFormHook.content.id;
+            if (this.contentFormHook.form.dirty) {
+                if ( contentId !== formContentId ) {
+                    this.errorMessage('Saving Changed Content', 'There is something changed in Content, save it please!');
+                }
+                return false;
+            }
+        }
         this.contentChange.next(content);
+        return true;
     }
 
     successMessage(_summary: string, _message: string) {

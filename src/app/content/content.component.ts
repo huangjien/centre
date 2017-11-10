@@ -80,10 +80,8 @@ export class ContentComponent implements OnInit {
         .form
         .reset();
     }
-    this.config = this
-      .globals
-      .getForm(this.content.type)
-      .fields;
+    const formData = this.globals.getForm(this.content.type);
+    this.config = formData.fields;
     // create controls according content
     const group = this
       .fb
@@ -155,6 +153,7 @@ export class ContentComponent implements OnInit {
         this.content = value;
         this.buildForm();
       });
+      this.globals.contentFormHook = this;
   }
 
 }

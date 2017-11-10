@@ -207,7 +207,9 @@ export class TreeComponent implements OnInit {
 
   selectNode(event) {
     if (event.node) {
-      this.globals.setContent(this.selectedNode.data);
+      if (!this.globals.setContent(this.selectedNode.data)) {
+        return;
+      }
       // this.setMenuItemsDisabled(this.selectedNode.data['type']);
       const currentid = this.selectedNode.data['id'];
       this
