@@ -17,7 +17,9 @@ import { DragDropModule } from 'primeng/components/dragdrop/dragdrop';
     }
   ]
 })
-export class ReferencesComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class ReferencesComponent implements ControlValueAccessor,
+  OnInit,
+  OnChanges {
 
   @Input() references: any;
   @Input() header: string;
@@ -27,31 +29,17 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit, OnChan
   selectedRow: any;
   containId = false;
   cols: any[] = [];
-  formTypeOptions = [{ label: 'Select ...', value: null },
-  { label: 'id', value: 'id' }, { label: 'text', value: 'text' },
-  { label: 'editor', value: 'editor' }, { label: 'multi', value: 'multi' },
-  { label: 'single', value: 'single' }, { label: 'references', value: 'references' }];
+  formTypeOptions = [];
+  wayOptions = [];
 
-  wayOptions = [
-    { label: 'id', value: 'id' },
-    { label: 'tagName', value: 'tagName' },
-    { label: 'xpath', value: 'xpath' },
-    { label: 'className', value: 'className' },
-    { label: 'csssSelector', value: 'csssSelector' },
-    { label: 'linkText', value: 'linkText' },
-    { label: 'name', value: 'name' },
-    { label: 'partialLinkText', value: 'partialLinkText' }
-  ];
-
-  constructor(private globals: Globals, private helper: Helper) {
-
-  }
+  constructor(private globals: Globals, private helper: Helper) { }
 
   get value() {
     return this.references;
   }
-
   ngOnChanges() {
+    this.formTypeOptions = this.helper.formTypeOptions;
+    this.wayOptions = this.helper.wayOptions;
 
     if (!this.references) {
       // original is undefined, then will caused error
@@ -64,43 +52,42 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit, OnChan
     if (this.ref_type === 'references') {
       // update the references, add name, type, description
       this.references.forEach(element => {
-        const id = element['id'];
-        this.globals.id(id).subscribe(item => {
-          const wholeElement = item[0];
-          element['name'] = wholeElement['name'];
-          element['type'] = wholeElement['type'];
-          element['description'] = wholeElement['description'];
+          const id = element['id'];
+          this.globals.id(id).subscribe(item => {
+              const wholeElement = item[0];
+              element['name'] = wholeElement['name'];
+              element['type'] = wholeElement['type'];
+              element['description'] = wholeElement['description'];
+            });
         });
-        // tslint:disable-next-line:no-bitwise
-      });
     }
-
-    // this.globals.addInputParameter.subscribe(value => {
-    //   console.log('add input parameter:');
-    //   console.log(value);
-    // });
-    // this.globals.addReference.subscribe(value => {
-    //   this.add(value);
-    // });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
   onChanged = (obj: any) => {
-    this.valueChange.emit(this.references);
+    this
+      .valueChange
+      .emit(this.references);
   }
 
-  isChosen(): boolean {
-    return this.selectedRow;
-  }
+  isChosen(): boolean { return this.selectedRow; }
 
   dropNode(event: DragEvent) {
-    // console.log('something falling from the sky');
-    // console.log(event.dataTransfer.getData('testing'));
     const droppedData = JSON.parse(event.dataTransfer.getData('testing'));
-    if (this.helper.isDroppedAllowed(droppedData.type, this.ref_type)) {
+    const dragSource = droppedData.type;
+    const dropTarget = this.ref_type;
+    if (this.helper.isDroppedAllowed(dragSource, dropTarget)) {
       console.log(droppedData, 'allow to drop here');
+      if (dragSource === 'Data' && dropTarget === 'inputs') {
+        return true;
+      }
+      if (dragSource === 'Case' && dropTarget === 'references') {
+        return true;
+      }
+      if (dragSource === 'OUT' && dropTarget === 'actions') {
+        return true;
+      }
     }
   }
   canAddedManually(): boolean {
@@ -121,18 +108,17 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit, OnChan
 
   onAdd() {
     const newObject = this.helper.addOneRow(this.ref_type, this.getMaxOrder());
-
     this.addReference(newObject);
   }
 
   addReference(newObject) {
     if (newObject['id']) {
       this.globals.id(newObject['id']).subscribe(item => {
-        const wholeElement = item[0];
-        newObject['name'] = wholeElement['name'];
-        newObject['type'] = wholeElement['type'];
-        newObject['description'] = wholeElement['description'];
-      });
+          const wholeElement = item[0];
+          newObject['name'] = wholeElement['name'];
+          newObject['type'] = wholeElement['type'];
+          newObject['description'] = wholeElement['description'];
+        });
     }
     this.references = [...this.references, newObject];
     // this.references.push(newObject);
@@ -156,7 +142,6 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit, OnChan
       }
     }
   }
-
   getMaxOrder(): string {
     if (!this.references) {
       return '1';
@@ -165,43 +150,29 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit, OnChan
       return '1';
     }
     let max = this.references.length + 1;
-    this.references.forEach(item => {
-      if (!item['order']) {
-        max = this.references.length + 1;
-      }
-      if (+item['order'] === max) {
-        max = max + 1;
-      }
-      if (+item['order'] > max) {
-        max = +item['order'] + 1;
-      }
-    });
+    this
+      .references
+      .forEach(item => {
+        if (!item['order']) {
+          max = this.references.length + 1;
+        }
+        if (+ item['order'] === max) {
+          max = max + 1;
+        }
+        if (+ item['order'] > max) {
+          max = +item['order'] + 1;
+        }
+      });
     return max.toString();
   }
 
-  // onOrderChanged(event, i) {
-  //   this.references[i]['order'] = event.target.value;
-  //   this.onChanged(this.references);
-  // }
-
-  // onIdentityChanged(event, i) {
-  //   this.onChanged(this.references);
-  // }
-
-  // disabledChanged(boolFlag, i) {
-  //   this.references[i]['disabled'] = boolFlag;
-  //   this.onChanged(this.references);
-  // }
-
   tableChanged() {
-    // this.references[i]['way'] = boolFlag;
     this.onChanged(this.references);
   }
 
   set value(val) {
     this.references = val;
     this.onChanged(val);
-    // this.onChanged(val);
     this.onTouched();
   }
 
@@ -215,9 +186,9 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit, OnChan
 
   onTouched: any = () => { };
 
-  setDisabledState?(isDisabled: boolean): void {
+  setDisabledState
+    ?(isDisabled: boolean)
+    : void {
     this.disabled = isDisabled;
   }
-
-
 }

@@ -4,6 +4,59 @@ import { Globals } from '../globals';
 @Injectable()
 export class Helper {
 
+    formTypeOptions = [
+        {
+          label: 'Select ...',
+          value: null
+        }, {
+          label: 'id',
+          value: 'id'
+        }, {
+          label: 'text',
+          value: 'text'
+        }, {
+          label: 'editor',
+          value: 'editor'
+        }, {
+          label: 'multi',
+          value: 'multi'
+        }, {
+          label: 'single',
+          value: 'single'
+        }, {
+          label: 'references',
+          value: 'references'
+        }
+      ];
+
+      wayOptions = [
+        {
+          label: 'id',
+          value: 'id'
+        }, {
+          label: 'tagName',
+          value: 'tagName'
+        }, {
+          label: 'xpath',
+          value: 'xpath'
+        }, {
+          label: 'className',
+          value: 'className'
+        }, {
+          label: 'csssSelector',
+          value: 'csssSelector'
+        }, {
+          label: 'linkText',
+          value: 'linkText'
+        }, {
+          label: 'name',
+          value: 'name'
+        }, {
+          label: 'partialLinkText',
+          value: 'partialLinkText'
+        }
+      ];
+
     constructor(private globals: Globals) { }
     addOneRow(ref_type: string, maxOrder: string): any {
         if (ref_type === 'data') {
