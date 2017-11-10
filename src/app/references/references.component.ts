@@ -3,6 +3,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR, NG_VALIDATORS } from '@angular
 import { ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { Globals } from '../globals';
 import { Helper } from './references.helper';
+import { DragDropModule } from 'primeng/components/dragdrop/dragdrop';
 @Component({
   selector: 'app-references',
   templateUrl: './references.component.html',
@@ -53,10 +54,7 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
   ngOnInit() {
     this.value = this.references;
     // set the column header
-
     this.cols = this.helper.getCols(this.ref_type);
-
-    console.log('ref_type:' + this.ref_type);
 
     if (this.ref_type === 'references') {
       // update the references, add name, type, description
@@ -89,8 +87,15 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
     return this.selectedRow;
   }
 
+  dropNode(event: DragEvent) {
+    console.log('something falling from the sky');
+    const droppedData = JSON.parse(event.dataTransfer.getData('testing'));
+    if (this.helper.isDroppedAllowed(droppedData.type, this.ref_type)) {
+      console.log(droppedData, 'allow to drop here');
+    }
+  }
   canAddedManually(): boolean {
-    return this.ref_type === 'objects' || this.ref_type === 'data';
+    return this.ref_type === 'objects' || this.ref_type === 'data' || this.ref_type === 'fields';
   }
 
   add(obj: any) {
@@ -106,21 +111,20 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
   }
 
   onAdd() {
-    const newObject = Object.assign({}, this.references[0]);
+    const newObject = this.helper.addOneRow(this.ref_type, this.getMaxOrder());
 
-    if (newObject['order']) {
-      newObject['order'] = this.getMaxOrder();
-    }
     this.addReference(newObject);
   }
 
   addReference(newObject) {
-    this.globals.id(newObject['id']).subscribe(item => {
-      const wholeElement = item[0];
-      newObject['name'] = wholeElement['name'];
-      newObject['type'] = wholeElement['type'];
-      newObject['description'] = wholeElement['description'];
-    });
+    if (newObject['id']) {
+      this.globals.id(newObject['id']).subscribe(item => {
+        const wholeElement = item[0];
+        newObject['name'] = wholeElement['name'];
+        newObject['type'] = wholeElement['type'];
+        newObject['description'] = wholeElement['description'];
+      });
+    }
     this.references = [...this.references, newObject];
     // this.references.push(newObject);
     this.writeValue(this.references);
@@ -138,7 +142,6 @@ export class ReferencesComponent implements ControlValueAccessor, OnInit {
   writeValue(obj: any): void {
     if (obj) {
       if (obj !== this.references) {
-        console.log('reference !== obj');
         this.references = obj;
       }
     }

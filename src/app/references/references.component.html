@@ -1,4 +1,4 @@
-<p-accordion>
+<p-accordion >
 
     <p-accordionTab [selected]="true" >
         <p-header>
@@ -9,10 +9,10 @@
             <button pButton type="button" (click)="onAdd()" label="Add" icon="fa-plus" [disabled]="!canAddedManually()"></button>
         </div>
         <p></p>
-        <div>
+        <div pDroppable="node" (drop)="dropNode($event)" >
             <p-dataTable [(value)]="references" [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[10,20,30,40,50,100]"
                 resizableColumns="true" columnResizeMode="expand" reorderableColumns="true" expandableRows="true" editable="true"
-                selectionMode="single" [(selection)]="selectedRow" dataKey="order">
+                selectionMode="single" [(selection)]="selectedRow" dataKey="order" >
 
                 <p-column expander="true" styleClass="col-icon" [style]="{'width': '2em'}"></p-column>
                 <p-column *ngFor="let col of cols" [field]="col.field" [header]="col.header" editable="true" filter="true" filterMatchMode="contains"

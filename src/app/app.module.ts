@@ -7,10 +7,11 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Observable } from 'rxjs/Rx';
 import { TieredMenuModule, MenuItem, EditorModule, TooltipModule, InputSwitchModule, ChipsModule, DropdownModule } from 'primeng/primeng';
-import { FileUploadModule, TerminalModule, DragDropModule, ToggleButtonModule } from 'primeng/primeng';
+import { FileUploadModule, TerminalModule, ToggleButtonModule } from 'primeng/primeng';
 import { PanelModule, TreeModule, SelectButtonModule, TreeDragDropService, CheckboxModule, InputTextareaModule } from 'primeng/primeng';
 import { ChartModule, DataTableModule, MessagesModule, GrowlModule, DialogModule, ToolbarModule, OrderListModule } from 'primeng/primeng';
-import { InputTextModule, AccordionModule, SharedModule, ButtonModule, ContextMenuModule } from 'primeng/primeng';
+import { InputTextModule, AccordionModule, SharedModule, ButtonModule, ContextMenuModule, AutoCompleteModule } from 'primeng/primeng';
+import { DragDropModule } from 'primeng/components/dragdrop/dragdrop';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
@@ -58,7 +59,7 @@ const appRoutes: Routes = [
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule, CommonModule, DropdownModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule, TooltipModule, ChipsModule,
     TieredMenuModule, PanelModule, AngularSplitModule, EditorModule, SelectButtonModule, ToggleButtonModule,
-    FormsModule, InputTextModule, TreeModule, SelectButtonModule, CheckboxModule, InputSwitchModule,
+    FormsModule, InputTextModule, TreeModule, SelectButtonModule, CheckboxModule, InputSwitchModule, AutoCompleteModule,
     HttpModule, ContextMenuModule
   ],
 

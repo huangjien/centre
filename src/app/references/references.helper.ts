@@ -1,8 +1,10 @@
 
 import { Injectable } from '@angular/core';
+import { Globals } from '../globals';
 @Injectable()
 export class Helper {
 
+    constructor(private globals: Globals) { }
     addOneRow(ref_type: string, maxOrder: string): any {
         if (ref_type === 'data') {
             return {'order': maxOrder, 'key': 'newKey', 'value': 'value', 'disabled': true };
@@ -13,6 +15,22 @@ export class Helper {
         if (ref_type === 'fields') {
             return {'order': maxOrder, 'name': 'newName', 'type': 'text', 'readOnly': false, 'validators': [], 'disabled': true };
         }
+    }
+
+    isDroppedAllowed(dragSource: string, dropTarget: string): boolean {
+        if (dragSource === 'Data' && dropTarget === 'inputs') {
+            return true;
+        }
+        if (dragSource === 'Case' && dropTarget === 'references') {
+            return true;
+        }
+        if (dragSource === 'OUT' && dropTarget === 'actions') {
+            return true;
+        }
+        // TODO: OUT can be dropped to objects, but have not think out how to handle it.
+
+        this.globals.warnMessage('Drop Not Allowed', dragSource + ' is not acceptable by ' + dropTarget);
+        return false;
     }
     getCols(ref_type: string): any[] {
         const cols: any[] = [];

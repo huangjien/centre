@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Validators, FormControl, FormGroup, FormBuilder, ValidatorFn } from '@angular/forms';
 import { Globals } from '../globals';
 import { EditorModule, SelectButtonModule } from 'primeng/primeng';
-
+import { DragDropModule, Droppable } from 'primeng/primeng';
 @Component({
   selector: 'app-content', templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
@@ -95,8 +95,7 @@ export class ContentComponent implements OnInit {
         const value = this.content[control.name];
         const validators = this.getValidators(control.validators);
         const form_control = this.fb.control(value, validators);
-        console.log(value );
-        console.log(control);
+
         if ( control.readOnly ) {
           console.log('disabled ' + control);
           form_control.disable();
