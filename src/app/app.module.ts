@@ -54,7 +54,7 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(appRoutes
       // , {enableTracing: true} // <-- debugging purposes only
-    ), environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
+    ), // environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
     BrowserModule, BrowserAnimationsModule, ToolbarModule, HttpClientModule, ReactiveFormsModule, DragDropModule,
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule, CommonModule, DropdownModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule, TooltipModule, ChipsModule,

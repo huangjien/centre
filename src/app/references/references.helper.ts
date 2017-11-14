@@ -71,7 +71,7 @@ export class Helper {
     }
 
     isDroppedAllowed(dragSource: string, dropTarget: string): boolean {
-        if (dragSource === 'Data' && dropTarget === 'inputs') {
+        if (dragSource === 'Data' && dropTarget === 'parameters') {
             return true;
         }
         if (dragSource === 'Case' && dropTarget === 'references') {
@@ -95,15 +95,13 @@ export class Helper {
         }
         if (ref_type === 'objects') {
             cols.push({ field: 'name', header: 'Name', style: {} });
-            cols.push({ field: 'way', header: 'Way', style: {} });
-            cols.push({ field: 'identity', header: 'Identity', style: {} });
+            cols.push({ field: 'objects', header: 'Objects', style: {} });
         }
         if (ref_type === 'data') {
             cols.push({ field: 'key', header: 'Key', style: {} });
             cols.push({ field: 'value', header: 'Value', style: {} });
         }
-        if (ref_type === 'inputs') {
-            cols.push({ field: 'name', header: 'Name', style: {} });
+        if (ref_type === 'parameters') {
             cols.push({ field: 'key', header: 'Key', style: {} });
             cols.push({ field: 'value', header: 'Value', style: {} });
         }

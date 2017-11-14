@@ -49,6 +49,28 @@ export class ReferencesComponent implements ControlValueAccessor,
     // set the column header
     this.cols = this.helper.getCols(this.ref_type);
 
+    if (this.references === null ) {
+      return;
+    }
+    console.log(this.ref_type);
+    if (this.ref_type === 'parameters' || this.ref_type === 'objects') {
+      this.disabled = true;
+      this.references.forEach(item => {
+        
+        this.globals.id(item.id).subscribe(element => {
+          
+          item['name'] = element[0].name;
+          if (element[0].data) {
+            item['data'] = element[0].data;
+          }
+          if (element[0].objects) {
+            item['OUTs'] = element[0].objects;
+          }
+          console.log(item);
+        });
+      });
+    }
+
     if (this.ref_type === 'references') {
       // update the references, add name, type, description
       this.references.forEach(element => {
@@ -79,7 +101,7 @@ export class ReferencesComponent implements ControlValueAccessor,
     const dropTarget = this.ref_type;
     if (this.helper.isDroppedAllowed(dragSource, dropTarget)) {
       console.log(droppedData, 'allow to drop here');
-      if (dragSource === 'Data' && dropTarget === 'inputs') {
+      if (dragSource === 'Data' && dropTarget === 'parameters') {
         return true;
       }
       if (dragSource === 'Case' && dropTarget === 'references') {

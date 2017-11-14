@@ -90,7 +90,12 @@ export class ContentComponent implements OnInit {
       .config
       .forEach(control => {
         // build controls with data and validations
-        const value = this.content[control.name];
+        let value = this.content[control.name];
+        // init the references here
+        console.log(control.name, control.type, value);
+        if (control.type === 'references') {
+          value = this.getReferencesValue(control.name, value);
+        }
         const validators = this.getValidators(control.validators);
         const form_control = this.fb.control(value, validators);
 
@@ -109,6 +114,21 @@ export class ContentComponent implements OnInit {
     this.hasContent = true;
   }
 
+  getReferencesValue(ref_type: string, value: any[]): any[] {
+    console.log(ref_type, value);
+    const ret: any[] = [];
+    for ( let i = 0; i < value.length; i++) {
+      ret['order'] = i.toString();
+      this.globals.id(value[i].id).subscribe(res => {
+        ret['name'] = res[0].name;
+        ret['disabled'] = res[0].disabled;
+        ret['type'] = res[0].type;
+        ret['description'] = res[0].description;
+      });
+    }
+
+    return ret;
+  }
   getValidators(validators: any): ValidatorFn[] {
     const ret = [];
     validators.forEach(item => {
