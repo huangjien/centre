@@ -2,7 +2,7 @@
 
     <p-accordionTab [selected]="true">
         <p-header>
-            {{ref_type}}
+           {{ ref_type }}
         </p-header>
         <div class="ui-inputgroup">
             <button pButton type="button" (click)="onDelete()" label="Delete" icon="fa-close" [disabled]="!isChosen()"></button>
@@ -22,7 +22,7 @@
                         <ng-template let-col let-data="rowData" let-i="rowIndex" pTemplate="body">
                             <p-accordion>
                                 <p-accordionTab header="data">
-                                    {{data['data']|json}}
+                                    {{ data['data'] | json }}
                                     <!-- <p-dataTable [(value)]="data['data']" [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[10,20,30]" resizableColumns="true"
                                         columnResizeMode="expand" reorderableColumns="true" editable="false" dataKey="order">
                                         <p-column field="order" header="#"></p-column>
@@ -38,7 +38,7 @@
                         <ng-template let-col let-objects="rowData" let-i="rowIndex" pTemplate="body">
                             <p-accordion>
                                 <p-accordionTab header="objects">
-                                    {{objects['OUTs']|json}}
+                                    {{ objects['OUTs'] | json }}
                                     <!-- <p-dataTable [(value)]="objects['objects']" [rows]="10" [paginator]="true" [pageLinks]="5" [rowsPerPageOptions]="[10,20,30]" resizableColumns="true"
                                         columnResizeMode="expand" reorderableColumns="true" editable="false" dataKey="order">
                                         <p-column field="order" header="#"></p-column>
@@ -94,7 +94,7 @@
                     <div class="ui-grid ui-grid-responsive ui-fluid">
                         <p-accordion>
                             <p-accordionTab header="Description" [selected]="true">
-                                {{row['description']}}
+                                {{ row['description'] }}
                             </p-accordionTab>
                             <ng-container *ngIf="containId">
                                 <p-accordionTab header="Referred">

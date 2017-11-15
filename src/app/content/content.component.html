@@ -15,7 +15,7 @@
           <div *ngSwitchCase="'text'">
             <span class="ui-float-label">
               <input id="{{control.name}}" type="text" pInputText formControlName="{{control.name}}">
-              <label for="{{control.name}}">{{control.name}}</label>
+              <label for="{{control.name}}" > {{ control.name }} </label>
             </span>
           </div>
           <!-- end of input text -->
@@ -49,7 +49,7 @@
           <!-- end of table format reference list -->
 
           <div *ngSwitchDefault>
-            <label>un-recognized control type "{{control.type}}", name:"{{control.name}}"</label>
+            <label>un-recognized control type {{ control.type }}, name: {{ control.name }} </label>
           </div>
         </ng-container>
       </ng-container>

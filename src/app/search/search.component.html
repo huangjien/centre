@@ -19,17 +19,17 @@
         <p-dataTable [value]="results" [editable]="false" selectionMode="single" [(selection)]="selectedRow" (onRowSelect)="onRowSelect($event)" dataKey="name">
             <p-column field="type" header="Type" [sortable]="true">
                 <ng-template let-col let-row="rowData" pTemplate="body">
-                    <span pDraggable="node" (onDragStart)="dragStart($event, row)" >{{row[col.field]}}</span>
+                    <span pDraggable="node" (onDragStart)="dragStart($event, row)" > {{ row[col.field] }} </span>
                 </ng-template>
             </p-column>
             <p-column field="name" header="Name" [sortable]="true">
                 <ng-template let-col let-row="rowData" pTemplate="body">
-                    <span pDraggable="node" (onDragStart)="dragStart($event, row)" >{{row[col.field]}}</span>
+                    <span pDraggable="node" (onDragStart)="dragStart($event, row)" > {{ row[col.field] }} </span>
                 </ng-template>
             </p-column>
             <p-column field="description" header="Description" [sortable]="true">
                 <ng-template let-col let-row="rowData" pTemplate="body">
-                    <span pDraggable="node" (onDragStart)="dragStart($event, row)" >{{row[col.field]}}</span>
+                    <span pDraggable="node" (onDragStart)="dragStart($event, row)" > {{ row[col.field] }} </span>
                 </ng-template>
             </p-column>
         </p-dataTable>
