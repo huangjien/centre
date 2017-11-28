@@ -3,7 +3,6 @@ import { Http, Response, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
 import { environment } from '../environments/environment';
-import { Client } from '_debugger';
 
 enum ClientApiUrls {
   ping = 'data/ping',

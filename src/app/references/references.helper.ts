@@ -95,7 +95,9 @@ export class Helper {
         }
         if (ref_type === 'objects') {
             cols.push({ field: 'name', header: 'Name', style: {} });
-            cols.push({ field: 'objects', header: 'Objects', style: {} });
+            cols.push({ field: 'type', header: 'Type', style: {} });
+            cols.push({ field: 'way', header: 'Way', style: {} });
+            cols.push({ field: 'identity', header: 'Identity', style: {} });
         }
         if (ref_type === 'data') {
             cols.push({ field: 'key', header: 'Key', style: {} });

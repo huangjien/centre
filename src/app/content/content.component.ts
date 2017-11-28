@@ -99,7 +99,7 @@ export class ContentComponent implements OnInit {
         const validators = this.getValidators(control.validators);
         const form_control = this.fb.control(value, validators);
 
-        if ( control.readOnly ) {
+        if (control.readOnly) {
           console.log('disabled ' + control);
           form_control.disable();
         }
@@ -116,15 +116,40 @@ export class ContentComponent implements OnInit {
 
   getReferencesValue(ref_type: string, value: any[]): any[] {
     console.log(ref_type, value);
+    if (!value) {
+      return null;
+    }
     const ret: any[] = [];
-    for ( let i = 0; i < value.length; i++) {
-      ret['order'] = i.toString();
-      this.globals.id(value[i].id).subscribe(res => {
-        ret['name'] = res[0].name;
-        ret['disabled'] = res[0].disabled;
-        ret['type'] = res[0].type;
-        ret['description'] = res[0].description;
-      });
+    let columns = ['order', 'name', 'type', 'disabled', 'description'];
+    if (ref_type === 'data' || ref_type === 'parameters') {
+      columns = ['order', 'key', 'value', 'disabled'];
+    }
+    if (ref_type === 'fields') {
+      columns = ['order', 'name', 'type', 'readOnly', 'validators', 'disabled'];
+    }
+    if (ref_type === 'actions') {
+      columns = ['order', 'key', 'value', 'disabled'];
+    }
+    if (ref_type === 'logs') {
+      columns = ['order', 'dateTime', 'result', 'log', 'disabled'];
+    }
+    if (ref_type === 'objects') {
+      columns = ['order', 'name', 'type', 'way', 'identity', 'disabled'];
+    }
+    for (let i = 0; i < value.length; i++) {
+      if (!ret[i]) {
+        ret[i] = [];
+      }
+      ret[i]['order'] = i.toString();
+      if (value[i].id) {
+        this.globals.id(value[i].id).subscribe(res => {
+          columns.forEach(col => {
+            if (value[i][col]) {
+              ret[i][col] = value[i][col];
+            }
+          });
+        });
+      }
     }
 
     return ret;
@@ -173,7 +198,7 @@ export class ContentComponent implements OnInit {
         this.content = value;
         this.buildForm();
       });
-      this.globals.contentFormHook = this;
+    this.globals.contentFormHook = this;
   }
 
 }
