@@ -23,7 +23,6 @@ import { DebugComponent } from './debug/debug.component';
 import { SearchComponent } from './search/search.component';
 import { TreeComponent } from './tree/tree.component';
 import { TerminalComponent } from './terminal/terminal.component';
-import { AngularSplitModule } from 'angular-split';
 import { ContentComponent } from './content/content.component';
 import { ReferencesComponent } from './references/references.component';
 import { Helper } from './references/references.helper';
@@ -58,7 +57,7 @@ const appRoutes: Routes = [
     BrowserModule, BrowserAnimationsModule, ToolbarModule, HttpClientModule, ReactiveFormsModule, DragDropModule,
     ChartModule, DataTableModule, SharedModule, AccordionModule, TerminalModule, CommonModule, DropdownModule,
     ButtonModule, FileUploadModule, MessagesModule, GrowlModule, DialogModule, TooltipModule, ChipsModule,
-    TieredMenuModule, PanelModule, AngularSplitModule, EditorModule, SelectButtonModule, ToggleButtonModule,
+    TieredMenuModule, PanelModule, EditorModule, SelectButtonModule, ToggleButtonModule,
     FormsModule, InputTextModule, TreeModule, SelectButtonModule, CheckboxModule, InputSwitchModule, AutoCompleteModule,
     HttpModule, ContextMenuModule
   ],

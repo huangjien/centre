@@ -1,37 +1,15 @@
+<p-accordion [multiple]="true">
+  <p-accordionTab header="Search">
+    <app-search>
 
-<split [gutterSize]="10" direction="horizontal" class="container" style="border:1px;margin:1px;"  >
-  <split-area [size]="20" [visible]="treeViewVisible || debugViewVisible">
-    <split direction="vertical" [gutterSize]="5">
-      <split-area [visible]="treeViewVisible" [order]="1">
+    </app-search>
+  </p-accordionTab>
+  <p-accordionTab header="Workspace Structure" [selected]="true">
+    <app-tree>
 
-        <app-tree></app-tree>
-
-      </split-area>
-      <split-area [visible]="debugViewVisible" [order]="2">
-
-        <app-debug></app-debug>
-
-      </split-area>
-    </split>
-  </split-area>
-  <split-area [size]="80">
-    <split direction="vertical" [gutterSize]="5">
-      <split-area [visible]="searchViewVisible" [size]="33" [order]="1">
-
-        <app-search></app-search>
-
-      </split-area>
-      <split-area [size]="33" [order]="2">
-        <app-content></app-content>
-        
-
-      </split-area>
-      <split-area [visible]="terminalViewVisible" [size]="33" [order]="3">
-
-        <app-terminal></app-terminal>
-
-      </split-area>
-
-    </split>
-  </split-area>
-</split>
+    </app-tree>
+  </p-accordionTab>
+  <p-accordionTab header="Work area">
+    <app-content></app-content>
+  </p-accordionTab>
+</p-accordion>

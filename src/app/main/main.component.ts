@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Globals } from '../globals';
 import {PanelModule} from 'primeng/primeng';
-import { AngularSplitModule } from 'angular-split';
 
 @Component({
   selector: 'app-main',

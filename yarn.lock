@@ -157,9 +157,9 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/service-worker@^5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-5.0.3.tgz#8308949070d673daa766d83b325b23098b067b33"
+"@angular/service-worker@^5.1.0-beta.2":
+  version "5.1.0-beta.2"
+  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-5.1.0-beta.2.tgz#cb9f5562bf740fc82455cf7733dc24ca62a135b5"
   dependencies:
     tslib "^1.7.1"
 
@@ -297,12 +297,6 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
 amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
-
-angular-split@^1.0.0-beta.9:
-  version "1.0.0-beta.9"
-  resolved "https://registry.yarnpkg.com/angular-split/-/angular-split-1.0.0-beta.9.tgz#8339700d6213d07e10e3ce8294dd8a427af9cab8"
-  dependencies:
-    tslib "^1.7.1"
 
 ansi-html@0.0.7:
   version "0.0.7"

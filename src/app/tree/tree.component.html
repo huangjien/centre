@@ -1,7 +1,7 @@
 <!-- <p-contextMenu #viewOnly [global]="true" [model]="viewOnlyContextMenuItems"></p-contextMenu>
 <p-contextMenu #addTest [global]="true" [model]="addTestContextMenuItems"></p-contextMenu>
 <p-contextMenu #addInput [global]="true" [model]="addInputContextMenuItems"></p-contextMenu> -->
-<p-tree [value]="nodes" (onNodeExpand)="loadNode($event)" class="allarea" (onNodeSelect)="selectNode($event)"
+<p-tree [value]="nodes" (onNodeExpand)="loadNode($event)" class="allarea" (onNodeSelect)="selectNode($event)" layout="horizontal"
   selectionMode="single" [(selection)]="selectedNode" draggableNodes="true" droppableNodes="true" (onNodeDrop)="dropOnNode($event)"
   >
   
