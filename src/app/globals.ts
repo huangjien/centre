@@ -1,10 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs/Rx';
-import { MenuItem } from 'primeng/primeng';
 import { DataService } from './data.service';
-import { Message } from 'primeng/components/common/api';
-import { MessageService } from 'primeng/components/common/messageservice';
-import { ContentComponent } from './content/content.component';
+
 @Injectable()
 export class Globals {
 
@@ -43,12 +40,11 @@ export class Globals {
 
     messages = [];
 
-    contentFormHook: ContentComponent;
     // messages
-    msgs: Message[] = [];
-    messageChange: Subject<Message[]> = new Subject<Message[]>();
+    // msgs: Message[] = [];
+    // messageChange: Subject<Message[]> = new Subject<Message[]>();
     // services
-    constructor(private dataService: DataService, private messageService: MessageService) {
+    constructor(private dataService: DataService) {
         // subscribe view visibility changes
         this.treeViewVisibilityChange.subscribe((value) => {
             this.treeViewVisible = value;
@@ -115,15 +111,15 @@ export class Globals {
     setContent(content: any) {
         // this.content = content;
         const contentId = content.id;
-        if (this.contentFormHook.form) {
-            const formContentId = this.contentFormHook.content.id;
-            if (this.contentFormHook.form.dirty) {
-                if ( contentId !== formContentId ) {
-                    this.errorMessage('Saving Changed Content', 'There is something changed in Content, save it please!');
-                }
-                return false;
-            }
-        }
+        // if (this.contentFormHook.form) {
+        //     const formContentId = this.contentFormHook.content.id;
+        //     if (this.contentFormHook.form.dirty) {
+        //         if ( contentId !== formContentId ) {
+        //             this.errorMessage('Saving Changed Content', 'There is something changed in Content, save it please!');
+        //         }
+        //         return false;
+        //     }
+        // }
         this.contentChange.next(content);
         return true;
     }
@@ -145,11 +141,11 @@ export class Globals {
     }
 
     showMessage(_serverity: string, _summary: string, _message: string) {
-        this.messageService.add({severity: _serverity, summary: _summary, detail: _message});
+        // this.messageService.add({severity: _serverity, summary: _summary, detail: _message});
     }
 
     clearMessage() {
-        this.messageService.clear();
+        // this.messageService.clear();
     }
 
     getMenuItems(): Observable<any> {
