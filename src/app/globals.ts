@@ -5,151 +5,31 @@ import { DataService } from './data.service';
 @Injectable()
 export class Globals {
 
-    // views' visiblilties
-    treeViewVisible = true;
-    treeViewVisibilityChange: Subject<boolean> = new Subject<boolean>();
-    searchViewVisible = true;
-    searchViewVisibilityChange: Subject<boolean> = new Subject<boolean>();
-    terminalViewVisible = false;
-    terminalVisibilityChange: Subject<boolean> = new Subject<boolean>();
-    debugViewVisible = true;
-    debugVisibilityChange: Subject<boolean> = new Subject<boolean>();
-
-    addReferenceItem: any;
-    addInputParameterItem: any;
-
-    addReference: Subject<any> = new Subject<any>();
-    addInputParameter: Subject<any> = new Subject<any>();
-
-    // debug info
-    debugInfo = '';
-    debugInfoChange: Subject<string> = new Subject<string>();
-
     // user
     currentUser = '';
-
-    // rootID
-    rootID = '';
 
     // content
     content: any;
     contentChange: Subject<any> = new Subject<any>();
 
-    // forms metadata store here
-    forms: any[];
+    message = '';
+    messageShow: Subject<string> = new Subject<string>();
 
-    messages = [];
-
-    // messages
-    // msgs: Message[] = [];
-    // messageChange: Subject<Message[]> = new Subject<Message[]>();
-    // services
     constructor(private dataService: DataService) {
-        // subscribe view visibility changes
-        this.treeViewVisibilityChange.subscribe((value) => {
-            this.treeViewVisible = value;
-        });
-        this.searchViewVisibilityChange.subscribe((value) => {
-            this.searchViewVisible = value;
-        });
-        this.terminalVisibilityChange.subscribe((value) => {
-            this.terminalViewVisible = value;
-        });
-        this.debugVisibilityChange.subscribe((value) => {
-            this.debugViewVisible = value;
-        });
-
-        // subscribe debug info changes
-        this.debugInfoChange.subscribe((value) => {
-            this.debugInfo = value;
-        });
-
         this.contentChange.subscribe((value) => {
             this.content = value;
         });
-
-        this.addInputParameter.subscribe(value => {
-            this.addInputParameter = value;
+        this.messageShow.subscribe((value) => {
+            this.message = value;
         });
-
-        this.addReference.subscribe(value => {
-            this.addReferenceItem = value;
-        });
-
-    }
-
-    toggleTreeViewVisibility() {
-        this.treeViewVisibilityChange.next(!this.treeViewVisible);
-    }
-
-    toggleDebugViewVisibility() {
-        this.debugVisibilityChange.next(!this.debugViewVisible);
-    }
-
-    toggleTerminalViewVisibility() {
-        this.terminalVisibilityChange.next(!this.terminalViewVisible);
-    }
-
-    toggleSearchViewVisibility() {
-        this.searchViewVisibilityChange.next(!this.searchViewVisible);
-    }
-
-    debug(info: string) {
-        this.debugInfoChange.next(info);
-    }
-
-    add_Reference(content: any) {
-        this.addReferenceItem = content;
-        this.addReference.next(this.addReferenceItem);
-    }
-
-    add_InputParameter(content: any) {
-        this.addInputParameterItem = content;
-        this.addInputParameter.next(this.addInputParameterItem);
     }
 
     setContent(content: any) {
-        // this.content = content;
-        const contentId = content.id;
-        // if (this.contentFormHook.form) {
-        //     const formContentId = this.contentFormHook.content.id;
-        //     if (this.contentFormHook.form.dirty) {
-        //         if ( contentId !== formContentId ) {
-        //             this.errorMessage('Saving Changed Content', 'There is something changed in Content, save it please!');
-        //         }
-        //         return false;
-        //     }
-        // }
         this.contentChange.next(content);
-        return true;
     }
 
-    successMessage(_summary: string, _message: string) {
-        this.showMessage('success', _summary, _message);
-    }
-
-    infoMessage(_summary: string, _message: string) {
-        this.showMessage('info', _summary, _message);
-    }
-
-    warnMessage(_summary: string, _message: string) {
-        this.showMessage('warn', _summary, _message);
-    }
-
-    errorMessage(_summary: string, _message: string) {
-        this.showMessage('error', _summary, _message);
-    }
-
-    showMessage(_serverity: string, _summary: string, _message: string) {
-        // this.messageService.add({severity: _serverity, summary: _summary, detail: _message});
-    }
-
-    clearMessage() {
-        // this.messageService.clear();
-    }
-
-    getMenuItems(): Observable<any> {
-        return this.dataService.getData('Menu');
+    showMessage(_message: string) {
+        this.messageShow.next(_message);
     }
 
     query(content): Observable<any> {
@@ -162,14 +42,6 @@ export class Globals {
 
     ping(): Observable<any> {
         return this.dataService.ping();
-    }
-
-    getForm(name: string): any {
-        return this.forms.find(item => item.name === name);
-    }
-
-    getTreeRootNode(): Observable<any> {
-        return this.dataService.getData('Root');
     }
 
     save(content: string): any {
@@ -213,7 +85,6 @@ export class Globals {
         if (typeof obj === 'string') {
             return obj;
         }
-
         return JSON.stringify(obj, null, 2);
     }
 

@@ -1,0 +1,20 @@
+<mat-accordion>
+  <mat-expansion-panel hideToggle="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        {{name}}
+      </mat-panel-title>
+      <mat-panel-description>
+        {{type}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    
+      <section>{{description}}</section>
+    
+    <mat-action-row>
+      
+      <button mat-button color="primary" (click)="load()">Detail</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>

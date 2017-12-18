@@ -17,23 +17,33 @@
       </button>
       <mat-menu #menu="matMenu">
         <button mat-menu-item>
-          <mat-icon>dialpad</mat-icon>
-          <span>Redial</span>
-        </button>
-        <button mat-menu-item disabled>
-          <mat-icon>voicemail</mat-icon>
-          <span>Check voicemail</span>
+          <mat-icon>shop_two</mat-icon>
+          <span>New Suite</span>
         </button>
         <button mat-menu-item>
-          <mat-icon>notifications_off</mat-icon>
-          <span>Disable alerts</span>
+          <mat-icon>next_week</mat-icon>
+          <span>New Case</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>picture_in_picture</mat-icon>
+          <span>New UI</span>
+        </button>
+        <button mat-menu-item>
+          <mat-icon>library_books</mat-icon>
+          <span>New Data</span>
         </button>
       </mat-menu>
   </mat-toolbar>
   <mat-tab-group>
-    <mat-tab label="Script"></mat-tab>
-    <mat-tab label="Environment"></mat-tab>
-    <mat-tab label="Result"></mat-tab>
+    <mat-tab label="Script">
+      <app-search [options]="['Suite', 'Case', 'UI', 'Data']"></app-search>
+    </mat-tab>
+    <mat-tab label="Environment">
+        <app-search [options]="['Idle', 'Running', 'Stopped']"></app-search>
+    </mat-tab>
+    <mat-tab label="Result" >
+        <app-search [options]="['Checked', 'Unchecked', 'Recent 1 day', 'Recent 1 week']"></app-search>
+    </mat-tab>
   </mat-tab-group>
   <!-- <p-growl [life]="3000 "></p-growl> -->
   <router-outlet></router-outlet>

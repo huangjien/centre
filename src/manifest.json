@@ -1,0 +1,16 @@
+{
+    "short_name": "A Test",
+    "name": "A Test",
+    "start_url": "/",
+    "theme_color": "#f48c5b",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "/assets/favicon.ico",
+            "sizes": "64x64",
+            "type": "image/ico"
+        }
+    ]
+}

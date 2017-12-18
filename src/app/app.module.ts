@@ -21,6 +21,15 @@ import { DataService } from './data.service';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { Globals } from './globals';
+import { SearchComponent } from './search/search.component';
+import { SimpleviewComponent } from './simpleview/simpleview.component';
+import { DynamicComponent } from './dynamic/dynamic.component';
+import { SuiteComponent } from './suite/suite.component';
+import { CaseComponent } from './case/case.component';
+import { UiComponent } from './ui/ui.component';
+import { DataComponent } from './data/data.component';
+import { ResultComponent } from './result/result.component';
+import { EnvComponent } from './env/env.component';
 
 
 const appRoutes: Routes = [
@@ -33,12 +42,21 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SearchComponent,
+    SimpleviewComponent,
+    DynamicComponent,
+    SuiteComponent,
+    CaseComponent,
+    UiComponent,
+    DataComponent,
+    ResultComponent,
+    EnvComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes
       // , {enableTracing: true} // <-- debugging purposes only
-    ), // environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
+    ),  environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
     BrowserModule, BrowserAnimationsModule, HttpClientModule, ReactiveFormsModule, CommonModule, MatButtonModule, MatCheckboxModule,
     MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatPaginatorModule,
     MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
