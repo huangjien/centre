@@ -1,3 +1,122 @@
-<p>
-  case works!
-</p>
+<mat-expansion-panel hideToggle="true" [expanded]="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-icon matTooltip="{{data.id}}">{{icon}}</mat-icon> &nbsp;
+      <small>{{data.type}}</small>
+    </mat-panel-title>
+    <mat-panel-description>
+      {{data.name}}
+    </mat-panel-description>
+
+  </mat-expansion-panel-header>
+
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Name" [(ngModel)]="data.name" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+    <mat-select placeholder="On Failed" [(ngModel)]="data.onFailed">
+      <mat-option value="Terminate">Terminate</mat-option>
+      <mat-option value="Stop">Stop</mat-option>
+      <mat-option value="Continue">Continue</mat-option>
+      <mat-option value="Ignored">Ignored</mat-option>
+    </mat-select>
+  </mat-form-field>
+  &nbsp;
+  <mat-form-field>
+      <mat-select placeholder="Disabled" [(ngModel)]="data.disabled">
+        <mat-option value="Enabled">Enabled</mat-option>
+        <mat-option value="Disabled">Disabled</mat-option>
+      </mat-select>
+    </mat-form-field>
+  <br>
+  <mat-form-field class="description">
+    <textarea matInput placeholder="Description" [(ngModel)]="data.description" class="description-height"></textarea>
+  </mat-form-field>
+  <br>
+  <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Parameters
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-container *ngFor="let item of data.parameters">
+        
+        <mat-form-field>
+          <input matInput placeholder="id" [(ngModel)]="item.id" required>
+        </mat-form-field>  
+        
+        <br>
+      </ng-container>
+    </mat-expansion-panel>
+  <br>
+  <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Objects
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ng-container *ngFor="let item of data.objects">
+        
+        <mat-form-field>
+          <input matInput placeholder="id" [(ngModel)]="item.id" required>
+        </mat-form-field>  
+        
+        <br>
+      </ng-container>
+    </mat-expansion-panel>
+  <br>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Actions
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-container *ngFor="let item of data.actions">
+      <mat-form-field>
+        <input matInput placeholder="#" [(ngModel)]="item.order" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="id" [(ngModel)]="item.id" required>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-select placeholder="diabled" [(ngModel)]="item.disabled">
+          <mat-option value="Enabled">Enabled</mat-option>
+          <mat-option value="Disabled">Disabled</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+    </ng-container>
+  </mat-expansion-panel>
+<br>
+<mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Returns
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-container *ngFor="let item of data.returns">
+      
+        <mat-form-field>
+            <input matInput placeholder="key" [(ngModel)]="item.key" required>
+          </mat-form-field>
+          
+          <mat-form-field>
+              <mat-select placeholder="diabled" [(ngModel)]="item.disabled" >
+                <mat-option value="Enabled">Enabled</mat-option>
+                <mat-option value="Disabled">Disabled</mat-option>
+              </mat-select>
+          </mat-form-field>
+          <br>
+      
+      <br>
+    </ng-container>
+  </mat-expansion-panel>
+<br>
+  <mat-action-row>
+    <button mat-button (click)="delete()">Delete</button>
+    <button mat-button color="primary" (click)="save()">Save</button>
+  </mat-action-row>
+
+</mat-expansion-panel>

@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Globals } from '../globals';
+import { BasicComponent } from '../basic/basic.component';
 
 @Component({
   selector: 'app-ui',
   templateUrl: './ui.component.html',
-  styleUrls: ['./ui.component.css']
+  styleUrls: ['../../custom.css']
 })
-export class UiComponent implements OnInit {
+export class UiComponent extends BasicComponent {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(globals: Globals) {
+    super(globals);
   }
 
 }

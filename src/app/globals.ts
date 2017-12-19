@@ -1,6 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs/Rx';
 import { DataService } from './data.service';
+import { validateConfig } from '@angular/router/src/config';
 
 @Injectable()
 export class Globals {
@@ -12,6 +13,9 @@ export class Globals {
     content: any;
     contentChange: Subject<any> = new Subject<any>();
 
+    searchViewToggle = false;
+    searchViewChange: Subject<boolean> = new Subject<boolean>();
+
     message = '';
     messageShow: Subject<string> = new Subject<string>();
 
@@ -22,6 +26,14 @@ export class Globals {
         this.messageShow.subscribe((value) => {
             this.message = value;
         });
+        this.searchViewChange.subscribe((value) => {
+            this.searchViewToggle = value;
+        });
+    }
+
+    collapseSearchView() {
+        this.searchViewToggle = false;
+        this.searchViewChange.next(this.searchViewToggle);
     }
 
     setContent(content: any) {
@@ -86,6 +98,28 @@ export class Globals {
             return obj;
         }
         return JSON.stringify(obj, null, 2);
+    }
+
+    getIcon(type: string): string {
+        if ( type === 'Case' ) {
+            return 'next_week';
+        }
+        if ( type === 'Suite' ) {
+            return 'shop_two';
+        }
+        if ( type === 'Data' ) {
+            return 'library_books';
+        }
+        if ( type === 'OUT' ) {
+            return 'picture_in_picture';
+        }
+        if ( type === 'Environment' ) {
+            return 'computer';
+        }
+        if ( type === 'Result' ) {
+            return 'chrome_reader_mode';
+        }
+        return 'assignment_late';
     }
 
 }

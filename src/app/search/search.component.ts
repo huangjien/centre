@@ -10,13 +10,26 @@ export class SearchComponent implements OnInit {
   @Input() options: string[];
   searchString: string;
   results: any;
+  expand = false;
   constructor(private globals: Globals) { }
 
   ngOnInit() {
+    this.globals.searchViewChange.subscribe((value) => {
+      this.expand = value;
+    });
   }
 
   onEnter() {
     this.search();
+  }
+
+  collapse() {
+    this.expand = false;
+  }
+
+  clear() {
+    this.searchString = '';
+    this.results = [];
   }
   search() {
     if (!this.searchString) {
@@ -31,13 +44,14 @@ export class SearchComponent implements OnInit {
         });
         query_string += ' )';
         // this.globals.showMessage(null, null, this.searchString);
-        // console.log(query_string);
+        console.log(query_string);
       }
       // this.globals.infoMessage('Searching...', query_string);
       this.globals.query(query_string).subscribe(res => {
         this.results = res;
         // console.log(this.results);
       });
+      this.expand = true;
     } else {
       this.globals.showMessage('You click search button, but forget to input something (at least 3 letters) to search...');
     }

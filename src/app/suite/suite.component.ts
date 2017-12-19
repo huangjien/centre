@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { BasicComponent } from '../basic/basic.component';
+import { Globals } from '../globals';
 
 @Component({
   selector: 'app-suite',
   templateUrl: './suite.component.html',
-  styleUrls: ['./suite.component.css']
+  styleUrls: ['../../custom.css']
 })
-export class SuiteComponent implements OnInit {
+export class SuiteComponent extends BasicComponent {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(globals: Globals) {
+    super(globals);
   }
-
 }

@@ -7,6 +7,7 @@ import { DataComponent } from '../data/data.component';
 import { UiComponent } from '../ui/ui.component';
 import { EnvComponent } from '../env/env.component';
 import { ResultComponent } from '../result/result.component';
+import { BasicComponent } from '../basic/basic.component';
 
 @Component({
   selector: 'app-dynamic',
@@ -22,7 +23,32 @@ export class DynamicComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.globals.contentChange.subscribe( () => {
       // switch - case load components
+      let component = null;
       console.log(this.globals.content);
+      const type = this.globals.content['type'];
+      if ( type === 'Suite') {
+        component = this.cfr.resolveComponentFactory<any>(SuiteComponent);
+      }
+      if ( type === 'Case') {
+        component = this.cfr.resolveComponentFactory<any>(CaseComponent);
+      }
+      if ( type === 'OUT') {
+        component = this.cfr.resolveComponentFactory<any>(UiComponent);
+      }
+      if ( type === 'Data') {
+        component = this.cfr.resolveComponentFactory<any>(DataComponent);
+      }
+      if ( type === 'Environment') {
+        component = this.cfr.resolveComponentFactory<any>(EnvComponent);
+      }
+      if ( type === 'Result') {
+        component = this.cfr.resolveComponentFactory<any>(ResultComponent);
+      }
+      if ( component !== null ) {
+        this.hook.clear();
+        this.hook.createComponent(component);
+      }
+
     });
   }
 

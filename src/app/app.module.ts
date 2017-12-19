@@ -30,6 +30,7 @@ import { UiComponent } from './ui/ui.component';
 import { DataComponent } from './data/data.component';
 import { ResultComponent } from './result/result.component';
 import { EnvComponent } from './env/env.component';
+import { BasicComponent } from './basic/basic.component';
 
 
 const appRoutes: Routes = [
@@ -46,6 +47,14 @@ const appRoutes: Routes = [
     SearchComponent,
     SimpleviewComponent,
     DynamicComponent,
+    SuiteComponent,
+    CaseComponent,
+    UiComponent,
+    DataComponent,
+    ResultComponent,
+    EnvComponent,
+    BasicComponent
+  ], entryComponents: [
     SuiteComponent,
     CaseComponent,
     UiComponent,

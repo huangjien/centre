@@ -1,3 +1,52 @@
-<p>
-  data works!
-</p>
+<mat-expansion-panel hideToggle="true" [expanded]="true">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-icon matTooltip="{{data.id}}">{{icon}}</mat-icon> &nbsp;
+      <small>{{data.type}}</small>
+    </mat-panel-title>
+    <mat-panel-description>
+      {{data.name}}
+    </mat-panel-description>
+
+  </mat-expansion-panel-header>
+
+  <mat-form-field class="full-width">
+    <input matInput placeholder="Name" [(ngModel)]="data.name" required>
+  </mat-form-field>
+  <br>
+  <mat-form-field>
+      <mat-select placeholder="Override" [(ngModel)]="data.isOverride" >
+        <mat-option value="Override">Override</mat-option>
+        <mat-option value="Inherit">Inherit</mat-option>
+      </mat-select>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="description">
+    <textarea matInput placeholder="Description" [(ngModel)]="data.description" class="description-height"></textarea>
+  </mat-form-field>
+  <br>
+  <ng-container *ngFor="let item of data.data">
+    <mat-form-field>
+      <input matInput placeholder="#" [(ngModel)]="item.order" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="key" [(ngModel)]="item.key" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="value" [(ngModel)]="item.value" required>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-select placeholder="diabled" [(ngModel)]="item.disabled" >
+          <mat-option value="Enabled">Enabled</mat-option>
+          <mat-option value="Disabled">Disabled</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <br>
+  </ng-container>
+
+  <mat-action-row>
+    <button mat-button (click)="delete()">Delete</button>
+    <button mat-button color="primary" (click)="save()">Save</button>
+  </mat-action-row>
+
+</mat-expansion-panel>

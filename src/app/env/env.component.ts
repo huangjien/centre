@@ -1,15 +1,25 @@
 import { Component, OnInit } from '@angular/core';
+import { BasicComponent } from '../basic/basic.component';
+import { Globals } from '../globals';
 
 @Component({
   selector: 'app-env',
   templateUrl: './env.component.html',
-  styleUrls: ['./env.component.css']
+  styleUrls: ['../../custom.css']
 })
-export class EnvComponent implements OnInit {
+export class EnvComponent extends BasicComponent {
 
-  constructor() { }
+  status = 'Idle';
+  constructor(globals: Globals) {
+    super(globals);
+  }
 
-  ngOnInit() {
+  start() {
+
+  }
+
+  stop() {
+
   }
 
 }

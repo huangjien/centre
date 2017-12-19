@@ -1,3 +1,71 @@
-<p>
-  ui works!
-</p>
+<mat-expansion-panel hideToggle="true" [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <mat-icon matTooltip="{{data.id}}">{{icon}}</mat-icon> &nbsp;
+        <small>{{data.type}}</small>
+      </mat-panel-title>
+      <mat-panel-description>
+        {{data.name}}
+      </mat-panel-description>
+  
+    </mat-expansion-panel-header>
+  
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Name" [(ngModel)]="data.name" required>
+    </mat-form-field>
+    
+    <br>
+    <mat-form-field class="description">
+      <textarea matInput placeholder="Description" [(ngModel)]="data.description" class="description-height"></textarea>
+    </mat-form-field>
+    <br>
+    <ng-container *ngFor="let item of data.objects">
+      <mat-form-field style="width:2em">
+        <input matInput placeholder="#" [(ngModel)]="item.order" required>
+      </mat-form-field>
+      <mat-form-field style="width:12em">
+        <input matInput placeholder="name" [(ngModel)]="item.name" required>
+      </mat-form-field>
+
+      <mat-form-field style="width:12em">
+          <mat-select placeholder="type" [(ngModel)]="item.type" >
+            <mat-option value="text">text</mat-option>
+            <mat-option value="password">password</mat-option>
+            <mat-option value="select">select</mat-option>
+            <mat-option value="button">button</mat-option>
+            <mat-option value="submit">submit</mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width: 12em">
+          <mat-select placeholder="way" [(ngModel)]="item.way" >
+            <mat-option value="id">id</mat-option>
+            <mat-option value="tagname">tagname</mat-option>
+            <mat-option value="xpath">xpath</mat-option>
+            <mat-option value="name">name</mat-option>
+            <mat-option value="classname">classname</mat-option>
+            <mat-option value="cssselector">cssselector</mat-option>
+            <mat-option value="linktext">linktext</mat-option>
+            <mat-option value="partialLinkText">partialLinkText</mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-form-field style="width:12em">
+          <input matInput placeholder="identity" [(ngModel)]="item.identity" required>
+        </mat-form-field>
+      <mat-form-field style="width:12em">
+        <input matInput placeholder="description" [(ngModel)]="item.description" required>
+      </mat-form-field>
+      <mat-form-field style="width: 6em">
+          <mat-select placeholder="diabled" [(ngModel)]="item.disabled" >
+            <mat-option value="Enabled">Enabled</mat-option>
+            <mat-option value="Disabled">Disabled</mat-option>
+          </mat-select>
+      </mat-form-field>
+      <br>
+    </ng-container>
+  
+    <mat-action-row>
+      <button mat-button (click)="delete()">Delete</button>
+      <button mat-button color="primary" (click)="save()">Save</button>
+    </mat-action-row>
+  
+  </mat-expansion-panel>

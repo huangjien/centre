@@ -1,12 +1,12 @@
 <mat-accordion multi="true">
-  <mat-expansion-panel >
+  <mat-expansion-panel [expanded]="expand">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <mat-form-field>
           
           <input matInput type="text" placeholder="Search" (keyup.enter)="onEnter()" required minlength="3" [(ngModel)]="searchString"
           />
-          <button mat-button *ngIf="searchString" matSuffix mat-icon-button aria-label="Clear" (click)="searchString=''">
+          <button mat-button *ngIf="searchString" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
             <mat-icon>close</mat-icon>
           </button>
           <button mat-button *ngIf="searchString" matSuffix mat-icon-button aria-label="Search" (click)="search()">
@@ -21,18 +21,11 @@
       <mat-slide-toggle checked="true" id="{{option}}">{{option}}</mat-slide-toggle>
       <span>&nbsp;</span>
     </ng-container>
-    
     <br />
     <p></p>
-
     <ng-container *ngFor="let result of results">
       <app-simpleview [data]="result"></app-simpleview>
     </ng-container>
-
-    
-  </mat-expansion-panel>
-
-  <mat-expansion-panel >
-    <app-dynamic></app-dynamic>
   </mat-expansion-panel>
 </mat-accordion>
+<app-dynamic></app-dynamic>
