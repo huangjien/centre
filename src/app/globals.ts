@@ -36,6 +36,11 @@ export class Globals {
         this.searchViewChange.next(this.searchViewToggle);
     }
 
+    expandSearchView() {
+        this.searchViewToggle = true;
+        this.searchViewChange.next(this.searchViewToggle);
+    }
+
     setContent(content: any) {
         this.contentChange.next(content);
     }

@@ -15,3 +15,13 @@
   .description-height {
       height:100%;min-height: 4em;
   }
+
+  .button-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  html {
+    overflow-y: scroll;    
+  }

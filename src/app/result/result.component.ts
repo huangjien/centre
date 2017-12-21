@@ -4,8 +4,7 @@ import { BasicComponent } from '../basic/basic.component';
 
 @Component({
   selector: 'app-result',
-  templateUrl: './result.component.html',
-  styleUrls: ['../../custom.css']
+  templateUrl: './result.component.html'
 })
 export class ResultComponent extends BasicComponent {
 

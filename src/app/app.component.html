@@ -1,53 +1,35 @@
-<!-- <div style="display:block;height:93vh;border:3px;"> -->
-  <mat-toolbar>
-    
-    <!-- <div class=" ui-toolbar-group-left ">
-      <label class="logo">A Test </label>
-      <i class="fa fa-bars "></i>
-      <p-tieredMenu #menu [model]="menuItems " (click)="onClicked($event) " [popup]="true "></p-tieredMenu>
-      <button #btn type="button " pButton icon="fa fa-list " label="Menu " (click)="menu.toggle($event) "></button>
-    </div>
-    <div class="ui-toolbar-group-right ">
-      <a routerLink="about ">
-        <button pButton type="button " label="About " icon="fa-question "></button>
-      </a>
-    </div> -->
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-        <span>A Test</span>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon>shop_two</mat-icon>
-          <span>New Suite</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>next_week</mat-icon>
-          <span>New Case</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>picture_in_picture</mat-icon>
-          <span>New UI</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>library_books</mat-icon>
-          <span>New Data</span>
-        </button>
-      </mat-menu>
-  </mat-toolbar>
-  <mat-tab-group>
-    <mat-tab label="Script">
-      <app-search [options]="['Suite', 'Case', 'OUT', 'Data']"></app-search>
-    </mat-tab>
-    <mat-tab label="Environment">
-        <app-search [options]="['Idle', 'Running', 'Stopped']"></app-search>
-    </mat-tab>
-    <mat-tab label="Result" >
-        <app-search [options]="['Checked', 'Unchecked', 'Recent 1 day', 'Recent 1 week']"></app-search>
-    </mat-tab>
-  </mat-tab-group>
-  <!-- <p-growl [life]="3000 "></p-growl> -->
-  <router-outlet></router-outlet>
-  <!-- <p-footer>
-    something
-  </p-footer> -->
-<!-- </div> -->
+<mat-toolbar>
+  <button mat-icon-button [matMenuTriggerFor]="menu">
+    <span>A Test</span>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>shop_two</mat-icon>
+      <span>New Suite</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>next_week</mat-icon>
+      <span>New Case</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>picture_in_picture</mat-icon>
+      <span>New UI</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>library_books</mat-icon>
+      <span>New Data</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
+<mat-tab-group (selectedTabChange)="clear()">
+  <mat-tab label="Script">
+    <app-search [options]="['Suite', 'Case', 'OUT', 'Data']"></app-search>
+  </mat-tab>
+  <mat-tab label="Environment">
+    <app-search [options]="['Idle', 'Running', 'Stopped']"></app-search>
+  </mat-tab>
+  <mat-tab label="Result">
+    <app-search [options]="['Checked', 'Unchecked', 'Recent 1 day', 'Recent 1 week']"></app-search>
+  </mat-tab>
+</mat-tab-group>
+<router-outlet></router-outlet>

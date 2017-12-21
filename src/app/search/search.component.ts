@@ -3,8 +3,7 @@ import { Globals } from '../globals';
 
 @Component({
   selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  templateUrl: './search.component.html'
 })
 export class SearchComponent implements OnInit {
   @Input() options: string[];
@@ -30,8 +29,10 @@ export class SearchComponent implements OnInit {
   clear() {
     this.searchString = '';
     this.results = [];
+    this.globals.setContent('');
   }
   search() {
+    this.results = [];
     if (!this.searchString) {
       return;
     }
@@ -51,7 +52,7 @@ export class SearchComponent implements OnInit {
         this.results = res;
         // console.log(this.results);
       });
-      this.expand = true;
+      this.globals.expandSearchView();
     } else {
       this.globals.showMessage('You click search button, but forget to input something (at least 3 letters) to search...');
     }

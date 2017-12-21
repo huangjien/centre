@@ -8,8 +8,7 @@ import { Globals } from './globals';
 
 @Component({
     selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css']
+    templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
 
@@ -28,5 +27,13 @@ export class AppComponent implements OnInit {
             const msg = res;
             this.showMessage(msg);
         });
+    }
+
+    clear() {
+        this.globals.setContent('');
+    }
+
+    getIcon(type: string): string {
+        return this.globals.getIcon(type);
     }
 }

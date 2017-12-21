@@ -1,22 +1,26 @@
 <mat-accordion multi="true">
-  <mat-expansion-panel [expanded]="expand">
+  <mat-expansion-panel [expanded]="expand" hideToggle="true">
     <mat-expansion-panel-header>
       <mat-panel-title>
-        <mat-form-field>
-          
-          <input matInput type="text" placeholder="Search" (keyup.enter)="onEnter()" required minlength="3" [(ngModel)]="searchString"
-          />
-          <button mat-button *ngIf="searchString" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
-            <mat-icon>close</mat-icon>
-          </button>
-          <button mat-button *ngIf="searchString" matSuffix mat-icon-button aria-label="Search" (click)="search()">
-            <mat-icon>search</mat-icon>
-          </button>
-          
-        </mat-form-field>
+          <mat-icon>search</mat-icon>
       </mat-panel-title>
-      
+      <mat-panel-description>
+          <small>Search</small>
+          
+        </mat-panel-description>
     </mat-expansion-panel-header>
+    <mat-form-field>
+          
+        <input matInput type="text" placeholder="Search" (keyup.enter)="onEnter()" required minlength="3" [(ngModel)]="searchString"
+        />
+        <button mat-button *ngIf="searchString" matSuffix mat-icon-button aria-label="Clear" (click)="clear()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button mat-button *ngIf="searchString" matSuffix mat-icon-button aria-label="Search" (click)="search()">
+          <mat-icon>search</mat-icon>
+        </button>
+        
+      </mat-form-field>
     <ng-container *ngFor="let option of options">
       <mat-slide-toggle checked="true" id="{{option}}">{{option}}</mat-slide-toggle>
       <span>&nbsp;</span>

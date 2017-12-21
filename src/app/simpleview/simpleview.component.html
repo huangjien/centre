@@ -2,7 +2,7 @@
   <mat-expansion-panel hideToggle="true" (dblclick)="load()">
     <mat-expansion-panel-header>
       <mat-panel-title>
-          <mat-icon matTooltip="{{id}}" >{{icon}}</mat-icon> &nbsp;
+          <mat-icon matTooltip="{{id}}" (click)="load()" >{{icon}}</mat-icon> &nbsp;
           <small>{{type}}</small>
       </mat-panel-title>
       <mat-panel-description>

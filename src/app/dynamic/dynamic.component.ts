@@ -11,8 +11,7 @@ import { BasicComponent } from '../basic/basic.component';
 
 @Component({
   selector: 'app-dynamic',
-  templateUrl: './dynamic.component.html',
-  styleUrls: ['./dynamic.component.css']
+  templateUrl: './dynamic.component.html'
 })
 export class DynamicComponent implements OnInit, OnDestroy {
   @ViewChild('hook', { read: ViewContainerRef}) hook: ViewContainerRef;
@@ -25,6 +24,10 @@ export class DynamicComponent implements OnInit, OnDestroy {
       // switch - case load components
       let component = null;
       console.log(this.globals.content);
+      if ( this.globals.content === '' || this.globals.content === null || this.globals.content === undefined ) {
+        this.hook.clear();
+        return;
+      }
       const type = this.globals.content['type'];
       if ( type === 'Suite') {
         component = this.cfr.resolveComponentFactory<any>(SuiteComponent);

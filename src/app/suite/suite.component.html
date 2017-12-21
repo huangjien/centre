@@ -52,10 +52,34 @@
   <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
+        Parameters
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-container *ngFor="let item of data.parameters">
+      <button mat-icon-button (click)="removeParameter(item.order)">
+        <mat-icon>remove_circle_outline</mat-icon>
+      </button>
+      <mat-form-field>
+        <input matInput placeholder="#" [(ngModel)]="item.order" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="id" [(ngModel)]="item.id" required>
+      </mat-form-field>
+
+      <br>
+    </ng-container>
+  </mat-expansion-panel>
+  <br>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
         References ( Suites or Cases)
       </mat-panel-title>
     </mat-expansion-panel-header>
     <ng-container *ngFor="let item of data.references">
+      <button mat-icon-button (click)="removeReference(item.order)">
+        <mat-icon>remove_circle_outline</mat-icon>
+      </button>
       <mat-form-field>
         <input matInput placeholder="#" [(ngModel)]="item.order" required>
       </mat-form-field>
@@ -82,6 +106,12 @@
     </mat-expansion-panel-header>
     <ng-container *ngFor="let item of data.returns">
 
+      <button mat-icon-button (click)="removeReturn(item.order)">
+        <mat-icon>remove_circle_outline</mat-icon>
+      </button>
+      <mat-form-field>
+        <input matInput placeholder="#" [(ngModel)]="item.order" required>
+      </mat-form-field>
       <mat-form-field>
         <input matInput placeholder="key" [(ngModel)]="item.key" required>
       </mat-form-field>
@@ -98,9 +128,12 @@
     </ng-container>
   </mat-expansion-panel>
   <br>
-  <mat-action-row>
-    <button mat-button (click)="delete()">Delete</button>
-    <button mat-button color="primary" (click)="save()">Save</button>
+  <mat-action-row class="button-row">
+    <button mat-raised-button (click)="newParameter()">New Parameter</button>
+    <button mat-raised-button (click)="newReference()">New Reference</button>
+    <button mat-raised-button (click)="newReturn()">New Return</button>
+    <button mat-raised-button (click)="delete()">Delete</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
   </mat-action-row>
 
 </mat-expansion-panel>

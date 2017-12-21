@@ -65,7 +65,7 @@ const appRoutes: Routes = [
   imports: [
     RouterModule.forRoot(appRoutes
       // , {enableTracing: true} // <-- debugging purposes only
-    ),  environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
+    ),  environment.production ? ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production}) : [],
     BrowserModule, BrowserAnimationsModule, HttpClientModule, ReactiveFormsModule, CommonModule, MatButtonModule, MatCheckboxModule,
     MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatPaginatorModule,
     MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,

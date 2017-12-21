@@ -3,8 +3,7 @@ import { Globals } from '../globals';
 
 @Component({
   selector: 'app-simpleview',
-  templateUrl: './simpleview.component.html',
-  styleUrls: ['./simpleview.component.css']
+  templateUrl: './simpleview.component.html'
 })
 export class SimpleviewComponent implements OnInit {
 

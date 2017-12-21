@@ -26,6 +26,9 @@
   </mat-form-field>
   <br>
   <ng-container *ngFor="let item of data.data">
+    <button mat-icon-button (click)="removeData(item.order)">
+      <mat-icon >remove_circle_outline</mat-icon>
+    </button>
     <mat-form-field>
       <input matInput placeholder="#" [(ngModel)]="item.order" required>
     </mat-form-field>
@@ -44,9 +47,10 @@
     <br>
   </ng-container>
 
-  <mat-action-row>
-    <button mat-button (click)="delete()">Delete</button>
-    <button mat-button color="primary" (click)="save()">Save</button>
+  <mat-action-row class="button-row">
+      <button mat-raised-button (click)="newData()">New Data</button>
+    <button mat-raised-button (click)="delete()">Delete</button>
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
   </mat-action-row>
 
 </mat-expansion-panel>

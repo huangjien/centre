@@ -4,8 +4,7 @@ import { Globals } from '../globals';
 
 @Component({
   selector: 'app-env',
-  templateUrl: './env.component.html',
-  styleUrls: ['../../custom.css']
+  templateUrl: './env.component.html'
 })
 export class EnvComponent extends BasicComponent {
 

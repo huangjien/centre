@@ -27,12 +27,12 @@
     "dataGroups": [{
       "name": "api-freshness",
       "urls": [
-        "/new"
+        "/data/**"
       ],
       "cacheConfig": {
         "maxSize": 100,
         "maxAge": "1h",
-        "timeout": "10s",
+        "timeout": "300s",
         "strategy": "freshness"
       }
     }, {

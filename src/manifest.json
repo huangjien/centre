@@ -4,8 +4,8 @@
     "start_url": "/",
     "theme_color": "#f48c5b",
     "background_color": "#ffffff",
-    "display": "standalone",
-    "orientation": "portrait",
+    "display": "fullscreen",
+    "orientation": "any",
     "icons": [
         {
             "src": "/assets/favicon.ico",

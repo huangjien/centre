@@ -4,8 +4,7 @@ import { BasicComponent } from '../basic/basic.component';
 
 @Component({
   selector: 'app-data',
-  templateUrl: './data.component.html',
-  styleUrls: ['../../custom.css']
+  templateUrl: './data.component.html'
 })
 export class DataComponent extends BasicComponent {
 
@@ -13,5 +12,11 @@ export class DataComponent extends BasicComponent {
     super(globals);
   }
 
+  removeData(order: string) {
+    this.data.data = this.removeItem(this.data.data, order);
+  }
 
+  newData() {
+    this.data.data = this.newItem('Data', this.data.data);
+  }
 }
