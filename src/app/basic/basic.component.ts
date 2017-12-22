@@ -10,6 +10,9 @@ import { ControlValueAccessor } from '@angular/forms/src/directives/control_valu
 export class BasicComponent implements OnInit {
   icon: string;
   data: any;
+  dirty = false;
+  valid = true;
+
   constructor(public globals: Globals) { }
 
   ngOnInit() {
@@ -18,8 +21,9 @@ export class BasicComponent implements OnInit {
   }
 
   save() {
-    console.log('saving data', this.data);
+    console.log('saving data', this.dirty, this.valid, this.data);
     this.globals.save(this.data);
+    this.dirty = false;
   }
 
   delete() {
@@ -56,6 +60,9 @@ export class BasicComponent implements OnInit {
   }
 
   newItem(type: string, array: any) {
+    if (!array) {
+      array = [];
+    }
     const order = this.getMaxOrder(array);
     let newObj = null;
 
@@ -82,8 +89,53 @@ export class BasicComponent implements OnInit {
     }
 
     if ( newObj ) {
+      this.valid = false;
       return [...array, newObj];
     }
   }
 
+  onChanged() {
+    this.dirty = true;
+    this.valid = this.checkDataValidation(this.data);
+  }
+
+  checkDataValidation(data: any): boolean {
+    if (data === null || data === undefined || data === '') {
+      return false;
+    }
+    if ( Array.isArray(data)) {
+      data.forEach(item => {
+        if (!this.checkDataValidation(item)) {
+          return false;
+        }
+      });
+    } else {
+      for (const property of Object.getOwnPropertyNames(data)) {
+        if (property !== 'description' && property !== 'value') {
+          if (Array.isArray(data[property])) {
+            if (!this.checkDataValidation(data[property])) {
+              return false;
+            }
+          } else {
+            if ( data[property] === null || data[property]=== undefined || data[property] === '') {
+              return false;
+            }
+          }
+        }
+      }
+    }
+    return true;
+  }
+
+  isDirty(): boolean {
+    return this.dirty;
+  }
+
+  isValid(): boolean {
+    return this.valid;
+  }
+
+  canSave(): boolean {
+    return this.dirty && this.valid;
+  }
 }
