@@ -138,4 +138,8 @@ export class BasicComponent implements OnInit {
   canSave(): boolean {
     return this.dirty && this.valid;
   }
+
+  cancel() {
+    this.globals.setContent('');
+  }
 }

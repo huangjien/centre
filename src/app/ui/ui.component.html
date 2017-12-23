@@ -11,12 +11,12 @@
   </mat-expansion-panel-header>
 
   <mat-form-field class="full-width">
-    <input matInput  (keyup)="onChanged()" placeholder="Name" [(ngModel)]="data.name" required>
+    <input matInput (keyup)="onChanged()" placeholder="Name" [(ngModel)]="data.name" required>
   </mat-form-field>
 
   <br>
   <mat-form-field class="description">
-    <textarea matInput  (keyup)="onChanged()" placeholder="Description" [(ngModel)]="data.description" class="description-height"></textarea>
+    <textarea matInput (keyup)="onChanged()" placeholder="Description" [(ngModel)]="data.description" class="description-height"></textarea>
   </mat-form-field>
   <br>
   <ng-container *ngFor="let item of data.objects">
@@ -24,14 +24,14 @@
       <mat-icon>remove_circle_outline</mat-icon>
     </button>
     <mat-form-field style="width:2em">
-      <input matInput  (keyup)="onChanged()" placeholder="#" [(ngModel)]="item.order" required>
+      <input matInput (keyup)="onChanged()" placeholder="#" [(ngModel)]="item.order" required>
     </mat-form-field>
     <mat-form-field style="width:8em">
-      <input matInput  (keyup)="onChanged()" placeholder="name" [(ngModel)]="item.name" required>
+      <input matInput (keyup)="onChanged()" placeholder="name" [(ngModel)]="item.name" required>
     </mat-form-field>
 
     <mat-form-field style="width:8em">
-      <mat-select (selectionChange)="onChanged()"  placeholder="type" [(ngModel)]="item.type">
+      <mat-select (selectionChange)="onChanged()" placeholder="type" [(ngModel)]="item.type">
         <mat-option value="text">text</mat-option>
         <mat-option value="password">password</mat-option>
         <mat-option value="select">select</mat-option>
@@ -40,7 +40,7 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field style="width: 8em">
-      <mat-select (selectionChange)="onChanged()"  placeholder="way" [(ngModel)]="item.way">
+      <mat-select (selectionChange)="onChanged()" placeholder="way" [(ngModel)]="item.way">
         <mat-option value="id">id</mat-option>
         <mat-option value="tagname">tagname</mat-option>
         <mat-option value="xpath">xpath</mat-option>
@@ -52,13 +52,13 @@
       </mat-select>
     </mat-form-field>
     <mat-form-field style="width:32em">
-      <input matInput  (keyup)="onChanged()" placeholder="identity" [(ngModel)]="item.identity" required>
+      <input matInput (keyup)="onChanged()" placeholder="identity" [(ngModel)]="item.identity" required>
     </mat-form-field>
     <mat-form-field style="width:12em">
-      <input matInput  (keyup)="onChanged()" placeholder="description" [(ngModel)]="item.description" required>
+      <input matInput (keyup)="onChanged()" placeholder="description" [(ngModel)]="item.description" required>
     </mat-form-field>
     <mat-form-field style="width: 6em">
-      <mat-select  (selectionChange)="onChanged()"  placeholder="diabled" [(ngModel)]="item.disabled">
+      <mat-select (selectionChange)="onChanged()" placeholder="diabled" [(ngModel)]="item.disabled">
         <mat-option value="Enabled">Enabled</mat-option>
         <mat-option value="Disabled">Disabled</mat-option>
       </mat-select>
@@ -67,10 +67,11 @@
   </ng-container>
 
   <mat-action-row class="button-row">
+    <button mat-raised-button (click)="cancel()">Cancel</button>
     <button mat-raised-button (click)="newObject()">New Object</button>
     <button mat-raised-button (click)="importObjects()">Import Objects</button>
     <button mat-raised-button (click)="delete()">Delete</button>
-    <button mat-raised-button color="primary" (click)="save()"  [disabled]="!canSave()" >Save</button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="!canSave()">Save</button>
   </mat-action-row>
 
 </mat-expansion-panel>

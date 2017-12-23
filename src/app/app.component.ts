@@ -22,6 +22,10 @@ export class AppComponent implements OnInit {
         this.snackBar.open(msg, null, {duration: 1500});
     }
 
+    requestAction() {
+        this.snackBar.open('There is something unsaved, please save/cancel it before next step!', 'OK');
+    }
+
     ngOnInit(): void {
         this.globals.messageShow.subscribe(res => {
             const msg = res;

@@ -15,7 +15,7 @@
   </mat-form-field>
   <br>
   <mat-form-field>
-    <mat-select  (selectionChange)="onChanged()"  placeholder="On Failed" [(ngModel)]="data.onFailed">
+    <mat-select (selectionChange)="onChanged()" placeholder="On Failed" [(ngModel)]="data.onFailed">
       <mat-option value="Terminate">Terminate</mat-option>
       <mat-option value="Stop">Stop</mat-option>
       <mat-option value="Continue">Continue</mat-option>
@@ -24,14 +24,14 @@
   </mat-form-field>
   &nbsp;
   <mat-form-field>
-    <mat-select  (selectionChange)="onChanged()"  placeholder="Disabled" [(ngModel)]="data.disabled">
+    <mat-select (selectionChange)="onChanged()" placeholder="Disabled" [(ngModel)]="data.disabled">
       <mat-option value="Enabled">Enabled</mat-option>
       <mat-option value="Disabled">Disabled</mat-option>
     </mat-select>
   </mat-form-field>
   <br>
   <mat-form-field class="description">
-    <textarea matInput  (keyup)="onChanged()" placeholder="Description" [(ngModel)]="data.description" class="description-height"></textarea>
+    <textarea matInput (keyup)="onChanged()" placeholder="Description" [(ngModel)]="data.description" class="description-height"></textarea>
   </mat-form-field>
   <br>
   <br>
@@ -46,8 +46,8 @@
         <mat-icon>remove_circle_outline</mat-icon>
       </button>
       <mat-form-field>
-          <input matInput (keyup)="onChanged()" placeholder="#" [(ngModel)]="item.order" required>
-        </mat-form-field>
+        <input matInput (keyup)="onChanged()" placeholder="#" [(ngModel)]="item.order" required>
+      </mat-form-field>
       <mat-form-field>
         <input matInput (keyup)="onChanged()" placeholder="id" [(ngModel)]="item.id" required>
       </mat-form-field>
@@ -67,8 +67,8 @@
         <mat-icon>remove_circle_outline</mat-icon>
       </button>
       <mat-form-field>
-          <input matInput (keyup)="onChanged()" placeholder="#" [(ngModel)]="item.order" required>
-        </mat-form-field>
+        <input matInput (keyup)="onChanged()" placeholder="#" [(ngModel)]="item.order" required>
+      </mat-form-field>
       <mat-form-field>
         <input matInput (keyup)="onChanged()" placeholder="id" [(ngModel)]="item.id" required>
       </mat-form-field>
@@ -111,12 +111,12 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <ng-container *ngFor="let item of data.returns">
-        <button mat-icon-button (click)="removeReturn(item.order)">
-            <mat-icon>remove_circle_outline</mat-icon>
-          </button>
-        <mat-form-field>
-            <input matInput (keyup)="onChanged()" placeholder="#" [(ngModel)]="item.order" required>
-          </mat-form-field>
+      <button mat-icon-button (click)="removeReturn(item.order)">
+        <mat-icon>remove_circle_outline</mat-icon>
+      </button>
+      <mat-form-field>
+        <input matInput (keyup)="onChanged()" placeholder="#" [(ngModel)]="item.order" required>
+      </mat-form-field>
       <mat-form-field>
         <input matInput (keyup)="onChanged()" placeholder="key" [(ngModel)]="item.key" required>
       </mat-form-field>
@@ -134,12 +134,13 @@
   </mat-expansion-panel>
   <br>
   <mat-action-row class="button-row">
+    <button mat-raised-button (click)="cancel()">Cancel</button>
     <button mat-raised-button (click)="newParameter()">New Parameter</button>
     <button mat-raised-button (click)="newReference()">New Object</button>
     <button mat-raised-button (click)="newAction()">New Action</button>
     <button mat-raised-button (click)="newReturn()">New Return</button>
     <button mat-raised-button (click)="delete()">Delete</button>
-    <button mat-raised-button color="primary" (click)="save()" [disabled]="!canSave()" >Save</button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="!canSave()">Save</button>
   </mat-action-row>
 
 </mat-expansion-panel>

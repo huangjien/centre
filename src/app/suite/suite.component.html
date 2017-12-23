@@ -11,11 +11,11 @@
   </mat-expansion-panel-header>
 
   <mat-form-field class="full-width">
-    <input matInput  (keyup)="onChanged()" placeholder="Name" [(ngModel)]="data.name" required>
+    <input matInput (keyup)="onChanged()" placeholder="Name" [(ngModel)]="data.name" required>
   </mat-form-field>
   <br>
   <mat-form-field>
-    <mat-select (selectionChange)="onChanged()"  placeholder="On Failed" [(ngModel)]="data.onFailed">
+    <mat-select (selectionChange)="onChanged()" placeholder="On Failed" [(ngModel)]="data.onFailed">
       <mat-option value="Terminate">Terminate</mat-option>
       <mat-option value="Stop">Stop</mat-option>
       <mat-option value="Continue">Continue</mat-option>
@@ -24,21 +24,21 @@
   </mat-form-field>
   &nbsp;
   <mat-form-field>
-    <mat-select (selectionChange)="onChanged()"  placeholder="Disabled" [(ngModel)]="data.disabled">
+    <mat-select (selectionChange)="onChanged()" placeholder="Disabled" [(ngModel)]="data.disabled">
       <mat-option value="Enabled">Enabled</mat-option>
       <mat-option value="Disabled">Disabled</mat-option>
     </mat-select>
   </mat-form-field>
   &nbsp;
   <mat-form-field>
-    <mat-select (selectionChange)="onChanged()"  placeholder="Root Suite" [(ngModel)]="data.isRoot">
+    <mat-select (selectionChange)="onChanged()" placeholder="Root Suite" [(ngModel)]="data.isRoot">
       <mat-option value="Root">Root</mat-option>
       <mat-option value="Sub">Sub</mat-option>
     </mat-select>
   </mat-form-field>
   &nbsp;
   <mat-form-field>
-    <mat-select (selectionChange)="onChanged()"  placeholder="Client Type" [(ngModel)]="data.clientType">
+    <mat-select (selectionChange)="onChanged()" placeholder="Client Type" [(ngModel)]="data.clientType">
       <mat-option value="Selenium">Selenium</mat-option>
       <mat-option value="RMI">RMI</mat-option>
       <mat-option value="REST">REST API</mat-option>
@@ -46,7 +46,7 @@
   </mat-form-field>
   <br>
   <mat-form-field class="description">
-    <textarea matInput  (keyup)="onChanged()" placeholder="Description" [(ngModel)]="data.description" class="description-height"></textarea>
+    <textarea matInput (keyup)="onChanged()" placeholder="Description" [(ngModel)]="data.description" class="description-height"></textarea>
   </mat-form-field>
   <br>
   <mat-expansion-panel>
@@ -60,7 +60,7 @@
         <mat-icon>remove_circle_outline</mat-icon>
       </button>
       <mat-form-field>
-        <input matInput  (keyup)="onChanged()" placeholder="#" [(ngModel)]="item.order" required>
+        <input matInput (keyup)="onChanged()" placeholder="#" [(ngModel)]="item.order" required>
       </mat-form-field>
       <mat-form-field>
         <input matInput (keyup)="onChanged()" placeholder="id" [(ngModel)]="item.id" required>
@@ -88,7 +88,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select (selectionChange)="onChanged()"  placeholder="diabled" [(ngModel)]="item.disabled">
+        <mat-select (selectionChange)="onChanged()" placeholder="diabled" [(ngModel)]="item.disabled">
           <mat-option value="Enabled">Enabled</mat-option>
           <mat-option value="Disabled">Disabled</mat-option>
         </mat-select>
@@ -117,7 +117,7 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select (selectionChange)="onChanged()"  placeholder="diabled" [(ngModel)]="item.disabled">
+        <mat-select (selectionChange)="onChanged()" placeholder="diabled" [(ngModel)]="item.disabled">
           <mat-option value="Enabled">Enabled</mat-option>
           <mat-option value="Disabled">Disabled</mat-option>
         </mat-select>
@@ -129,11 +129,12 @@
   </mat-expansion-panel>
   <br>
   <mat-action-row class="button-row">
+    <button mat-raised-button (click)="cancel()">Cancel</button>
     <button mat-raised-button (click)="newParameter()">New Parameter</button>
     <button mat-raised-button (click)="newReference()">New Reference</button>
     <button mat-raised-button (click)="newReturn()">New Return</button>
     <button mat-raised-button (click)="delete()">Delete</button>
-    <button mat-raised-button color="primary" (click)="save()"  [disabled]="!canSave()" >Save</button>
+    <button mat-raised-button color="primary" (click)="save()" [disabled]="!canSave()">Save</button>
   </mat-action-row>
 
 </mat-expansion-panel>
