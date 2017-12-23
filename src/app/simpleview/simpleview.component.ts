@@ -26,7 +26,7 @@ export class SimpleviewComponent implements OnInit {
 
   load() {
     this.globals.setContent(this.data);
-    this.globals.showMessage(this.id);
+    // this.globals.showMessage(this.id);
     this.globals.collapseSearchView();
     // console.log('id', this.id);
   }

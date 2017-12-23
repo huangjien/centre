@@ -18,10 +18,12 @@ export class BasicComponent implements OnInit {
   ngOnInit() {
     this.data = this.globals.content;
     this.icon = this.getIcon();
+    this.globals.setSaved();
   }
 
   save() {
     console.log('saving data', this.dirty, this.valid, this.data);
+    this.globals.setSaved();
     this.globals.save(this.data);
     this.dirty = false;
   }
@@ -35,6 +37,8 @@ export class BasicComponent implements OnInit {
   }
 
   removeItem(reference: any, order: string) {
+    this.dirty = true;
+    this.globals.setUnsaved();
     return reference.filter(item => item['order'] !== order );
   }
 
@@ -89,7 +93,9 @@ export class BasicComponent implements OnInit {
     }
 
     if ( newObj ) {
+      this.dirty = true;
       this.valid = false;
+      this.globals.setUnsaved();
       return [...array, newObj];
     }
   }
@@ -97,6 +103,7 @@ export class BasicComponent implements OnInit {
   onChanged() {
     this.dirty = true;
     this.valid = this.checkDataValidation(this.data);
+    this.globals.setUnsaved();
   }
 
   checkDataValidation(data: any): boolean {
@@ -140,6 +147,7 @@ export class BasicComponent implements OnInit {
   }
 
   cancel() {
+    this.globals.setUnsaved();
     this.globals.setContent('');
   }
 }

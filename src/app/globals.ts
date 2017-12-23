@@ -12,6 +12,8 @@ export class Globals {
     // content
     content: any;
     contentChange: Subject<any> = new Subject<any>();
+    contentUpdated = false;
+    contentUpdatedUnsaved: Subject<boolean> = new Subject<boolean>();
 
     searchViewToggle = false;
     searchViewChange: Subject<boolean> = new Subject<boolean>();
@@ -22,6 +24,9 @@ export class Globals {
     constructor(private dataService: DataService) {
         this.contentChange.subscribe((value) => {
             this.content = value;
+        });
+        this.contentUpdatedUnsaved.subscribe((value) => {
+            this.contentUpdated = value;
         });
         this.messageShow.subscribe((value) => {
             this.message = value;
@@ -41,7 +46,20 @@ export class Globals {
         this.searchViewChange.next(this.searchViewToggle);
     }
 
+    setUnsaved() {
+        this.contentUpdatedUnsaved.next(true);
+    }
+
+    setSaved() {
+        this.contentUpdatedUnsaved.next(false);
+    }
+
     setContent(content: any) {
+        if (this.contentUpdated === true) {
+            // show message then return
+            this.showMessage('UNSAVEDWARNING');
+            return;
+        }
         this.contentChange.next(content);
     }
 

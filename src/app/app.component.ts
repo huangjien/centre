@@ -29,7 +29,11 @@ export class AppComponent implements OnInit {
     ngOnInit(): void {
         this.globals.messageShow.subscribe(res => {
             const msg = res;
-            this.showMessage(msg);
+            if (msg === 'UNSAVEDWARNING') {
+                this.requestAction();
+            } else {
+                this.showMessage(msg);
+            }
         });
     }
 
