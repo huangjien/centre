@@ -147,7 +147,7 @@ export class BasicComponent implements OnInit {
   }
 
   cancel() {
-    this.globals.setUnsaved();
+    this.globals.setSaved();
     this.globals.setContent('');
   }
 }
