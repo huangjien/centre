@@ -15,7 +15,7 @@ import { BasicComponent } from '../basic/basic.component';
 })
 export class DynamicComponent implements OnInit, OnDestroy {
   @ViewChild('hook', { read: ViewContainerRef}) hook: ViewContainerRef;
-
+  panelOpenState = false;
 
   constructor(private cfr: ComponentFactoryResolver, private globals: Globals) { }
 

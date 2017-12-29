@@ -13,7 +13,7 @@ export class BasicComponent implements OnInit {
   dirty = false;
   valid = true;
 
-  constructor(public globals: Globals) { }
+  constructor(public globals: Globals) {}
 
   ngOnInit() {
     this.data = this.globals.content;
@@ -39,23 +39,23 @@ export class BasicComponent implements OnInit {
   removeItem(reference: any, order: string) {
     this.dirty = true;
     this.globals.setUnsaved();
-    return reference.filter(item => item['order'] !== order );
+    return reference.filter(item => item['order'] !== order);
   }
 
   getMaxOrder(reference: any): string {
-    if ( !reference ) {
+    if (!reference) {
       return '1';
     }
-    if ( reference.length === 0 ) {
+    if (reference.length === 0) {
       return '1';
     }
     let max = reference.length + 1;
     reference.forEach(item => {
       if (item['order']) {
-        if (+ item['order'] === max ) {
+        if (+item['order'] === max) {
           max = max + 1;
         }
-        if (+ item['order'] > max ) {
+        if (+item['order'] > max) {
           max = +item['order'] + 1;
         }
       }
@@ -71,28 +71,36 @@ export class BasicComponent implements OnInit {
     let newObj = null;
 
     if (type === 'Data') {
-      newObj = {'order': order, 'key': '', 'value': '', 'diabled': true};
+      newObj = { order: order, key: '', value: '', diabled: true };
     }
     if (type === 'Object') {
-      newObj = {'order': order, 'name': '', 'type': '', 'way': '', 'identity': '', 'description': '', 'diabled': true};
+      newObj = {
+        order: order,
+        name: '',
+        type: '',
+        way: '',
+        identity: '',
+        description: '',
+        diabled: true
+      };
     }
     if (type === 'Parameter') {
-      newObj = {'order': order, 'id': '', 'diabled': true};
+      newObj = { order: order, id: '', diabled: true };
     }
     if (type === 'ObjectReference') {
-      newObj = {'order': order, 'id': '', 'diabled': true};
+      newObj = { order: order, id: '', diabled: true };
     }
     if (type === 'Action') {
-      newObj = {'order': order, 'id': '', 'diabled': true};
+      newObj = { order: order, id: '', diabled: true };
     }
     if (type === 'Reference') {
-      newObj = {'order': order, 'id': '', 'diabled': true};
+      newObj = { order: order, id: '', diabled: true };
     }
     if (type === 'Return') {
-      newObj = {'order': order, 'key': '', 'diabled': true};
+      newObj = { order: order, key: '', diabled: true };
     }
 
-    if ( newObj ) {
+    if (newObj) {
       this.dirty = true;
       this.valid = false;
       this.globals.setUnsaved();
@@ -110,7 +118,7 @@ export class BasicComponent implements OnInit {
     if (data === null || data === undefined || data === '') {
       return false;
     }
-    if ( Array.isArray(data)) {
+    if (Array.isArray(data)) {
       data.forEach(item => {
         if (!this.checkDataValidation(item)) {
           return false;
@@ -124,7 +132,11 @@ export class BasicComponent implements OnInit {
               return false;
             }
           } else {
-            if ( data[property] === null || data[property]=== undefined || data[property] === '') {
+            if (
+              data[property] === null ||
+              data[property] === undefined ||
+              data[property] === ''
+            ) {
               return false;
             }
           }

@@ -13,6 +13,7 @@ export class SimpleviewComponent implements OnInit {
   id: string;
   icon: string;
   description: string;
+  panelOpenState = false;
 
   constructor(private globals: Globals) { }
 

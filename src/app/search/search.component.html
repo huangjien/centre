@@ -1,5 +1,6 @@
 <mat-accordion multi="true">
-  <mat-expansion-panel [expanded]="expand" hideToggle="true">
+  <mat-expansion-panel [expanded]="panelOpenState" hideToggle="true"  (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+  [class.mat-elevation-z2]="!panelOpenState" [class.mat-elevation-z8]="panelOpenState">
     <mat-expansion-panel-header>
       <mat-panel-title>
           <mat-icon>search</mat-icon>

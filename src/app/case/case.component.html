@@ -9,30 +9,31 @@
     </mat-panel-description>
 
   </mat-expansion-panel-header>
-
-  <mat-form-field class="full-width">
-    <input matInput placeholder="Name" (keyup)="onChanged()" [(ngModel)]="data.name" required>
-  </mat-form-field>
-  <br>
-  <mat-form-field>
-    <mat-select (selectionChange)="onChanged()" placeholder="On Failed" [(ngModel)]="data.onFailed">
-      <mat-option value="Terminate">Terminate</mat-option>
-      <mat-option value="Stop">Stop</mat-option>
-      <mat-option value="Continue">Continue</mat-option>
-      <mat-option value="Ignored">Ignored</mat-option>
-    </mat-select>
-  </mat-form-field>
-  &nbsp;
-  <mat-form-field>
-    <mat-select (selectionChange)="onChanged()" placeholder="Disabled" [(ngModel)]="data.disabled">
-      <mat-option value="Enabled">Enabled</mat-option>
-      <mat-option value="Disabled">Disabled</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <br>
-  <mat-form-field class="description">
-    <textarea matInput (keyup)="onChanged()" placeholder="Description" [(ngModel)]="data.description" class="description-height"></textarea>
-  </mat-form-field>
+  <div mat-elevation-z2>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Name" (keyup)="onChanged()" [(ngModel)]="data.name" required>
+    </mat-form-field>
+    <br>
+    <mat-form-field>
+      <mat-select (selectionChange)="onChanged()" placeholder="On Failed" [(ngModel)]="data.onFailed">
+        <mat-option value="Terminate">Terminate</mat-option>
+        <mat-option value="Stop">Stop</mat-option>
+        <mat-option value="Continue">Continue</mat-option>
+        <mat-option value="Ignored">Ignored</mat-option>
+      </mat-select>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+      <mat-select (selectionChange)="onChanged()" placeholder="Disabled" [(ngModel)]="data.disabled">
+        <mat-option value="Enabled">Enabled</mat-option>
+        <mat-option value="Disabled">Disabled</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="description">
+      <textarea matInput (keyup)="onChanged()" placeholder="Description" [(ngModel)]="data.description" class="description-height"></textarea>
+    </mat-form-field>
+  </div>
   <br>
   <br>
   <mat-expansion-panel>

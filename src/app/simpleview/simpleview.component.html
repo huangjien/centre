@@ -1,16 +1,16 @@
-<mat-accordion>
-  <mat-expansion-panel hideToggle="true" (dblclick)="load()">
-    <mat-expansion-panel-header>
-      <mat-panel-title>
-          <mat-icon matTooltip="{{id}}" (click)="load()" >{{icon}}</mat-icon> &nbsp;
-          <small>{{type}}</small>
-      </mat-panel-title>
-      <mat-panel-description>
-        {{name}}
-      </mat-panel-description>
-    </mat-expansion-panel-header>
+<mat-expansion-panel hideToggle="true" (dblclick)="load()" (opened)="panelOpenState = true" (closed)="panelOpenState = false"
+  [class.mat-elevation-z2]="!panelOpenState" [class.mat-elevation-z8]="panelOpenState">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      <mat-icon matTooltip="{{id}}" (click)="load()">{{icon}}</mat-icon> &nbsp;
+      <small>{{type}}</small>
+    </mat-panel-title>
+    <mat-panel-description>
+      {{name}}
+    </mat-panel-description>
+  </mat-expansion-panel-header>
 
-      <pre>{{description}}</pre>
-    
-  </mat-expansion-panel>
-</mat-accordion>
+  <pre>{{description}}</pre>
+
+</mat-expansion-panel>
+<br />

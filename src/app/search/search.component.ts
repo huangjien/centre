@@ -9,12 +9,13 @@ export class SearchComponent implements OnInit {
   @Input() options: string[];
   searchString: string;
   results: any;
-  expand = false;
+  // expand = false;
+  panelOpenState = false;
   constructor(private globals: Globals) { }
 
   ngOnInit() {
     this.globals.searchViewChange.subscribe((value) => {
-      this.expand = value;
+      this.panelOpenState = value;
     });
   }
 
@@ -23,7 +24,7 @@ export class SearchComponent implements OnInit {
   }
 
   collapse() {
-    this.expand = false;
+    this.panelOpenState = false;
   }
 
   clear() {
