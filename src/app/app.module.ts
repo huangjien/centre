@@ -31,9 +31,20 @@ import { DataComponent } from './data/data.component';
 import { ResultComponent } from './result/result.component';
 import { EnvComponent } from './env/env.component';
 import { BasicComponent } from './basic/basic.component';
+import { OktaCallbackComponent, OktaAuthModule } from '@okta/okta-angular';
 
+
+const config = {
+  issuer: 'https://dev-897297.oktapreview.com/oauth2/default',
+  redirectUri: 'http://localhost:4200/implicit/callback',
+  clientId: '0oadwdhzx5bvaGql20h7'
+};
 
 const appRoutes: Routes = [
+  {
+    path: 'implicit/callback',
+    component: OktaCallbackComponent
+  },
   {
     path: '',
     redirectTo: 'main',
@@ -66,7 +77,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes
       // , {enableTracing: true} // <-- debugging purposes only
     ),  environment.production ? ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production}) : [],
-    BrowserModule, BrowserAnimationsModule, HttpClientModule, ReactiveFormsModule, CommonModule, MatButtonModule, MatCheckboxModule,
+     BrowserModule, BrowserAnimationsModule,
+     OktaAuthModule.initAuth(config),
+    HttpClientModule, ReactiveFormsModule, CommonModule, MatButtonModule, MatCheckboxModule,
     MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatPaginatorModule,
     MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
     MatDialogModule, MatGridListModule, MatIconModule, MatInputModule,
