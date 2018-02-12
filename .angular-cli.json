@@ -21,8 +21,8 @@
       "prefix": "app",
       "serviceWorker": true,
       "styles": [
-        "./custom.css",
-        "./styles.css"
+        "custom.css",
+        "styles.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",

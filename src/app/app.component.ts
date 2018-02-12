@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { RouterModule, Routes } from '@angular/router';
 import { Router } from '@angular/router';
@@ -19,21 +19,19 @@ export class AppComponent implements OnInit {
     authenticated: boolean;
 
     constructor(private globals: Globals, private snackBar: MatSnackBar,
-        private oktaAuth: OktaAuthService, private changeDetectorRef: ChangeDetectorRef) {
+        private oktaAuth: OktaAuthService) {
         this.innerHeight = window.innerHeight;
-        this.authenticated = this.oktaAuth.isAuthenticated();
+        // this.authenticated = this.oktaAuth.isAuthenticated();
     }
 
     async login() {
-        this.oktaAuth.loginRedirect();
-        this.changeDetectorRef.detectChanges();
-        this.authenticated = true;
-        console.log(this.authenticated);
+        await this.oktaAuth.loginRedirect();
     }
 
     logout() {
-        this.oktaAuth.logout();
-        this.authenticated = false;
+        this.oktaAuth.logout().then(res => {
+            this.authenticated = false;
+        });
     }
 
     showMessage(msg: string) {
@@ -45,8 +43,22 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.authenticated = this.oktaAuth.isAuthenticated();
-        console.log(this.authenticated);
+        // this.oktaAuth.handleAuthentication().then(result => {
+        //     // do something with the result
+        //     this.authenticated = true;
+        //     console.log(this.oktaAuth.getIdToken());
+        //  }).catch(reason => {
+        //     // failure, so something with failure
+        //     console.log(reason);
+        //     this.authenticated = false;
+        //  });
+        this.oktaAuth.handleAuthentication().then(value => {
+            this.authenticated = true;
+        }, reason => {
+            this.authenticated = false;
+        }).catch( reason => {
+            this.authenticated = false;
+        });
         this.globals.messageShow.subscribe(res => {
             const msg = res;
             if (msg === 'UNSAVEDWARNING') {

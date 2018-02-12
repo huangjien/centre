@@ -2,11 +2,11 @@
 
 
 <mat-toolbar>
-  <button mat-icon-button [matMenuTriggerFor]="menu">
+  <button mat-icon-button [matMenuTriggerFor]="menu" [disabled] = "!authenticated">
     <span>A Test</span>
   </button>
   <mat-menu #menu="matMenu"  >
-    <button mat-menu-item [disabled] = "!authenticated">
+    <button mat-menu-item >
       <mat-icon>shop_two</mat-icon>
       <span>New Suite</span>
     </button>
@@ -24,10 +24,10 @@
     </button>
   </mat-menu>
   <span class="toolbar-spacer"></span>
-  <button matTooltip="Login" *ngIf="!oktaAuth.isAuthenticated()" (click)="login()" >
+  <button matTooltip="Login" *ngIf="!authenticated" (click)="login()" >
     <mat-icon>account_circle</mat-icon>
   </button>
-  <button matTooltip="Logout" *ngIf="oktaAuth.isAuthenticated()" (click)="logout()" >
+  <button matTooltip="Logout" *ngIf="authenticated" (click)="logout()" >
     <mat-icon>account_box</mat-icon>
   </button>
 </mat-toolbar>
