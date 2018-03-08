@@ -32,22 +32,21 @@ import { ResultComponent } from './result/result.component';
 import { EnvComponent } from './env/env.component';
 import { BasicComponent } from './basic/basic.component';
 import { OktaCallbackComponent, OktaAuthModule } from '@okta/okta-angular';
+import { AboutComponent } from './about/about.component';
+import { OktaAuthGuard } from './app.guard';
+import { OktaAuthService } from './app.service';
+import { CallbackComponent } from './callback.component';
 
-
-const config = {
-  issuer: 'https://dev-897297.oktapreview.com/oauth2/default',
-  redirectUri: 'http://localhost:4200/implicit/callback',
-  clientId: '0oadwdhzx5bvaGql20h7'
-};
 
 const appRoutes: Routes = [
   {
     path: 'implicit/callback',
-    component: OktaCallbackComponent
+    component: CallbackComponent
   },
   {
     path: '',
     redirectTo: 'main',
+    canActivate: [OktaAuthGuard],
     pathMatch: 'full'
   }
 ];
@@ -64,7 +63,9 @@ const appRoutes: Routes = [
     DataComponent,
     ResultComponent,
     EnvComponent,
-    BasicComponent
+    BasicComponent,
+    CallbackComponent,
+    AboutComponent
   ], entryComponents: [
     SuiteComponent,
     CaseComponent,
@@ -74,11 +75,11 @@ const appRoutes: Routes = [
     EnvComponent
   ],
   imports: [
-    RouterModule.forRoot(appRoutes
-      // , {enableTracing: true} // <-- debugging purposes only
-    ),  environment.production ? ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production}) : [],
+    // RouterModule.forRoot(appRoutes
+    //   // , {enableTracing: true} // <-- debugging purposes only
+    // ),  environment.production ? ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production}) : [],
+    RouterModule.forRoot(appRoutes),
      BrowserModule, BrowserAnimationsModule,
-     OktaAuthModule.initAuth(config),
     HttpClientModule, ReactiveFormsModule, CommonModule, MatButtonModule, MatCheckboxModule,
     MatAutocompleteModule, MatButtonModule, MatButtonToggleModule, MatPaginatorModule,
     MatCardModule, MatCheckboxModule, MatChipsModule, MatDatepickerModule,
@@ -89,7 +90,7 @@ const appRoutes: Routes = [
     MatTooltipModule, MatFormFieldModule, MatExpansionModule, MatStepperModule, FormsModule, HttpModule
   ],
 
-  providers: [DataService, FormBuilder, Globals],
+  providers: [DataService, FormBuilder, Globals, OktaAuthGuard, OktaAuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

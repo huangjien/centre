@@ -16,22 +16,11 @@ export class AppComponent implements OnInit {
 
     messages = [];
     innerHeight: any;
-    authenticated: boolean;
 
     constructor(private globals: Globals, private snackBar: MatSnackBar,
         private oktaAuth: OktaAuthService) {
         this.innerHeight = window.innerHeight;
         // this.authenticated = this.oktaAuth.isAuthenticated();
-    }
-
-    async login() {
-        await this.oktaAuth.loginRedirect();
-    }
-
-    logout() {
-        this.oktaAuth.logout().then(res => {
-            this.authenticated = false;
-        });
     }
 
     showMessage(msg: string) {
@@ -43,22 +32,6 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // this.oktaAuth.handleAuthentication().then(result => {
-        //     // do something with the result
-        //     this.authenticated = true;
-        //     console.log(this.oktaAuth.getIdToken());
-        //  }).catch(reason => {
-        //     // failure, so something with failure
-        //     console.log(reason);
-        //     this.authenticated = false;
-        //  });
-        this.oktaAuth.handleAuthentication().then(value => {
-            this.authenticated = true;
-        }, reason => {
-            this.authenticated = false;
-        }).catch( reason => {
-            this.authenticated = false;
-        });
         this.globals.messageShow.subscribe(res => {
             const msg = res;
             if (msg === 'UNSAVEDWARNING') {

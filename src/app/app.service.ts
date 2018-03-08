@@ -6,13 +6,13 @@ import * as OktaAuth from '@okta/okta-auth-js';
 export class OktaAuthService {
 
   oktaAuth = new OktaAuth({
-    url: 'https://dev-897297.oktapreview.com',
-    clientId: '{clientId}',
-    issuer: 'https://dev-897297.oktapreview.com/oauth2/{authorizationServerId}',
-    redirectUri: 'http://localhost:4200/callback',
+    issuer: 'https://dev-897297.oktapreview.com/oauth2/default',
+    redirectUri: 'http://localhost:4200/implicit/callback',
+    clientId: '0oadwdhzx5bvaGql20h7',
+    url: 'https://dev-897297.oktapreview.com'
   });
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   isAuthenticated() {
     // Checks if there is a current accessToken in the TokenManger.
@@ -21,7 +21,7 @@ export class OktaAuthService {
 
   login() {
     // Launches the login redirect.
-    this.oktaAuth.token.getWithRedirect({ 
+    this.oktaAuth.token.getWithRedirect({
       responseType: ['id_token', 'token'],
       scopes: ['openid', 'email', 'profile']
     });
